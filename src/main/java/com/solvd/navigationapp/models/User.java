@@ -1,23 +1,23 @@
 package com.solvd.navigationapp.models;
 
 public class User extends Person {
-    private Long userId;  // id from Users table
+    private Long id;
     private String email;
     private String password;
 
-    public User(Long userId, Long personId, String firstName, String lastName, String email, String password) {
+    public User(Long id, Long personId, String firstName, String lastName, String email, String password) {
         super(personId, firstName, lastName);
-        this.userId = userId;
+        this.id = id;
         this.email = email;
         this.password = password;
     }
 
-    public Long getUserId() {
-        return userId;
+    public Long getId() {
+        return id;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getEmail() {
