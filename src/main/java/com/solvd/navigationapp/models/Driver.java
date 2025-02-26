@@ -1,12 +1,12 @@
 package com.solvd.navigationapp.models;
 
 public class Driver extends Person {
-    private Long driverId;  // id from Drivers table
+    private Long id;
     private Long licenseId;
 
-    public Driver(Long driverId, Long personId, String firstName, String lastName, Long licenseId) {
+    public Driver(Long id, Long personId, String firstName, String lastName, Long licenseId) {
         super(personId, firstName, lastName);
-        this.driverId = driverId;
+        this.id = id;
         this.licenseId = licenseId;
     }
 
@@ -14,12 +14,12 @@ public class Driver extends Person {
         super(id, firstName, lastName);
     }
 
-    public Long getDriverId() {
-        return driverId;
+    public Long getId() {
+        return id;
     }
 
-    public void setDriverId(Long driverId) {
-        this.driverId = driverId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Long getLicenseId() {
