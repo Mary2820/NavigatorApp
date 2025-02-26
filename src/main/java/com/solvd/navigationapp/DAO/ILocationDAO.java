@@ -5,7 +5,7 @@ import com.solvd.navigationapp.models.Location;
 
 import java.util.List;
 
-public interface ILocationDAO extends IGenericDAO<Location, Long> {
+public interface ILocationDAO extends IDAO<Location> {
     List<Location> getByCityId(Long cityId);
 
     List<Location> getByName(String name);
@@ -13,12 +13,4 @@ public interface ILocationDAO extends IGenericDAO<Location, Long> {
     List<Location> getByAddress(String address);
 
     List<Location> getByType(LocationType type);
-
-    List<Location> getByCityIdAndType(Long cityId, LocationType type);
-
-    List<Location> getAllLocationsInCity(Long cityId);
-
-    int countLocationsByType(LocationType type);
-
-    int countLocationsInCity(Long cityId);
 }
