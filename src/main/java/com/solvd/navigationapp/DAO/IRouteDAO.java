@@ -4,7 +4,7 @@ import com.solvd.navigationapp.models.Route;
 
 import java.util.List;
 
-public interface IRouteDAO extends IGenericDAO<Route, Long> {
+public interface IRouteDAO extends IDAO<Route> {
     List<Route> getByStartPointId(Long startPointId);
 
     List<Route> getByEndPointId(Long endPointId);

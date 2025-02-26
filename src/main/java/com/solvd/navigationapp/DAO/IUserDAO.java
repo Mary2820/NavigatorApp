@@ -3,9 +3,8 @@ package com.solvd.navigationapp.DAO;
 import com.solvd.navigationapp.models.User;
 
 import java.util.List;
-import java.util.Optional;
 
-public interface IUserDAO extends IGenericDAO<User, Long> {
+public interface IUserDAO extends IDAO<User> {
     User getByEmail(String email);
 
     List<User> getByFirstName(String firstName);
