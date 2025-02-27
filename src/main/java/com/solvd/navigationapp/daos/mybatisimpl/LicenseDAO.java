@@ -1,0 +1,50 @@
+package com.solvd.navigationapp.daos.mybatisimpl;
+
+import com.solvd.navigationapp.daos.ILicenceDAO;
+import com.solvd.navigationapp.models.License;
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
+
+public class LicenseDAO extends AbstractMyBatisDAO<ILicenceDAO> implements ILicenceDAO {
+    @Override
+    public License getByNumber(String number) {
+        return executeInSession(mapper -> mapper.getByNumber(number));
+    }
+
+    @Override
+    public List<License> getExpiredLicenses(LocalDate currentDate) {
+        return executeInSession(mapper -> mapper.getExpiredLicenses(currentDate));
+    }
+
+    @Override
+    public List<License> getValidLicenses(LocalDate currentDate) {
+        return executeInSession(mapper -> mapper.getValidLicenses(currentDate));
+    }
+
+    @Override
+    public void insert(License entity) {
+        executeInSessionVoid(mapper -> mapper.insert(entity));
+    }
+
+    @Override
+    public Optional<License> getById(Long id) {
+        return executeInSession(mapper -> mapper.getById(id));
+    }
+
+    @Override
+    public void update(License entity) {
+        executeInSessionVoid(mapper -> mapper.update(entity));
+    }
+
+    @Override
+    public void delete(Long id) {
+        executeInSessionVoid(mapper -> mapper.delete(id));
+    }
+
+    @Override
+    protected Class<ILicenceDAO> getMapperClass() {
+        return ILicenceDAO.class;
+    }
+} 
