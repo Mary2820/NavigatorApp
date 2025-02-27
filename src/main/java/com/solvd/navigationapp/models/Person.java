@@ -1,9 +1,12 @@
 package com.solvd.navigationapp.models;
 
+import com.solvd.navigationapp.enums.UserType;
+
 public abstract class Person {
     private Long id;
     private String firstName;
     private String lastName;
+    protected UserType userType;
 
     protected Person(Long id, String firstName, String lastName) {
         this.id = id;
@@ -34,4 +37,10 @@ public abstract class Person {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+    public UserType getUserType()
+    {
+        return userType;
+    }
+
 }

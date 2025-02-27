@@ -1,16 +1,18 @@
 package com.solvd.navigationapp.models;
 
-public class User extends Person {
+import com.solvd.navigationapp.enums.UserType;
+
+public class Client extends Person {
     private Long id;
     private String email;
     private String password;
-   
 
-    public User(Long id, Long personId, String firstName, String lastName, String email, String password) {
+    public Client(Long id, Long personId, String firstName, String lastName, String email, String password) {
         super(personId, firstName, lastName);
         this.id = id;
         this.email = email;
         this.password = password;
+        this.userType = UserType.USER;
     }
 
     public Long getId() {

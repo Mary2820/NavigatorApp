@@ -1,6 +1,5 @@
-package com.solvd.navigationapp.DAO;
+package com.solvd.navigationapp.daos;
 
-import java.util.List;
 import java.util.Optional;
 
 public interface IDAO<T> {
