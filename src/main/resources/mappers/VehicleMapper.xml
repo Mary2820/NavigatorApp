@@ -1,0 +1,33 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "com.solvd.navigationapp.daos.IVehicleDAO">
+    <resultMap id = "VehicleResultMap" type = "com.solvd.navigationapp.models.Vehicle" autoMapping = "false">
+        <id columnn = "ID" property= "id"/>
+        <result columnn = "VEHICLE_TYPE_ID" property "vehicleTypeId"/>
+        <result columnn = "REGISTRATION_NUMBER" property "registrationNumber"/> 
+        <result columnn = "SEATS_COUNT" property "seatsCount"/> 
+        <result columnn = "DRIVER_ID" property "driverId"/> 
+    </resultMap>
+
+    <select id ="getById" resultMap = "VehicleResultMap">
+        SELECT * FROM Vehicle WHERE ID = #{id}
+    </select>
+
+    <insert id="save" parameterType="com.solvd.socialnetwork.models.Vehicle" useGeneratedKeys="true" keyProperty="id">
+            INSERT INTO Vehicle (VEHICLE_TYPE_ID, REGISTRATION_NUMBER, SEATS_COUNT, DRIVER_ID)
+            VALUES (#{vehicleTypeId}, #{registrationNumber}, #{seatsCount}, #{driverId})   
+    </insert>
+
+    <update id="update" parameterType="com.solvd.socialnetwork.models.Vehicle">
+            UPDATE Vehicle
+            SET VEHICLE_TYPE_ID = #{vehicleTypeId}, REGISTRATION_NUMBER = #{registrationNumber}, SEATS_COUNT = #{seatsCount}, DRIVER_ID = #{driverId}
+            WHERE ID = #{id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+            DELETE FROM Vehicle WHERE ID = #{id}
+    </delete>
+
+</mapper>

@@ -1,0 +1,32 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "com.solvd.navigationapp.daos.ILicenseDAO">
+    <resultMap id = "LicenseResultMap" type = "com.solvd.navigationapp.models.License" autoMapping = "false">
+        <id columnn = "ID" property= "id"/>
+        <result columnn = "NUMBER" property "number"/>
+        <result columnn = "EXPIRATION_DATE" property "expirationDate"/> 
+    </resultMap>
+
+
+    <select id ="getById" resultMap = "LicenseResultMap">
+        SELECT * FROM Licenses WHERE ID = #{id}
+    </select>
+
+    <insert id="save" parameterType="com.solvd.socialnetwork.models.License" useGeneratedKeys="true" keyProperty="id">
+            INSERT INTO Licenses (NUMBER, EXPIRATION_DATE)
+            VALUES (#{number}, #{expirationDate})   
+    </insert>
+
+    <update id="update" parameterType="com.solvd.socialnetwork.models.License">
+            UPDATE Licenses
+            SET NUMBER = #{number}, EXPIRATION_DATE = #{expirationDate}
+            WHERE ID = #{id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+            DELETE FROM Licenses WHERE ID = #{id}
+    </delete>
+
+</mapper>
