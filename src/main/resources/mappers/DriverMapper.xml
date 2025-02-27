@@ -1,0 +1,55 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace  = "com.solvd.navigationapp.daos.IDriverDAO">
+    <resultMap id = "DriverResultMap" type = "com.solvd.navigationapp.models.Driver" autoMapping = "false" >
+        <id columnn = "ID" property = "id" />
+        <result column = "FIRST_NAME" property = "firstName"/>
+        <result column = "LAST_NAME" propert = "lastName"/>
+        <result column = "PERSON_ID" property ="personId"/>
+    </resultMap>
+
+    <select id ="getById" resultMap = "DriverResultMap">
+            SELECT d.ID, p.FIRST_NAME, p.LAST_NAME, d.LICENSE_ID
+            FROM Drivers d
+            JOIN Persons p ON d.PERSON_ID = p.ID
+            WHERE d.ID = #{id}
+    </select>
+
+    <select id ="getByLicenseId" resultMap = "DriverResultMap">
+            SELECT d.ID, p.FIRST_NAME, p.LAST_NAME, d.LICENSE_ID
+            FROM Drivers d
+            JOIN Persons p ON d.PERSON_ID = p.ID
+            WHERE d.LICENSE_ID = #{licenseId}
+    </select>
+
+    <select id ="getByFullName" resultMap = "ResultMap">
+            SELECT d.ID, p.FIRST_NAME, p.LAST_NAME, d.LICENSE_ID
+            FROM Drivers d
+            JOIN Persons p ON d.PERSON_ID = p.ID
+            WHERE p.FIRST_NAME = #{firstName} AND p.LAST_NAME = #{lastName};
+    </select>
+
+    <select id ="getByPersonId" resultMap = "DriverResultMap">
+            SELECT d.ID, p.FIRST_NAME, p.LAST_NAME, d.LICENSE_ID
+            FROM Drivers d
+            JOIN Persons p ON d.PERSON_ID = p.ID
+            WHERE d.PERSON_ID = #{personId}
+    </select>
+
+    <insert id="save" parameterType="com.solvd.socialnetwork.models.City" useGeneratedKeys="true" keyProperty="id">
+            INSERT INTO Driver (PERSON_ID, LICENSE_ID)
+            VALUES (#{personId}, #{licensId})   
+    </insert>
+
+    <update id="update" parameterType="com.solvd.socialnetwork.models.Comment">
+            UPDATE Driver
+            SET PERSON_ID = #{personId}, LICENSE_ID = #{licenseId}
+            WHERE ID = #{id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+            DELETE FROM Driver WHERE ID = #{id}
+    </delete>
+</mapper>

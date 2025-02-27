@@ -1,0 +1,31 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace  = "com.solvd.navigationapp.daos.IUserDAO" >
+    <resultMap id = "UserResultMap" type = "com.solvd.navigationapp.models.User" autoMapping = "false">
+        <id columnn = "ID" property = "id" />
+        <result column = "PERSON_ID" property ="personId"/>
+        <result column = "FIRST_NAME" property = "firstName"/>
+        <result column = "LAST_NAME" propert = "lastName"/>
+        <result column = "EMAIL" property = "email"/>
+    </resultMap>
+
+    <select id ="getById" resultMap = "UserResultMap">
+        SELECT ID, FIRST_NAME, LAST_NAME, EMAIL,
+        FROM Users 
+        WHERE ID = #{id} and TYPE = "USER"
+    </select>
+
+    <select id ="getByEmail" resultMap = "UserResultMap">
+        SELECT ID, FIRST_NAME, LAST_NAME, EMAIL,
+        FROM Users 
+        WHERE EMAIL = #{email}
+    </select>
+
+    <select id ="getAllUsers" resultMap = "UserResultMap">
+        SELECT ID, FIRST_NAME, LAST_NAME, EMAIL, PASSWORD
+        FROM Users 
+    </select>
+    
+</mapper>

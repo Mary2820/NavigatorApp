@@ -1,0 +1,33 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "com.solvd.navigationapp.daos.ILocationDAO">
+    <resultMap id = "LocationResultMap" type = "com.solvd.navigationapp.models.Location" autoMapping = "false">
+        <id columnn = "ID" property= "id"/>
+        <result columnn = "NAME" property "name"/>
+        <result columnn = "CITY_ID" property "cityId"/> 
+        <result columnn = "ADDRESS" property "address"/> 
+        <result columnn = "TYPE" property "type"/> 
+    </resultMap>
+
+    <select id ="getById" resultMap = "LocationResultMap">
+        SELECT * FROM Locations WHERE ID = #{id}
+    </select>
+
+    <insert id="save" parameterType="com.solvd.socialnetwork.models.Location" useGeneratedKeys="true" keyProperty="id">
+            INSERT INTO Locations (NAME, CITY_ID, ADDRESS, TYPE)
+            VALUES (#{name}, #{cityId}, #{address}, #{type})   
+    </insert>
+
+    <update id="update" parameterType="com.solvd.socialnetwork.models.Location">
+            UPDATE Locations
+            SET NAME = #{name}, CITY_ID = #{cityId}, ADDRESS = #{address}, TYPE = #{type}
+            WHERE ID = #{id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+            DELETE FROM Locations WHERE ID = #{id}
+    </delete>
+
+</mapper>
