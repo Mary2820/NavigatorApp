@@ -7,45 +7,37 @@
         <id columnn = "ID" property = "id" />
         <result column = "FIRST_NAME" property = "firstName"/>
         <result column = "LAST_NAME" propert = "lastName"/>
-        <result column = "PERSON_ID" property ="personId"/>
+        <result column = "PHONE_NUMBER" propert = "phoneNumber"/>
+        <result column = "USER_TYPE" property = "userType"/>
+        <result column = "LICENSE_ID" property = "licenseId"/>
     </resultMap>
 
     <select id ="getById" resultMap = "DriverResultMap">
-            SELECT d.ID, p.FIRST_NAME, p.LAST_NAME, d.LICENSE_ID
-            FROM Drivers d
-            JOIN Persons p ON d.PERSON_ID = p.ID
-            WHERE d.ID = #{id}
+            SELECT ID, FIRST_NAME, LAST_NAME, PHONE_NUMBER, LICENSE_ID
+            FROM Drivers 
+            WHERE ID = #{id} and USER_TYPE = "DRIVER"
     </select>
 
     <select id ="getByLicenseId" resultMap = "DriverResultMap">
-            SELECT d.ID, p.FIRST_NAME, p.LAST_NAME, d.LICENSE_ID
-            FROM Drivers d
-            JOIN Persons p ON d.PERSON_ID = p.ID
-            WHERE d.LICENSE_ID = #{licenseId}
+            SELECT ID, FIRST_NAME, LAST_NAME, PHONE_NUMBER, LICENSE_ID
+            FROM Drivers 
+            WHERE LICENSE_ID = #{licenseId}
     </select>
 
     <select id ="getByFullName" resultMap = "ResultMap">
-            SELECT d.ID, p.FIRST_NAME, p.LAST_NAME, d.LICENSE_ID
-            FROM Drivers d
-            JOIN Persons p ON d.PERSON_ID = p.ID
-            WHERE p.FIRST_NAME = #{firstName} AND p.LAST_NAME = #{lastName};
+            SELECT ID, FIRST_NAME, LAST_NAME, PHONE_NUMBER, LICENSE_ID
+            FROM Drivers 
+            WHERE FIRST_NAME = #{firstName} AND LAST_NAME = #{lastName} AND USER_TYPE ="DRIVER"
     </select>
 
-    <select id ="getByPersonId" resultMap = "DriverResultMap">
-            SELECT d.ID, p.FIRST_NAME, p.LAST_NAME, d.LICENSE_ID
-            FROM Drivers d
-            JOIN Persons p ON d.PERSON_ID = p.ID
-            WHERE d.PERSON_ID = #{personId}
-    </select>
-
-    <insert id="save" parameterType="com.solvd.socialnetwork.models.City" useGeneratedKeys="true" keyProperty="id">
-            INSERT INTO Driver (PERSON_ID, LICENSE_ID)
-            VALUES (#{personId}, #{licensId})   
+    <insert id="save" parameterType="com.solvd.socialnetwork.models.Driver" useGeneratedKeys="true" keyProperty="id">
+            INSERT INTO Driver (FIRST_NAME, LAST_NAME, PHONE_NUMBER, LICENSE_ID, USER_TYPE)
+            VALUES (#{firstName}, #{lastName}, #{phoneNumber}, #{licenseId}, #{userType})   
     </insert>
 
-    <update id="update" parameterType="com.solvd.socialnetwork.models.Comment">
+    <update id="update" parameterType="com.solvd.socialnetwork.models.Drivers">
             UPDATE Driver
-            SET PERSON_ID = #{personId}, LICENSE_ID = #{licenseId}
+            SET FIRST_NAME = #{firstName}, LAST_NAME = #{lastName}, PHONE_NUMBER = #{phoneNumber}, LICENSE_ID = #{licenseId}, USER_TYPE = #{userType}
             WHERE ID = #{id}
     </update>
 

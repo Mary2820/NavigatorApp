@@ -1,5 +1,7 @@
 package com.solvd.navigationapp.models;
 
+import com.solvd.navigationapp.enums.UserType;
+
 public class Driver extends Person {
     private Long id;
     private Long licenseId;
@@ -8,10 +10,13 @@ public class Driver extends Person {
         super(personId, firstName, lastName);
         this.id = id;
         this.licenseId = licenseId;
+        this.userType = UserType.DRIVER;
+    
     }
 
     public Driver(Long id, String firstName, String lastName) {
         super(id, firstName, lastName);
+        this.userType = UserType.DRIVER;
     }
 
     public Long getId() {
@@ -29,4 +34,5 @@ public class Driver extends Person {
     public void setLicenseId(Long licenseId) {
         this.licenseId = licenseId;
     }
+
 }

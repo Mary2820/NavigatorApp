@@ -1,4 +1,4 @@
-package com.solvd.navigationapp.DAO;
+package com.solvd.navigationapp.daos;
 
 import com.solvd.navigationapp.models.Vehicle;
 
@@ -11,11 +11,11 @@ public interface IVehicleDAO extends IDAO<Vehicle> {
 
     List<Vehicle> getByDriverId(Integer driverId);
 
-    List<Vehicle> getBySeatsCountGreaterThan(Integer seatsCount);
+    List<Vehicle> getAllVehicles();
 
-    List<Vehicle> getBySeatsCountLessThan(Integer seatsCount);
+    /*List<Vehicle> getBySeatsCountGreaterThan(Integer seatsCount);
+
+    List<Vehicle> getBySeatsCountLessThan(Integer seatsCount);*/
 
     void deleteByRegistrationNumber(String registrationNumber);
-
-    List<Vehicle> getAllVehicles();
 }

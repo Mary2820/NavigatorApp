@@ -1,0 +1,76 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace  = "com.solvd.navigationapp.daos.IUserDAO" >
+    <resultMap id = "UserResultMap" type = "com.solvd.navigationapp.models.User" autoMapping = "false">
+        <id columnn = "ID" property = "id" />
+        <result column = "FIRST_NAME" property = "firstName"/>
+        <result column = "LAST_NAME" propert = "lastName"/>
+        <result column = "PHONE_NUMBER" propert = "phoneNumber"/>
+        <result column = "EMAIL" property = "email"/>
+        <result column = "TYPE" property = "userType"/>
+    </resultMap>
+
+    <select id ="getById" resultMap = "UserResultMap">
+        SELECT ID, FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER
+        FROM Users 
+        WHERE ID = #{id} and TYPE = "CLIENT"
+    </select>
+
+    <select id ="getByEmail" resultMap = "UserResultMap">
+        SELECT ID, FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER
+        FROM Users 
+        WHERE EMAIL = #{email} and TYPE = "CLIENT"
+    </select>
+
+    <select id ="getByFirstName" resultMap = "UserResultMap">
+        SELECT ID, FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER
+        FROM Users 
+        WHERE FIRST_NAME = #{firstName} and TYPE = "CLIENT"
+    </select>
+
+    <select id ="getByLastName" resultMap = "UserResultMap">
+        SELECT ID, FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER
+        FROM Users 
+        WHERE LAST_NAME = #{lastName} and TYPE = "CLIENT"
+    </select>
+
+    <select id ="getAllUsers" resultMap = "UserResultMap">
+        SELECT ID, FIRST_NAME, LAST_NAME, EMAIL, PASSWORD, PHONE_NUMBER
+        FROM Users 
+    </select>
+
+    <insert id="insert" parameterType="com.solvd.navigationapp.models.User">
+        INSERT INTO Users (ID, PERSON_ID, FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, TYPE)
+        VALUES (#{id}, #{personId}, #{firstName}, #{lastName}, #{email}, #{phoneNumber}, "CLIENT")
+    </insert>
+
+    <update id="update" parameterType="com.solvd.navigationapp.models.User">
+        UPDATE Users
+        SET PERSON_ID = #{personId}, FIRST_NAME = #{firstName}, LAST_NAME = #{lastName}, EMAIL = #{email}, PHONE_NUMBER = #{phoneNumber}, TYPE = "CLIENT"
+        WHERE ID = #{id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        DELETE FROM Users
+        WHERE ID = #{id}
+    </delete>
+    
+    <delete id="deleteByEmail" parameterType="String">
+        DELETE FROM Users
+        WHERE EMAIL = #{email}
+    </delete>
+
+     <select id="isEmailTaken" resultType="boolean">
+        SELECT 
+            CASE 
+                 WHEN COUNT(*) > 0 THEN 1 
+                ELSE 0 
+            END
+        FROM Users
+        WHERE email = #{email}
+    </select>
+
+
+</mapper>
