@@ -2,7 +2,7 @@ package com.solvd.navigationapp.models;
 
 import com.solvd.navigationapp.enums.UserType;
 
-public class Client extends Person {
+public class Client extends User {
     private Long id;
     private String email;
     private String password;

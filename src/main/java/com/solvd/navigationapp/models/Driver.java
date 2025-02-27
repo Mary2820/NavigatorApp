@@ -2,7 +2,7 @@ package com.solvd.navigationapp.models;
 
 import com.solvd.navigationapp.enums.UserType;
 
-public class Driver extends Person {
+public class Driver extends User {
     private Long id;
     private Long licenseId;
 
