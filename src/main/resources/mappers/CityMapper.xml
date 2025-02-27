@@ -28,12 +28,12 @@
 
     </select>
 
-    <insert id="save" parameterType="com.solvd.socialnetwork.models.City" useGeneratedKeys="true" keyProperty="id">
+    <insert id="save" parameterType="com.solvd.navigationapp.models.City" useGeneratedKeys="true" keyProperty="id">
             INSERT INTO Cities (NAME, REGION, COUNTRY)
             VALUES (#{name}, #{region}, #{country})   
     </insert>
 
-    <update id="update" parameterType="com.solvd.socialnetwork.models.Comment">
+    <update id="update" parameterType="com.solvd.navigationapp.models.City">
             UPDATE Cities
             SET NAME = #{name}, REGION = #{region}, COUNTRY = #{country}
             WHERE ID = #{id}

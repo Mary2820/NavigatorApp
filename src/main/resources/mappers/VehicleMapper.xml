@@ -20,7 +20,7 @@
     </select>
 
     <select id = "getByVehicleTypeId" resultMap = "VehicleResultMap">
-            SELECT * FROM Vehicle WHERE VEHICLE_TYPE_ID" = #{vehicleTypeId}
+            SELECT * FROM Vehicle WHERE VEHICLE_TYPE_ID = #{vehicleTypeId}
     </select>
 
     <select id = "getByDriverId" resultMap = "VehicleResultMap">
@@ -46,7 +46,7 @@
             DELETE FROM Vehicle WHERE ID = #{id}
     </delete>
 
-    <delete id="deleteByRegistrationNumber" parameterType="int">
+    <delete id="deleteByRegistrationNumber" parameterType="string">
             DELETE FROM Vehicle WHERE REGISTRATION_NUMBER = #{registrationNumber}
     </delete>
 

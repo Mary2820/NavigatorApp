@@ -10,34 +10,42 @@
     </resultMap>
 
     <select id ="getById" resultMap = "LicenseResultMap">
-        SELECT * FROM Licenses WHERE ID = #{id}
+        SELECT * 
+        FROM Licenses 
+        WHERE ID = #{id}
     </select>
 
     <select id="getByNumber" resultMap="LicenseResultMap">
-        SELECT * FROM Licenses WHERE NUMBER = #{number}
+        SELECT * 
+        FROM Licenses 
+        WHERE NUMBER = #{number}
     </select>
 
     <select id="getExpiredLicenses" resultMap="LicenseResultMap">
-        SELECT * FROM Licenses WHERE EXPIRATION_DATE < CURDATE();
+        SELECT * 
+        FROM Licenses 
+        WHERE EXPIRATION_DATE < CURDATE()
     </select>
 
     <select id="getValidLicenses" resultMap="LicenseResultMap">
-        SELECT * FROM Licenses WHERE EXPIRATION_DATE >= CURDATE();
+        SELECT * 
+        FROM Licenses 
+        WHERE EXPIRATION_DATE >= CURDATE()
     </select>
 
-    <insert id="save" parameterType="com.solvd.socialnetwork.models.License" useGeneratedKeys="true" keyProperty="id">
-            INSERT INTO Licenses (NUMBER, EXPIRATION_DATE)
-            VALUES (#{number}, #{expirationDate})   
+    <insert id="insert" parameterType="com.solvd.navigationapp.models.License" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO Licenses (NUMBER, EXPIRATION_DATE)
+        VALUES (#{number}, #{expirationDate})   
     </insert>
 
-    <update id="update" parameterType="com.solvd.socialnetwork.models.License">
-            UPDATE Licenses
-            SET NUMBER = #{number}, EXPIRATION_DATE = #{expirationDate}
-            WHERE ID = #{id}
+    <update id="update" parameterType="com.solvd.navigationapp.models.License">
+        UPDATE Licenses
+        SET NUMBER = #{number}, EXPIRATION_DATE = #{expirationDate}
+        WHERE ID = #{id}
     </update>
 
     <delete id="delete" parameterType="int">
-            DELETE FROM Licenses WHERE ID = #{id}
+        DELETE FROM Licenses WHERE ID = #{id}
     </delete>
 
 </mapper>
