@@ -1,4 +1,4 @@
 package com.solvd.navigationapp;
 
-public class main {
+public class Main {
 }
