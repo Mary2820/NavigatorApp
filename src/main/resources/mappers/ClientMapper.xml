@@ -2,8 +2,8 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace  = "com.solvd.navigationapp.daos.IUserDAO" >
-    <resultMap id = "UserResultMap" type = "com.solvd.navigationapp.models.User" autoMapping = "false">
+<mapper namespace  = "com.solvd.navigationapp.daos.IClientDAO" >
+    <resultMap id = "ClientResultMap" type = "com.solvd.navigationapp.models.Client" autoMapping = "false">
         <id columnn = "ID" property = "id" />
         <result column = "FIRST_NAME" property = "firstName"/>
         <result column = "LAST_NAME" propert = "lastName"/>
@@ -12,41 +12,41 @@
         <result column = "TYPE" property = "userType"/>
     </resultMap>
 
-    <select id ="getById" resultMap = "UserResultMap">
+    <select id ="getById" resultMap = "ClientResultMap">
         SELECT ID, FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER
         FROM Users 
         WHERE ID = #{id} and TYPE = "CLIENT"
     </select>
 
-    <select id ="getByEmail" resultMap = "UserResultMap">
+    <select id ="getByEmail" resultMap = "ClientResultMap">
         SELECT ID, FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER
         FROM Users 
         WHERE EMAIL = #{email} and TYPE = "CLIENT"
     </select>
 
-    <select id ="getByFirstName" resultMap = "UserResultMap">
+    <select id ="getByFirstName" resultMap = "ClientResultMap">
         SELECT ID, FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER
         FROM Users 
         WHERE FIRST_NAME = #{firstName} and TYPE = "CLIENT"
     </select>
 
-    <select id ="getByLastName" resultMap = "UserResultMap">
+    <select id ="getByLastName" resultMap = "ClientResultMap">
         SELECT ID, FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER
         FROM Users 
         WHERE LAST_NAME = #{lastName} and TYPE = "CLIENT"
     </select>
 
-    <select id ="getAllUsers" resultMap = "UserResultMap">
+    <select id ="getAllUsers" resultMap = "ClientResultMap">
         SELECT ID, FIRST_NAME, LAST_NAME, EMAIL, PASSWORD, PHONE_NUMBER
         FROM Users 
     </select>
 
-    <insert id="insert" parameterType="com.solvd.navigationapp.models.User">
+    <insert id="insert" parameterType="com.solvd.navigationapp.models.Client">
         INSERT INTO Users (ID, PERSON_ID, FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, TYPE)
         VALUES (#{id}, #{personId}, #{firstName}, #{lastName}, #{email}, #{phoneNumber}, "CLIENT")
     </insert>
 
-    <update id="update" parameterType="com.solvd.navigationapp.models.User">
+    <update id="update" parameterType="com.solvd.navigationapp.models.Client">
         UPDATE Users
         SET PERSON_ID = #{personId}, FIRST_NAME = #{firstName}, LAST_NAME = #{lastName}, EMAIL = #{email}, PHONE_NUMBER = #{phoneNumber}, TYPE = "CLIENT"
         WHERE ID = #{id}
