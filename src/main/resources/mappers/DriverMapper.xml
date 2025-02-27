@@ -30,7 +30,7 @@
         WHERE FIRST_NAME = #{firstName} AND LAST_NAME = #{lastName} AND USER_TYPE = 'DRIVER'
     </select>
 
-    <insert id="save" parameterType="com.solvd.navigationapp.models.Driver" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert" parameterType="com.solvd.navigationapp.models.Driver" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO Drivers (FIRST_NAME, LAST_NAME, PHONE_NUMBER, LICENSE_ID, USER_TYPE)
         VALUES (#{firstName}, #{lastName}, #{phoneNumber}, #{licenseId}, 'DRIVER')   
     </insert>
@@ -41,7 +41,7 @@
         WHERE ID = #{id}
     </update>
 
-    <delete id="delete" parameterType="int">
+    <delete id="delete" parameterType="long">
         DELETE FROM Drivers WHERE ID = #{id}
     </delete>
 </mapper>

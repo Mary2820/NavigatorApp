@@ -28,7 +28,7 @@
 
     </select>
 
-    <insert id="save" parameterType="com.solvd.navigationapp.models.City" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert" parameterType="com.solvd.navigationapp.models.City" useGeneratedKeys="true" keyProperty="id">
             INSERT INTO Cities (NAME, REGION, COUNTRY)
             VALUES (#{name}, #{region}, #{country})   
     </insert>
@@ -39,7 +39,7 @@
             WHERE ID = #{id}
     </update>
 
-    <delete id="delete" parameterType="int">
+    <delete id="delete" parameterType="long">
             DELETE FROM Cities WHERE ID = #{id}
     </delete>
 </mapper>
