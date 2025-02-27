@@ -1,4 +1,4 @@
-package com.solvd.navigationapp.DAO;
+package com.solvd.navigationapp.daos;
 
 import com.solvd.navigationapp.models.Driver;
 
@@ -9,5 +9,4 @@ public interface IDriverDAO extends IDAO<Driver> {
 
     List<Driver> getByFullName(String firstName, String lastName);
 
-    Driver getByPersonId(Long personId);
 }

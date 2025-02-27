@@ -2,31 +2,65 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace = "com.solvd.navigationapp.daos.IRouteDAO">
-    <resultMap id = "RouteResultMap" type = "com.solvd.navigationapp.models.Route" autoMapping = "false">
-        <id columnn = "ID" property= "id"/>
-        <result columnn = "START_POINT_ID" property "startPointId"/>
-        <result columnn = "END_POINT_ID" property "endPointId"/> 
-        <result columnn = "VEHICLE_ID" property "vehicleId"/> 
+<mapper namespace="com.solvd.navigationapp.daos.IRouteDAO">
+    <resultMap id="RouteResultMap" type="com.solvd.navigationapp.models.Route" autoMapping="false">
+        <id column="ID" property="id"/>
+        <result column="START_POINT_ID" property="startPointId"/>
+        <result column="END_POINT_ID" property="endPointId"/> 
+        <result column="VEHICLE_ID" property="vehicleId"/> 
     </resultMap>
 
-    <select id ="getById" resultMap = "RouteResultMap">
+    <select id="getById" resultMap="RouteResultMap">
         SELECT * FROM Routes WHERE ID = #{id}
     </select>
 
-    <insert id="save" parameterType="com.solvd.socialnetwork.models.Route" useGeneratedKeys="true" keyProperty="id">
-            INSERT INTO Routes (START_POINT_ID, END_POINT_ID, VEHICLE_ID)
-            VALUES (#{startPointId}, #{endPointId}, #{vehicleId})   
+    <select id="getByStartPointId" resultMap="RouteResultMap" parameterType="int">
+        SELECT * 
+        FROM Routes 
+        WHERE START_POINT_ID = #{startPointId}
+    </select>
+
+    <select id="getByEndPointId" resultMap="RouteResultMap" parameterType="int">
+        SELECT * 
+        FROM Routes 
+        WHERE END_POINT_ID = #{endPointId}
+    </select>
+
+    <select id="getByVehicleId" resultMap="RouteResultMap" parameterType="int">
+        SELECT * 
+        FROM Routes 
+        WHERE VEHICLE_ID = #{vehicleId}
+    </select>
+
+    <select id="getByStartAndEndPoints" resultMap="RouteResultMap">
+        SELECT * 
+        FROM Routes 
+        WHERE START_POINT_ID = #{startPointId} AND END_POINT_ID = #{endPointId}
+    </select>
+
+    <select id="getByStartEndAndVehicle" resultMap="RouteResultMap">
+        SELECT * 
+        FROM Routes 
+        WHERE START_POINT_ID = #{startPointId} AND END_POINT_ID = #{endPointId} AND VEHICLE_ID = #{vehicleId}
+    </select>
+
+    <select id="countTotal" resultType="int">
+        SELECT COUNT(*) FROM Routes
+    </select>
+
+    <insert id="save" parameterType="com.solvd.navigationapp.models.Route" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO Routes (START_POINT_ID, END_POINT_ID, VEHICLE_ID)
+        VALUES (#{startPointId}, #{endPointId}, #{vehicleId})   
     </insert>
 
-    <update id="update" parameterType="com.solvd.socialnetwork.models.Route">
-            UPDATE Routes
-            SET START_POINT_ID = #{startPointId}, END_POINT_ID = #{endPointid}, VEHICLE_ID = #{vehilceId}
-            WHERE ID = #{id}
+    <update id="update" parameterType="com.solvd.navigationapp.models.Route">
+        UPDATE Routes
+        SET START_POINT_ID = #{startPointId}, END_POINT_ID = #{endPointId}, VEHICLE_ID = #{vehicleId}
+        WHERE ID = #{id}
     </update>
 
     <delete id="delete" parameterType="int">
-            DELETE FROM Routes WHERE ID = #{id}
+        DELETE FROM Routes WHERE ID = #{id}
     </delete>
 
 </mapper>

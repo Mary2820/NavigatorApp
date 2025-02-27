@@ -1,4 +1,4 @@
-package com.solvd.navigationapp.DAO;
+package com.solvd.navigationapp.daos;
 
 import com.solvd.navigationapp.models.Person;
 
