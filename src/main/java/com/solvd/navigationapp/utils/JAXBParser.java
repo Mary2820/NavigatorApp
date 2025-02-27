@@ -1,6 +1,4 @@
-package com.solvd.navigationapp.models.utils;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.solvd.navigationapp.Main;
+package com.solvd.navigationapp.utils;
 import com.solvd.navigationapp.models.User;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
@@ -10,7 +8,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.File;
-import java.io.IOException;
 
 
 public class JAXBParser <T> implements DataParser<T> {

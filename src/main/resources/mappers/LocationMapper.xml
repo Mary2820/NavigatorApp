@@ -4,11 +4,11 @@
 
 <mapper namespace = "com.solvd.navigationapp.daos.ILocationDAO">
     <resultMap id = "LocationResultMap" type = "com.solvd.navigationapp.models.Location" autoMapping = "false">
-        <id columnn = "ID" property= "id"/>
-        <result columnn = "NAME" property "name"/>
-        <result columnn = "CITY_ID" property "cityId"/> 
-        <result columnn = "ADDRESS" property "address"/> 
-        <result columnn = "TYPE" property "type"/> 
+        <id column = "ID" property= "id"/>
+        <result column = "NAME" property = "name"/>
+        <result column = "CITY_ID" property = "cityId"/>
+        <result column = "ADDRESS" property = "address"/>
+        <result column = "TYPE" property =  "type"/>
     </resultMap>
 
     <select id ="getById" resultMap = "LocationResultMap">
@@ -45,5 +45,4 @@
     <delete id="delete" parameterType="int">
             DELETE FROM Locations WHERE ID = #{id}
     </delete>
-
 </mapper>

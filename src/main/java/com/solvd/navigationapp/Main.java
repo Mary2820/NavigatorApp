@@ -1,29 +1,23 @@
 package com.solvd.navigationapp;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.solvd.navigationapp.models.Client;
 import com.solvd.navigationapp.models.User;
-import com.solvd.navigationapp.models.utils.DataParser;
-import com.solvd.navigationapp.models.utils.JAXBParser;
-import com.solvd.navigationapp.models.utils.JacksonParser;
-import jakarta.xml.bind.JAXBContext;
-import jakarta.xml.bind.JAXBException;
-import jakarta.xml.bind.Marshaller;
+import com.solvd.navigationapp.utils.DataParser;
+import com.solvd.navigationapp.utils.JAXBParser;
+import com.solvd.navigationapp.utils.JacksonParser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.io.File;
-import java.io.IOException;
 
 
 public class Main {
     private static final Logger logger = LogManager.getLogger(Main.class.getName());
     public static void main(String[] args) {
-        User user = new User(1L, 1L, "Jan", "Mazowiecki", "jan.maz@example.com", "password123");
+        Client client = new Client(1L, 1L, "Jan", "Mazowiecki", "jan.maz@example.com", "password123");
 
         DataParser<User> jacksonparser = new JacksonParser();
         DataParser<User> jaxbparser = new JAXBParser();
 
-        jacksonparser.writeToFile("src/main/resources/data.json",user);
-        jaxbparser.writeToFile("src/main/resources/data.xml",user);
+        jacksonparser.writeToFile("src/main/resources/data.json",client);
+        jaxbparser.writeToFile("src/main/resources/data.xml", client);
 
         User parsedjacksonuser = jacksonparser.readFromFile("src/main/resources/data.json", User.class);
 

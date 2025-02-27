@@ -4,10 +4,10 @@
 
 <mapper namespace  = "com.solvd.navigationapp.daos.IDriverDAO">
     <resultMap id = "DriverResultMap" type = "com.solvd.navigationapp.models.Driver" autoMapping = "false" >
-        <id columnn = "ID" property = "id" />
+        <id column = "ID" property = "id" />
         <result column = "FIRST_NAME" property = "firstName"/>
-        <result column = "LAST_NAME" propert = "lastName"/>
-        <result column = "PHONE_NUMBER" propert = "phoneNumber"/>
+        <result column = "LAST_NAME" property = "lastName"/>
+        <result column = "PHONE_NUMBER" property = "phoneNumber"/>
         <result column = "USER_TYPE" property = "userType"/>
         <result column = "LICENSE_ID" property = "licenseId"/>
     </resultMap>

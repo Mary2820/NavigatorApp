@@ -1,4 +1,4 @@
-package com.solvd.navigationapp.models.utils;
+package com.solvd.navigationapp.utils;
 
 public interface DataParser<T> {
     void writeToFile(String filePath, T data);

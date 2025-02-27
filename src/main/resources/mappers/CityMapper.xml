@@ -4,10 +4,10 @@
 
 <mapper namespace = "com.solvd.navigationapp.daos.ICityDAO">
     <resultMap id = "CityResultMap" type = "com.solvd.navigationapp.models.City" autoMapping = "false">
-        <id columnn = "ID" property= "id"/>
-        <result columnn = "NAME" property "name"/>
-        <result columnn = "REGION" property "region"/> 
-        <result columnn = "COUNTRY" property "country"/>
+        <id column = "ID" property= "id"/>
+        <result column = "NAME" property = "name"/>
+        <result column = "REGION" property = "region"/>
+        <result column = "COUNTRY" property = "country"/>
     </resultMap>
 
     <select id ="getById" resultMap = "CityResultMap">
@@ -43,5 +43,4 @@
     <delete id="delete" parameterType="int">
             DELETE FROM Cities WHERE ID = #{id}
     </delete>
-
 </mapper>
