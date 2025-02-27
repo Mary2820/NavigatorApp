@@ -1,16 +1,16 @@
 package com.solvd.navigationapp.daos;
 
-import com.solvd.navigationapp.models.Person;
+import com.solvd.navigationapp.models.User;
 
 import java.util.List;
 
-public interface IPersonDAO extends IDAO<Person> {
+public interface IPersonDAO extends IDAO<User> {
 
-    List<Person> getByFirstName(String firstName);
+    List<User> getByFirstName(String firstName);
 
-    List<Person> getByLastName(String lastName);
+    List<User> getByLastName(String lastName);
 
-    List<Person> getByFullName(String firstName, String lastName);
+    List<User> getByFullName(String firstName, String lastName);
 
     int countTotal();
 }

@@ -2,13 +2,13 @@ package com.solvd.navigationapp.models;
 
 import com.solvd.navigationapp.enums.UserType;
 
-public abstract class Person {
+public abstract class User {
     private Long id;
     private String firstName;
     private String lastName;
     protected UserType userType;
 
-    protected Person(Long id, String firstName, String lastName) {
+    protected User(Long id, String firstName, String lastName) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
