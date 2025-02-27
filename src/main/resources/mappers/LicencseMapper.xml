@@ -4,9 +4,9 @@
 
 <mapper namespace = "com.solvd.navigationapp.daos.ILicenseDAO">
     <resultMap id = "LicenseResultMap" type = "com.solvd.navigationapp.models.License" autoMapping = "false">
-        <id columnn = "ID" property= "id"/>
-        <result columnn = "NUMBER" property "number"/>
-        <result columnn = "EXPIRATION_DATE" property "expirationDate"/> 
+        <id column = "ID" property= "id"/>
+        <result column = "NUMBER" property = "number"/>
+        <result column = "EXPIRATION_DATE" property = "expirationDate"/>
     </resultMap>
 
     <select id ="getById" resultMap = "LicenseResultMap">
