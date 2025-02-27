@@ -31,7 +31,7 @@
         SELECT * FROM Locations WHERE TYPE = #{type}
     </select>
 
-    <insert id="save" parameterType="com.solvd.navigationapp.models.Location" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert" parameterType="com.solvd.navigationapp.models.Location" useGeneratedKeys="true" keyProperty="id">
             INSERT INTO Locations (NAME, CITY_ID, ADDRESS, TYPE)
             VALUES (#{name}, #{cityId}, #{address}, #{type})   
     </insert>
@@ -42,7 +42,7 @@
             WHERE ID = #{id}
     </update>
 
-    <delete id="delete" parameterType="int">
+    <delete id="delete" parameterType="long">
             DELETE FROM Locations WHERE ID = #{id}
     </delete>
 </mapper>

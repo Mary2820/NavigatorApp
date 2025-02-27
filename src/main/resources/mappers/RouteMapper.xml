@@ -14,22 +14,16 @@
         SELECT * FROM Routes WHERE ID = #{id}
     </select>
 
-    <select id="getByStartPointId" resultMap="RouteResultMap" parameterType="int">
-        SELECT * 
-        FROM Routes 
-        WHERE START_POINT_ID = #{startPointId}
+    <select id="getByStartPointId" resultMap="RouteResultMap" parameterType="long">
+        SELECT * FROM Routes WHERE START_POINT_ID = #{startPointId}
     </select>
 
-    <select id="getByEndPointId" resultMap="RouteResultMap" parameterType="int">
-        SELECT * 
-        FROM Routes 
-        WHERE END_POINT_ID = #{endPointId}
+    <select id="getByEndPointId" resultMap="RouteResultMap" parameterType="long">
+        SELECT * FROM Routes WHERE END_POINT_ID = #{endPointId}
     </select>
 
-    <select id="getByVehicleId" resultMap="RouteResultMap" parameterType="int">
-        SELECT * 
-        FROM Routes 
-        WHERE VEHICLE_ID = #{vehicleId}
+    <select id="getByVehicleId" resultMap="RouteResultMap" parameterType="long">
+        SELECT * FROM Routes WHERE VEHICLE_ID = #{vehicleId}
     </select>
 
     <select id="getByStartAndEndPoints" resultMap="RouteResultMap">
@@ -48,7 +42,7 @@
         SELECT COUNT(*) FROM Routes
     </select>
 
-    <insert id="save" parameterType="com.solvd.navigationapp.models.Route" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert" parameterType="com.solvd.navigationapp.models.Route" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO Routes (START_POINT_ID, END_POINT_ID, VEHICLE_ID)
         VALUES (#{startPointId}, #{endPointId}, #{vehicleId})   
     </insert>
@@ -59,7 +53,7 @@
         WHERE ID = #{id}
     </update>
 
-    <delete id="delete" parameterType="int">
+    <delete id="delete" parameterType="long">
         DELETE FROM Routes WHERE ID = #{id}
     </delete>
 

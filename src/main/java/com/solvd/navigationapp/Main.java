@@ -11,7 +11,7 @@ import org.apache.logging.log4j.Logger;
 public class Main {
     private static final Logger logger = LogManager.getLogger(Main.class.getName());
     public static void main(String[] args) {
-        Client client = new Client(1L, 1L, "Jan", "Mazowiecki", "jan.maz@example.com", "password123");
+        Client client = new Client(1L, "Jan", "Mazowiecki", "jan.maz@example.com", "password123");
 
         DataParser<User> jacksonparser = new JacksonParser();
         DataParser<User> jaxbparser = new JAXBParser();

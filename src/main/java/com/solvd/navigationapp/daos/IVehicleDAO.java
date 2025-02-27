@@ -9,7 +9,7 @@ public interface IVehicleDAO extends IDAO<Vehicle> {
 
     List<Vehicle> getByVehicleTypeId(Long vehicleTypeId);
 
-    List<Vehicle> getByDriverId(Integer driverId);
+    List<Vehicle> getByDriverId(Long driverId);
 
     List<Vehicle> getAllVehicles();
 

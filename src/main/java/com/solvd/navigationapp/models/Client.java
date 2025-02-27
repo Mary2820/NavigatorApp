@@ -1,26 +1,31 @@
 package com.solvd.navigationapp.models;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import com.solvd.navigationapp.enums.UserType;
 
+@XmlRootElement(name = "client")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Client extends User {
-    private Long id;
+
+    @XmlElement(name = "email")
     private String email;
-    private String password;
 
-    public Client(Long id, Long personId, String firstName, String lastName, String email, String password) {
-        super(personId, firstName, lastName);
-        this.id = id;
+    @XmlElement(name = "phoneNumber")
+    private String phoneNumber;
+
+    public Client() {
+        super();
+        this.userType = UserType.CLIENT;
+    }
+
+    public Client(Long id, String firstName, String lastName, String email, String phoneNumber) {
+        super(id, firstName, lastName);
         this.email = email;
-        this.password = password;
-        this.userType = UserType.USER;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+        this.phoneNumber = phoneNumber;
+        this.userType = UserType.CLIENT;
     }
 
     public String getEmail() {
@@ -31,11 +36,11 @@ public class Client extends User {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }

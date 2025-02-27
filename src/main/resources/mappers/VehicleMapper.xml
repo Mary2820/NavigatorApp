@@ -11,43 +11,43 @@
         <result column = "DRIVER_ID" property = "driverId"/> 
     </resultMap>
 
-    <select id ="getById" resultMap = "VehicleResultMap">
-        SELECT * FROM Vehicle WHERE ID = #{id}
+    <select id="getById" resultMap="VehicleResultMap">
+        SELECT * FROM Vehicles WHERE ID = #{id}
     </select>
 
-    <select id = "getByRegistrationNumber" resultMap = "VehicleResultMap">
-            SELECT * FROM Vehicle WHERE REGISTRATION_NUMBER = #{registrationNumber}
+    <select id="getByRegistrationNumber" resultMap="VehicleResultMap">
+        SELECT * FROM Vehicles WHERE REGISTRATION_NUMBER = #{registrationNumber}
     </select>
 
-    <select id = "getByVehicleTypeId" resultMap = "VehicleResultMap">
-            SELECT * FROM Vehicle WHERE VEHICLE_TYPE_ID = #{vehicleTypeId}
+    <select id="getByVehicleTypeId" resultMap="VehicleResultMap">
+        SELECT * FROM Vehicles WHERE VEHICLE_TYPE_ID = #{vehicleTypeId}
     </select>
 
-    <select id = "getByDriverId" resultMap = "VehicleResultMap">
-            SELECT * FROM Vehicle WHERE DRIVER_ID = #{driverId}
+    <select id="getByDriverId" resultMap="VehicleResultMap">
+        SELECT * FROM Vehicles WHERE DRIVER_ID = #{driverId}
     </select>
 
-    <select id = "getAllVehicles" resultMap = "VehicleResultMap">
-            SELECT * FROM Vehicle
+    <select id="getAllVehicles" resultMap="VehicleResultMap">
+        SELECT * FROM Vehicles
     </select>
 
     <insert id="insert" parameterType="com.solvd.navigationapp.models.Vehicle" useGeneratedKeys="true" keyProperty="id">
-            INSERT INTO Vehicle (VEHICLE_TYPE_ID, REGISTRATION_NUMBER, SEATS_COUNT, DRIVER_ID)
+            INSERT INTO Vehicles (VEHICLE_TYPE_ID, REGISTRATION_NUMBER, SEATS_COUNT, DRIVER_ID)
             VALUES (#{vehicleTypeId}, #{registrationNumber}, #{seatsCount}, #{driverId})   
     </insert>
 
     <update id="update" parameterType="com.solvd.navigationapp.models.Vehicle">
-            UPDATE Vehicle
+            UPDATE Vehicles
             SET VEHICLE_TYPE_ID = #{vehicleTypeId}, REGISTRATION_NUMBER = #{registrationNumber}, SEATS_COUNT = #{seatsCount}, DRIVER_ID = #{driverId}
             WHERE ID = #{id}
     </update>
 
-    <delete id="delete" parameterType="int">
-            DELETE FROM Vehicle WHERE ID = #{id}
+    <delete id="delete" parameterType="long">
+            DELETE FROM Vehicles WHERE ID = #{id}
     </delete>
 
     <delete id="deleteByRegistrationNumber" parameterType="string">
-            DELETE FROM Vehicle WHERE REGISTRATION_NUMBER = #{registrationNumber}
+            DELETE FROM Vehicles WHERE REGISTRATION_NUMBER = #{registrationNumber}
     </delete>
 
 </mapper>

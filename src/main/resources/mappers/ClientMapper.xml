@@ -71,4 +71,12 @@
         FROM Users
         WHERE EMAIL = #{email}
     </select>
+
+    <select id="getByNamePart" resultMap="ClientResultMap">
+        SELECT *
+        FROM Users 
+        WHERE (FIRST_NAME LIKE CONCAT('%', #{namePart}, '%') 
+        OR LAST_NAME LIKE CONCAT('%', #{namePart}, '%'))
+        AND TYPE = 'CLIENT'
+    </select>
 </mapper>
