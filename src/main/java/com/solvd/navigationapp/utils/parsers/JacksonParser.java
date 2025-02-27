@@ -1,7 +1,6 @@
-package com.solvd.navigationapp.models.utils;
+package com.solvd.navigationapp.utils.parsers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.solvd.navigationapp.models.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
