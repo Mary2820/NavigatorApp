@@ -31,12 +31,12 @@
         SELECT * FROM Locations WHERE TYPE = #{type}
     </select>
 
-    <insert id="save" parameterType="com.solvd.socialnetwork.models.Location" useGeneratedKeys="true" keyProperty="id">
+    <insert id="save" parameterType="com.solvd.navigationapp.models.Location" useGeneratedKeys="true" keyProperty="id">
             INSERT INTO Locations (NAME, CITY_ID, ADDRESS, TYPE)
             VALUES (#{name}, #{cityId}, #{address}, #{type})   
     </insert>
 
-    <update id="update" parameterType="com.solvd.socialnetwork.models.Location">
+    <update id="update" parameterType="com.solvd.navigationapp.models.Location">
             UPDATE Locations
             SET NAME = #{name}, CITY_ID = #{cityId}, ADDRESS = #{address}, TYPE = #{type}
             WHERE ID = #{id}

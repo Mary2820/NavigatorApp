@@ -5,9 +5,9 @@ public class Vehicle {
     private Long vehicleTypeId;
     private String registrationNumber;
     private Integer seatsCount;
-    private Integer driverId;
+    private Long driverId;
 
-    public Vehicle(Long id, Long vehicleTypeId, String registrationNumber, Integer seatsCount, Integer driverId) {
+    public Vehicle(Long id, Long vehicleTypeId, String registrationNumber, Integer seatsCount, Long driverId) {
         this.id = id;
         this.vehicleTypeId = vehicleTypeId;
         this.registrationNumber = registrationNumber;
@@ -50,11 +50,11 @@ public class Vehicle {
         this.seatsCount = seatsCount;
     }
 
-    public Integer getDriverId() {
+    public Long getDriverId() {
         return driverId;
     }
 
-    public void setDriverId(Integer driverId) {
+    public void setDriverId(Long driverId) {
         this.driverId = driverId;
     }
 }

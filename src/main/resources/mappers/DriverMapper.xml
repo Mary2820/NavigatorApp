@@ -13,35 +13,35 @@
     </resultMap>
 
     <select id ="getById" resultMap = "DriverResultMap">
-            SELECT ID, FIRST_NAME, LAST_NAME, PHONE_NUMBER, LICENSE_ID
-            FROM Drivers 
-            WHERE ID = #{id} and USER_TYPE = "DRIVER"
+        SELECT *
+        FROM Drivers 
+        WHERE ID = #{id} and USER_TYPE = 'DRIVER'
     </select>
 
     <select id ="getByLicenseId" resultMap = "DriverResultMap">
-            SELECT ID, FIRST_NAME, LAST_NAME, PHONE_NUMBER, LICENSE_ID
-            FROM Drivers 
-            WHERE LICENSE_ID = #{licenseId}
+        SELECT *
+        FROM Drivers 
+        WHERE LICENSE_ID = #{licenseId} and USER_TYPE = 'DRIVER'
     </select>
 
-    <select id ="getByFullName" resultMap = "ResultMap">
-            SELECT ID, FIRST_NAME, LAST_NAME, PHONE_NUMBER, LICENSE_ID
-            FROM Drivers 
-            WHERE FIRST_NAME = #{firstName} AND LAST_NAME = #{lastName} AND USER_TYPE ="DRIVER"
+    <select id="getByFullName" resultMap="DriverResultMap">
+        SELECT *
+        FROM Drivers 
+        WHERE FIRST_NAME = #{firstName} AND LAST_NAME = #{lastName} AND USER_TYPE = 'DRIVER'
     </select>
 
-    <insert id="save" parameterType="com.solvd.socialnetwork.models.Driver" useGeneratedKeys="true" keyProperty="id">
-            INSERT INTO Driver (FIRST_NAME, LAST_NAME, PHONE_NUMBER, LICENSE_ID, USER_TYPE)
-            VALUES (#{firstName}, #{lastName}, #{phoneNumber}, #{licenseId}, #{userType})   
+    <insert id="save" parameterType="com.solvd.navigationapp.models.Driver" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO Drivers (FIRST_NAME, LAST_NAME, PHONE_NUMBER, LICENSE_ID, USER_TYPE)
+        VALUES (#{firstName}, #{lastName}, #{phoneNumber}, #{licenseId}, 'DRIVER')   
     </insert>
 
-    <update id="update" parameterType="com.solvd.socialnetwork.models.Drivers">
-            UPDATE Driver
-            SET FIRST_NAME = #{firstName}, LAST_NAME = #{lastName}, PHONE_NUMBER = #{phoneNumber}, LICENSE_ID = #{licenseId}, USER_TYPE = #{userType}
-            WHERE ID = #{id}
+    <update id="update" parameterType="com.solvd.navigationapp.models.Driver">
+        UPDATE Drivers
+        SET FIRST_NAME = #{firstName}, LAST_NAME = #{lastName}, PHONE_NUMBER = #{phoneNumber}, LICENSE_ID = #{licenseId}, USER_TYPE = 'DRIVER'
+        WHERE ID = #{id}
     </update>
 
     <delete id="delete" parameterType="int">
-            DELETE FROM Driver WHERE ID = #{id}
+        DELETE FROM Drivers WHERE ID = #{id}
     </delete>
 </mapper>
