@@ -4,10 +4,10 @@
 
 <mapper namespace  = "com.solvd.navigationapp.daos.IClientDAO" >
     <resultMap id = "ClientResultMap" type = "com.solvd.navigationapp.models.Client" autoMapping = "false">
-        <id columnn = "ID" property = "id" />
+        <id column = "ID" property = "id" />
         <result column = "FIRST_NAME" property = "firstName"/>
-        <result column = "LAST_NAME" propert = "lastName"/>
-        <result column = "PHONE_NUMBER" propert = "phoneNumber"/>
+        <result column = "LAST_NAME" property = "lastName"/>
+        <result column = "PHONE_NUMBER" property = "phoneNumber"/>
         <result column = "EMAIL" property = "email"/>
         <result column = "TYPE" property = "userType"/>
     </resultMap>
@@ -71,6 +71,4 @@
         FROM Users
         WHERE email = #{email}
     </select>
-
-
 </mapper>
