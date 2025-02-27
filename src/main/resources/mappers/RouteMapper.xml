@@ -1,0 +1,32 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "com.solvd.navigationapp.daos.IRouteDAO">
+    <resultMap id = "RouteResultMap" type = "com.solvd.navigationapp.models.Route" autoMapping = "false">
+        <id columnn = "ID" property= "id"/>
+        <result columnn = "START_POINT_ID" property "startPointId"/>
+        <result columnn = "END_POINT_ID" property "endPointId"/> 
+        <result columnn = "VEHICLE_ID" property "vehicleId"/> 
+    </resultMap>
+
+    <select id ="getById" resultMap = "RouteResultMap">
+        SELECT * FROM Routes WHERE ID = #{id}
+    </select>
+
+    <insert id="save" parameterType="com.solvd.socialnetwork.models.Route" useGeneratedKeys="true" keyProperty="id">
+            INSERT INTO Routes (START_POINT_ID, END_POINT_ID, VEHICLE_ID)
+            VALUES (#{startPointId}, #{endPointId}, #{vehicleId})   
+    </insert>
+
+    <update id="update" parameterType="com.solvd.socialnetwork.models.Route">
+            UPDATE Routes
+            SET START_POINT_ID = #{startPointId}, END_POINT_ID = #{endPointid}, VEHICLE_ID = #{vehilceId}
+            WHERE ID = #{id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+            DELETE FROM Routes WHERE ID = #{id}
+    </delete>
+
+</mapper>

@@ -1,0 +1,47 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "com.solvd.navigationapp.daos.ICityDAO">
+    <resultMap id = "CityResultMap" type = "com.solvd.navigationapp.models.City" autoMapping = "false">
+        <id columnn = "ID" property= "id"/>
+        <result columnn = "NAME" property "name"/>
+        <result columnn = "REGION" property "region"/> 
+        <result columnn = "COUNTRY" property "country"/>
+    </resultMap>
+
+    <select id ="getById" resultMap = "CityResultMap">
+        SELECT * FROM Cities WHERE ID = #{id}
+    </select>
+
+    <select id = "getByName" resultMap = "CityResultMap">
+            SELECT * FROM Cities WHERE NAME = #{name}
+
+    </select>
+
+     <select id = "getByRegion" resultMap = "CityResultMap">
+            SELECT * FROM Cities WHERE REGION = #{region}
+
+    </select>
+
+     <select id = "getByCountry" resultMap = "CityResultMap">
+            SELECT * FROM Cities WHERE COUNTRY = #{country}
+
+    </select>
+
+    <insert id="save" parameterType="com.solvd.socialnetwork.models.City" useGeneratedKeys="true" keyProperty="id">
+            INSERT INTO Cities (NAME, REGION, COUNTRY)
+            VALUES (#{name}, #{region}, #{country})   
+    </insert>
+
+    <update id="update" parameterType="com.solvd.socialnetwork.models.Comment">
+            UPDATE Cities
+            SET NAME = #{name}, REGION = #{region}, COUNTRY = #{country}
+            WHERE ID = #{id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+            DELETE FROM Cities WHERE ID = #{id}
+    </delete>
+
+</mapper>
