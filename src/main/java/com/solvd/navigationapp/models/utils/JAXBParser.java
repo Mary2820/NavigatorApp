@@ -13,11 +13,11 @@ import java.io.File;
 import java.io.IOException;
 
 
-public class JAXBParser implements DataParser<User> {
+public class JAXBParser <T> implements DataParser<T> {
     private static final Logger logger = LogManager.getLogger(JAXBParser.class.getName());
 
     @Override
-    public void writeToFile(String filePath, User data) {
+    public void writeToFile(String filePath, T data) {
         try {
             JAXBContext context = JAXBContext.newInstance(User.class);
 
@@ -31,11 +31,11 @@ public class JAXBParser implements DataParser<User> {
     }
 
     @Override
-    public User readFromFile(String filePath, Class<User> clazz) {
+    public T readFromFile(String filePath, Class<T> clazz) {
         try {
             JAXBContext context = JAXBContext.newInstance(User.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();
-            return (User) unmarshaller.unmarshal(new File(filePath));
+            return (T) unmarshaller.unmarshal(new File(filePath));
         } catch (JAXBException e) {
             logger.error(e);
         }
