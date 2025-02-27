@@ -11,16 +11,18 @@ public class ConnectionFactory {
     private static SqlSessionFactory sqlSessionFactory;
     private static final String CONFIG_FILE = "mybatis-config.xml";
 
-    static {
-        try {
-            Reader reader = Resources.getResourceAsReader(CONFIG_FILE);
-            sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader,"Stag");
-        } catch (IOException e) {
-            throw new RuntimeException("mybatis-config.xml file not found.", e);
-        }
+
+    public ConnectionFactory() {
     }
 
-    public static SqlSessionFactory getSqlSessionFactory() {
+    public static SqlSessionFactory getSQLSessionFactory() {
+        if (sqlSessionFactory == null) {
+            try (Reader reader = Resources.getResourceAsReader(CONFIG_FILE)) {
+                sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
+            } catch (IOException e) {
+                throw new RuntimeException("Error initializing MyBatis", e);
+            }
+        }
         return sqlSessionFactory;
     }
 }

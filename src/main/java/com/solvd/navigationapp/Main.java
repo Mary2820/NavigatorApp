@@ -1,9 +1,9 @@
 package com.solvd.navigationapp;
 import com.solvd.navigationapp.models.Client;
 import com.solvd.navigationapp.models.User;
-import com.solvd.navigationapp.utils.DataParser;
-import com.solvd.navigationapp.utils.JAXBParser;
-import com.solvd.navigationapp.utils.JacksonParser;
+import com.solvd.navigationapp.utils.parsers.DataParser;
+import com.solvd.navigationapp.utils.parsers.JAXBParser;
+import com.solvd.navigationapp.utils.parsers.JacksonParser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

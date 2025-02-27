@@ -16,7 +16,6 @@
 
     <select id = "getByName" resultMap = "CityResultMap">
             SELECT * FROM Cities WHERE NAME = #{name}
-
     </select>
 
      <select id = "getByRegion" resultMap = "CityResultMap">
