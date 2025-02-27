@@ -8,10 +8,10 @@ import org.apache.logging.log4j.Logger;
 import java.io.File;
 import java.io.IOException;
 
-public class JacksonParser implements DataParser<User> {
+public class JacksonParser <T> implements DataParser<T> {
     private static final Logger logger = LogManager.getLogger(JacksonParser.class.getName());
     @Override
-    public void writeToFile(String filePath, User data) {
+    public void writeToFile(String filePath, T data) {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(filePath), data);
@@ -22,7 +22,7 @@ public class JacksonParser implements DataParser<User> {
     }
 
     @Override
-    public User readFromFile(String filePath, Class<User> clazz) {
+    public T readFromFile(String filePath, Class<T> clazz) {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             return objectMapper.readValue(new File(filePath), clazz);
