@@ -15,17 +15,13 @@ public class Graph {
     }
 
     public void addRoute(Route route) {
-        Location startLocation = locationRoutes.keySet().stream()
-                .filter(location -> location.getId().equals(route.getStartPointId()))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("Start location not found in graph"));
-        
-        Location endLocation = locationRoutes.keySet().stream()
-                .filter(location -> location.getId().equals(route.getEndPointId()))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("End location not found in graph"));
-
+        Location startLocation = getLocationById(route.getStartPointId());
+        Location endLocation = getLocationById(route.getEndPointId());
         locationRoutes.get(startLocation).add(route);
+
+        if (route.isBidirectional()) {
+            locationRoutes.get(endLocation).add(route);
+        }
     }
 
     public void removeRoute(Route route) {
@@ -42,5 +38,12 @@ public class Graph {
             );
         }
         locationRoutes.remove(location);
+    }
+
+    private Location getLocationById(Long id) {
+        return locationRoutes.keySet().stream()
+                .filter(location -> location.getId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Location not found"));
     }
 }
