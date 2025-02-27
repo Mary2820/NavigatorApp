@@ -6,6 +6,7 @@ public class Client extends Person {
     private Long id;
     private String email;
     private String password;
+   
 
     public Client(Long id, Long personId, String firstName, String lastName, String email, String password) {
         super(personId, firstName, lastName);
