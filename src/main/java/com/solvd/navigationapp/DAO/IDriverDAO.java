@@ -9,7 +9,5 @@ public interface IDriverDAO extends IDAO<Driver> {
 
     List<Driver> getByFullName(String firstName, String lastName);
 
-    List<Driver> getByVehicleId(Long vehicleId);
-
     Driver getByPersonId(Long personId);
 }
