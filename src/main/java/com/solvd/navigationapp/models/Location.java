@@ -2,7 +2,10 @@ package com.solvd.navigationapp.models;
 
 import com.solvd.navigationapp.enums.LocationType;
 
+import java.util.Objects;
+
 public class Location {
+    private static final int MASK = 1;
     private Long id;
     private String name;
     private Long cityId;
@@ -59,4 +62,21 @@ public class Location {
     public void setType(LocationType type) {
         this.type = type;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (hashCode() != o.hashCode()) return false;
+        Location location = (Location) o;
+        return Objects.equals(id, location.id) && Objects.equals(name, location.name) &&
+                Objects.equals(cityId, location.cityId) && Objects.equals(address, location.address) &&
+                type == location.type;
+    }
+
+    @Override
+    public int hashCode() {
+        return MASK + Objects.hash(id, name, cityId, address, type);
+    }
+
 }
