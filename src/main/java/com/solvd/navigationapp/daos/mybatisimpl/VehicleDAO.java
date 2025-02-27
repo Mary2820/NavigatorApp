@@ -18,7 +18,7 @@ public class VehicleDAO extends AbstractMyBatisDAO<IVehicleDAO> implements IVehi
     }
 
     @Override
-    public List<Vehicle> getByDriverId(Integer driverId) {
+    public List<Vehicle> getByDriverId(Long driverId) {
         return executeInSession(mapper -> mapper.getByDriverId(driverId));
     }
 

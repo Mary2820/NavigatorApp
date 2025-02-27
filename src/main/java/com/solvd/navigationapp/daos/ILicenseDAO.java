@@ -5,7 +5,7 @@ import com.solvd.navigationapp.models.License;
 import java.time.LocalDate;
 import java.util.List;
 
-public interface ILicenceDAO extends IDAO<License> {
+public interface ILicenseDAO extends IDAO<License> {
 
     License getByNumber(String number);
 

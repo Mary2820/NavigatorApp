@@ -1,8 +1,9 @@
 {
+  "@class" : "com.solvd.navigationapp.models.Client",
   "id" : 1,
   "firstName" : "Jan",
   "lastName" : "Mazowiecki",
-  "userType" : "USER",
+  "userType" : "CLIENT",
   "email" : "jan.maz@example.com",
-  "password" : "password123"
+  "phoneNumber" : "password123"
 }

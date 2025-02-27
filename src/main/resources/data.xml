@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<client>
+    <id>1</id>
+    <firstName>Jan</firstName>
+    <lastName>Mazowiecki</lastName>
+    <userType>CLIENT</userType>
+    <email>jan.maz@example.com</email>
+    <phoneNumber>password123</phoneNumber>
+</client>

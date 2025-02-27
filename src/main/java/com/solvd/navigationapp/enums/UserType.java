@@ -1,7 +1,7 @@
 package com.solvd.navigationapp.enums;
 
 public enum UserType {
-    USER(1L, "USER"),
+    CLIENT(1L, "CLIENT"),
     DRIVER(2L, "DRIVER");
 
     private final Long id;

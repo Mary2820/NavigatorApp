@@ -1,13 +1,13 @@
 package com.solvd.navigationapp.daos.mybatisimpl;
 
-import com.solvd.navigationapp.daos.ILicenceDAO;
+import com.solvd.navigationapp.daos.ILicenseDAO;
 import com.solvd.navigationapp.models.License;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-public class LicenseDAO extends AbstractMyBatisDAO<ILicenceDAO> implements ILicenceDAO {
+public class LicenseDAO extends AbstractMyBatisDAO<ILicenseDAO> implements ILicenseDAO {
     @Override
     public License getByNumber(String number) {
         return executeInSession(mapper -> mapper.getByNumber(number));
@@ -44,7 +44,7 @@ public class LicenseDAO extends AbstractMyBatisDAO<ILicenceDAO> implements ILice
     }
 
     @Override
-    protected Class<ILicenceDAO> getMapperClass() {
-        return ILicenceDAO.class;
+    protected Class<ILicenseDAO> getMapperClass() {
+        return ILicenseDAO.class;
     }
 } 
