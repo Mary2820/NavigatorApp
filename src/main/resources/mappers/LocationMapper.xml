@@ -15,6 +15,22 @@
         SELECT * FROM Locations WHERE ID = #{id}
     </select>
 
+    <select id="getByCityId" resultMap="LocationResultMap">
+        SELECT * FROM Locations WHERE CITY_ID = #{cityId}
+    </select>
+
+    <select id="getByName" resultMap="LocationResultMap">
+        SELECT * FROM Locations WHERE NAME = #{name}
+    </select>
+
+    <select id="getByAddress" resultMap="LocationResultMap">
+        SELECT * FROM Locations WHERE ADDRESS = #{address}
+    </select>
+
+    <select id="getByType" resultMap="LocationResultMap">
+        SELECT * FROM Locations WHERE TYPE = #{type}
+    </select>
+
     <insert id="save" parameterType="com.solvd.socialnetwork.models.Location" useGeneratedKeys="true" keyProperty="id">
             INSERT INTO Locations (NAME, CITY_ID, ADDRESS, TYPE)
             VALUES (#{name}, #{cityId}, #{address}, #{type})   

@@ -4,23 +4,39 @@
 
 <mapper namespace = "com.solvd.navigationapp.daos.IVehicleDAO">
     <resultMap id = "VehicleResultMap" type = "com.solvd.navigationapp.models.Vehicle" autoMapping = "false">
-        <id columnn = "ID" property= "id"/>
-        <result columnn = "VEHICLE_TYPE_ID" property "vehicleTypeId"/>
-        <result columnn = "REGISTRATION_NUMBER" property "registrationNumber"/> 
-        <result columnn = "SEATS_COUNT" property "seatsCount"/> 
-        <result columnn = "DRIVER_ID" property "driverId"/> 
+        <id column = "ID" property= "id"/>
+        <result column = "VEHICLE_TYPE_ID" property = "vehicleTypeId"/>
+        <result column = "REGISTRATION_NUMBER" property = "registrationNumber"/> 
+        <result column = "SEATS_COUNT" property = "seatsCount"/> 
+        <result column = "DRIVER_ID" property = "driverId"/> 
     </resultMap>
 
     <select id ="getById" resultMap = "VehicleResultMap">
         SELECT * FROM Vehicle WHERE ID = #{id}
     </select>
 
-    <insert id="save" parameterType="com.solvd.socialnetwork.models.Vehicle" useGeneratedKeys="true" keyProperty="id">
+    <select id = "getByRegistrationNumber" resultMap = "VehicleResultMap">
+            SELECT * FROM Vehicle WHERE REGISTRATION_NUMBER = #{registrationNumber}
+    </select>
+
+    <select id = "getByVehicleTypeId" resultMap = "VehicleResultMap">
+            SELECT * FROM Vehicle WHERE VEHICLE_TYPE_ID" = #{vehicleTypeId}
+    </select>
+
+    <select id = "getByDriverId" resultMap = "VehicleResultMap">
+            SELECT * FROM Vehicle WHERE DRIVER_ID = #{driverId}
+    </select>
+
+    <select id = "getAllVehicles" resultMap = "VehicleResultMap">
+            SELECT * FROM Vehicle
+    </select>
+
+    <insert id="insert" parameterType="com.solvd.navigationapp.models.Vehicle" useGeneratedKeys="true" keyProperty="id">
             INSERT INTO Vehicle (VEHICLE_TYPE_ID, REGISTRATION_NUMBER, SEATS_COUNT, DRIVER_ID)
             VALUES (#{vehicleTypeId}, #{registrationNumber}, #{seatsCount}, #{driverId})   
     </insert>
 
-    <update id="update" parameterType="com.solvd.socialnetwork.models.Vehicle">
+    <update id="update" parameterType="com.solvd.navigationapp.models.Vehicle">
             UPDATE Vehicle
             SET VEHICLE_TYPE_ID = #{vehicleTypeId}, REGISTRATION_NUMBER = #{registrationNumber}, SEATS_COUNT = #{seatsCount}, DRIVER_ID = #{driverId}
             WHERE ID = #{id}
@@ -28,6 +44,10 @@
 
     <delete id="delete" parameterType="int">
             DELETE FROM Vehicle WHERE ID = #{id}
+    </delete>
+
+    <delete id="deleteByRegistrationNumber" parameterType="int">
+            DELETE FROM Vehicle WHERE REGISTRATION_NUMBER = #{registrationNumber}
     </delete>
 
 </mapper>
