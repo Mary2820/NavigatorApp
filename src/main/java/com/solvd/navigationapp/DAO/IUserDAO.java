@@ -11,7 +11,7 @@ public interface IUserDAO extends IDAO<User> {
 
     List<User> getByLastName(String lastName);
 
-    List<User> getByNamePart(String namePart); //Retrieves a list of users whose first name or last name partially matches the provided string - useful for search
+    List<User> getByNamePart(String namePart);
 
     boolean isEmailTaken(String email);
 
