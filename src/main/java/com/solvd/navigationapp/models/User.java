@@ -17,13 +17,13 @@ import com.solvd.navigationapp.enums.UserType;
 })
 public abstract class User {
     @XmlElement(name = "id")
-    protected Long id;
+    private Long id;
 
     @XmlElement(name = "firstName")
-    protected String firstName;
+    private String firstName;
 
     @XmlElement(name = "lastName")
-    protected String lastName;
+    private String lastName;
 
     @XmlElement(name = "userType")
     protected UserType userType;
