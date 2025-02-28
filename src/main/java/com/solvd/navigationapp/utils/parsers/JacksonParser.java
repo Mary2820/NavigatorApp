@@ -6,8 +6,9 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Optional;
 
-public class JacksonParser <T> implements DataParser<T> {
+public class JacksonParser<T> implements IDataParser<T> {
     private static final Logger logger = LogManager.getLogger(JacksonParser.class.getName());
     @Override
     public void writeToFile(String filePath, T data) {
@@ -21,13 +22,13 @@ public class JacksonParser <T> implements DataParser<T> {
     }
 
     @Override
-    public T readFromFile(String filePath, Class<T> clazz) {
+    public Optional<T> readFromFile(String filePath, Class<T> clazz) {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
-            return objectMapper.readValue(new File(filePath), clazz);
+            return Optional.of(objectMapper.readValue(new File(filePath), clazz));
         } catch (IOException e) {
             logger.error(e);
         }
-        return null;
+        return Optional.empty();
     }
 }

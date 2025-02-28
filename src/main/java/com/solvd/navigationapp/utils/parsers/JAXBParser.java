@@ -8,9 +8,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.File;
+import java.util.Optional;
 
 
-public class JAXBParser <T> implements DataParser<T> {
+public class JAXBParser<T> implements IDataParser<T> {
     private static final Logger logger = LogManager.getLogger(JAXBParser.class.getName());
 
     @Override
@@ -28,14 +29,14 @@ public class JAXBParser <T> implements DataParser<T> {
     }
 
     @Override
-    public T readFromFile(String filePath, Class<T> clazz) {
+    public Optional<T> readFromFile(String filePath, Class<T> clazz) {
         try {
-            JAXBContext context = JAXBContext.newInstance(User.class);
+            JAXBContext context = JAXBContext.newInstance(clazz);
             Unmarshaller unmarshaller = context.createUnmarshaller();
-            return (T) unmarshaller.unmarshal(new File(filePath));
+            return Optional.of(clazz.cast(unmarshaller.unmarshal(new File(filePath))));
         } catch (JAXBException e) {
-            logger.error(e);
+            logger.error("Error during reading XML file: ", e);
         }
-        return null;
+        return Optional.empty();
     }
 }
