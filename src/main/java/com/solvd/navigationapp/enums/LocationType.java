@@ -3,7 +3,8 @@ package com.solvd.navigationapp.enums;
 public enum LocationType {
     BUILDING(1L, "BUILDING"),
     BUS_STOP(2L, "BUS_STOP"),
-    TRAM_STOP(3L, "TRAM_STOP");
+    TRAM_STOP(3L, "TRAM_STOP"),
+    TRAIN_PLAFTORM(4L, "TRAM_PLATFORM");
 
     private final Long id;
     private final String name;

@@ -11,7 +11,6 @@ public class ConnectionFactory {
     private static SqlSessionFactory sqlSessionFactory;
     private static final String CONFIG_FILE = "mybatis-config.xml";
 
-
     public ConnectionFactory() {
     }
 
