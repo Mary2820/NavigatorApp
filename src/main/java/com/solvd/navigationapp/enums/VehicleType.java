@@ -3,7 +3,8 @@ package com.solvd.navigationapp.enums;
 public enum VehicleType {
     BUS(1L, "BUS"),
     TRAIN(2L, "TRAIN"),
-    TRAM(3L, "TRAM");
+    TRAM(3L, "TRAM"),
+    TAXI(4L, "TAXI");
 
     private final Long id;
     private final String name;
