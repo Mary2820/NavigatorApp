@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class Graph {
     private final Map<Location, List<Route>> locationRoutes = new HashMap<>();
@@ -40,10 +41,18 @@ public class Graph {
         locationRoutes.remove(location);
     }
 
-    private Location getLocationById(Long id) {
+    public Location getLocationById(Long id) {
         return locationRoutes.keySet().stream()
                 .filter(location -> location.getId().equals(id))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("Location not found"));
+    }
+
+    public Set<Location> getLocations() {
+        return locationRoutes.keySet();
+    }
+
+    public List<Route> getRoutesFromLocation(Location location) {
+        return locationRoutes.getOrDefault(location, new ArrayList<>());
     }
 }
