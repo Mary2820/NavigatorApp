@@ -7,33 +7,33 @@
         <id column = "ID" property = "id" />
         <result column = "FIRST_NAME" property = "firstName"/>
         <result column = "LAST_NAME" property = "lastName"/>
-        <result column = "PHONE_NUMBER" property = "phoneNumber"/>
+        <result column = "PHONE" property = "phoneNumber"/>
         <result column = "EMAIL" property = "email"/>
-        <result column = "TYPE" property = "userType"/>
+        <result column = "ROLE_TYPE" property = "userType"/>
     </resultMap>
 
     <select id ="getById" resultMap = "ClientResultMap">
         SELECT *
         FROM Users 
-        WHERE ID = #{id} and TYPE = 'CLIENT'
+        WHERE ID = #{id} and ROLE_TYPE = 'CLIENT'
     </select>
 
     <select id ="getByEmail" resultMap = "ClientResultMap">
         SELECT *
         FROM Users 
-        WHERE EMAIL = #{email} and TYPE = 'CLIENT'
+        WHERE EMAIL = #{email} and ROLE_TYPE = 'CLIENT'
     </select>
 
     <select id ="getByFirstName" resultMap = "ClientResultMap">
         SELECT *
         FROM Users 
-        WHERE FIRST_NAME = #{firstName} and TYPE = 'CLIENT'
+        WHERE FIRST_NAME = #{firstName} and ROLE_TYPE = 'CLIENT'
     </select>
 
     <select id ="getByLastName" resultMap = "ClientResultMap">
         SELECT *
         FROM Users 
-        WHERE LAST_NAME = #{lastName} and TYPE = 'CLIENT'
+        WHERE LAST_NAME = #{lastName} and ROLE_TYPE = 'CLIENT'
     </select>
 
     <select id ="getAllUsers" resultMap = "ClientResultMap">
@@ -42,13 +42,14 @@
     </select>
 
     <insert id="insert" parameterType="com.solvd.navigationapp.models.Client">
-        INSERT INTO Users (ID, FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, TYPE)
+        INSERT INTO Users (ID, FIRST_NAME, LAST_NAME, EMAIL, PHONE, ROLE_TYPE)
         VALUES (#{id}, #{firstName}, #{lastName}, #{email}, #{phoneNumber}, 'CLIENT')
     </insert>
 
     <update id="update" parameterType="com.solvd.navigationapp.models.Client">
         UPDATE Users
-        SET ID = #{id}, FIRST_NAME = #{firstName}, LAST_NAME = #{lastName}, EMAIL = #{email}, PHONE_NUMBER = #{phoneNumber}, TYPE = 'CLIENT'
+        SET ID = #{id}, FIRST_NAME = #{firstName}, LAST_NAME = #{lastName}, EMAIL = #{email}, PHONE = #{phoneNumber},
+        ROLE_TYPE = 'CLIENT'
         WHERE ID = #{id}
     </update>
 
@@ -77,6 +78,6 @@
         FROM Users 
         WHERE (FIRST_NAME LIKE CONCAT('%', #{namePart}, '%') 
         OR LAST_NAME LIKE CONCAT('%', #{namePart}, '%'))
-        AND TYPE = 'CLIENT'
+        AND ROLE_TYPE = 'CLIENT'
     </select>
 </mapper>

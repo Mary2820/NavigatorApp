@@ -1,21 +1,29 @@
 package com.solvd.navigationapp.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.solvd.navigationapp.models.Client;
 
-public interface IClientService extends IService<Client> {
-    Client getByEmail(String email);
+public interface IClientService {
 
-    List<Client> getByFirstName(String firstName);
+    boolean register(Client client);
 
-    List<Client> getByLastName(String lastName);
+    Optional<Client> findById(Long id);
 
-    List<Client> getByNamePart(String namePart);
+    Optional<Client> findByEmail(String email);
 
-    List<Client> getAllUsers();
+    List<Client> findByFirstName(String firstName);
 
-    boolean isEmailTaken(String email);
+    List<Client> findByLastName(String lastName);
 
-    void deleteByEmail(String email);
+    List<Client> findByNamePart(String namePart);
+
+    boolean updateProfile(Client client);
+
+    boolean deleteAccountById(Long clientId);
+
+    boolean deleteAccountByEmail(String email);
+
+    List<Client> findAllClients();
 }
