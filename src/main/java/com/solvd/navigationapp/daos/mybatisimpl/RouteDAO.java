@@ -33,6 +33,11 @@ public class RouteDAO extends AbstractMyBatisDAO<IRouteDAO> implements IRouteDAO
     }
 
     @Override
+    public List<Route> getAll() {
+        return executeInSession(mapper -> mapper.getAll());
+    }
+
+    @Override
     public int countTotal() {
         return executeInSession(IRouteDAO::countTotal);
     }
