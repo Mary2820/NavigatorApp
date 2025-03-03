@@ -4,6 +4,7 @@ import com.solvd.navigationapp.models.Location;
 import com.solvd.navigationapp.services.GraphService;
 import com.solvd.navigationapp.services.NavigationService;
 import com.solvd.navigationapp.services.PathFinderService;
+import com.solvd.navigationapp.services.TransportService;
 import com.solvd.navigationapp.utils.DAOFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -44,6 +45,7 @@ public class Main {
 
             PathFinderService pathFinderService = new PathFinderService(graphService.getGraph());
             NavigationService navigationService = new NavigationService(pathFinderService);
+            TransportService transportService = new TransportService(navigationService);
 
             logger.info("Searching path from {} to {}", start.getName(), end.getName());
             List<Location> path = navigationService.findPath(start, end);
@@ -54,6 +56,7 @@ public class Main {
                     logger.info("{}. {}", i + 1, path.get(i).getName());
                 }
                 logger.info("Total distance: {}", pathFinderService.getShortestPathDistance(start, end));
+                String bestTransport = transportService.determineBestTransport(start, end);
             } else {
                 logger.info("No path found between locations");
             }
