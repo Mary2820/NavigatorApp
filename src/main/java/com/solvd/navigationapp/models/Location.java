@@ -79,4 +79,16 @@ public class Location {
         return MASK + Objects.hash(id, name, cityId, address, type);
     }
 
+    @Override
+    public String toString() {
+        return "Location{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", cityId=" + cityId +
+                ", address='" + address + '\'' +
+                ", type=" + type +
+                '}';
+    }
+
+
 }

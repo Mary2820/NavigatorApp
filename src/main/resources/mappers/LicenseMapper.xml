@@ -5,6 +5,7 @@
 <mapper namespace = "com.solvd.navigationapp.daos.ILicenseDAO">
     <resultMap id = "LicenseResultMap" type = "com.solvd.navigationapp.models.License" autoMapping = "false">
         <id column = "ID" property= "id"/>
+        <result column="USER_ID" property="userId"/>
         <result column = "NUMBER" property = "number"/>
         <result column = "EXPIRATION_DATE" property = "expirationDate"/>
     </resultMap>
@@ -34,13 +35,13 @@
     </select>
 
     <insert id="insert" parameterType="com.solvd.navigationapp.models.License" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO Licenses (NUMBER, EXPIRATION_DATE)
-        VALUES (#{number}, #{expirationDate})   
+        INSERT INTO Licenses (NUMBER, EXPIRATION_DATE, USER_ID)
+        VALUES (#{number}, #{expirationDate}, #{userId})
     </insert>
 
     <update id="update" parameterType="com.solvd.navigationapp.models.License">
         UPDATE Licenses
-        SET NUMBER = #{number}, EXPIRATION_DATE = #{expirationDate}
+        SET NUMBER = #{number}, EXPIRATION_DATE = #{expirationDate}}
         WHERE ID = #{id}
     </update>
 
