@@ -15,5 +15,7 @@ public interface IRouteDAO extends IDAO<Route> {
 
     Route getByStartEndAndVehicle(Long startPointId, Long endPointId, Long vehicleId);
 
+    List<Route> getAll();
+
     int countTotal();
 }

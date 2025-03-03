@@ -8,7 +8,7 @@
         <result column = "NAME" property = "name"/>
         <result column = "CITY_ID" property = "cityId"/>
         <result column = "ADDRESS" property = "address"/>
-        <result column = "TYPE" property =  "type"/>
+        <result column="TYPE" property="type" javaType="com.solvd.navigationapp.enums.LocationType"/>
     </resultMap>
 
     <select id ="getById" resultMap = "LocationResultMap">
@@ -29,6 +29,10 @@
 
     <select id="getByType" resultMap="LocationResultMap">
         SELECT * FROM Locations WHERE TYPE = #{type}
+    </select>
+
+    <select id="getAll" resultMap="LocationResultMap">
+        SELECT * FROM Locations
     </select>
 
     <insert id="insert" parameterType="com.solvd.navigationapp.models.Location" useGeneratedKeys="true" keyProperty="id">
