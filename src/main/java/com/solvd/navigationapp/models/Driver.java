@@ -9,38 +9,22 @@ import com.solvd.navigationapp.enums.UserType;
 @XmlRootElement(name = "driver")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Driver extends User {
-    
-    @XmlElement(name = "licenseId")
-    private Long licenseId;
-    
-    @XmlElement(name = "phoneNumber")
-    private String phoneNumber;
 
     public Driver() {
         super();
         this.userType = UserType.DRIVER;
     }
 
-    public Driver(Long id, String firstName, String lastName, String phoneNumber, Long licenseId) {
-        super(id, firstName, lastName);
-        this.phoneNumber = phoneNumber;
-        this.licenseId = licenseId;
+    public Driver(Long id, String firstName, String lastName,String email, String phoneNumber) {
+        super(id, firstName, lastName, email, phoneNumber);
         this.userType = UserType.DRIVER;
     }
 
-    public Long getLicenseId() {
-        return licenseId;
-    }
-
-    public void setLicenseId(Long licenseId) {
-        this.licenseId = licenseId;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    @Override
+    public String toString() {
+        return "Driver{" +
+                "userType=" + userType +
+                ", " + super.toString() +
+                '}';
     }
 }
