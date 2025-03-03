@@ -29,6 +29,11 @@ public class LocationDAO extends AbstractMyBatisDAO<ILocationDAO> implements ILo
     }
 
     @Override
+    public List<Location> getAll() {
+        return executeInSession(mapper -> mapper.getAll());
+    }
+
+    @Override
     public void insert(Location entity) {
         executeInSessionVoid(mapper -> mapper.insert(entity));
     }

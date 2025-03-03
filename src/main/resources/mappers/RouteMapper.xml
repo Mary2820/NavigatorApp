@@ -5,9 +5,11 @@
 <mapper namespace="com.solvd.navigationapp.daos.IRouteDAO">
     <resultMap id="RouteResultMap" type="com.solvd.navigationapp.models.Route" autoMapping="false">
         <id column="ID" property="id"/>
-        <result column="START_POINT_ID" property="startPointId"/>
-        <result column="END_POINT_ID" property="endPointId"/> 
-        <result column="VEHICLE_ID" property="vehicleId"/> 
+        <result column="START_ID" property="startPointId"/>
+        <result column="END_ID" property="endPointId"/>
+        <result column="VEHICLE_ID" property="vehicleId"/>
+        <result column="DISTANCE" property="distance"/>
+        <result column="IS_BIDIRECTIONAL" property="isBidirectional"/>
     </resultMap>
 
     <select id="getById" resultMap="RouteResultMap">
@@ -38,6 +40,10 @@
         WHERE START_POINT_ID = #{startPointId} AND END_POINT_ID = #{endPointId} AND VEHICLE_ID = #{vehicleId}
     </select>
 
+    <select id="getAll" resultMap="RouteResultMap">
+        SELECT * FROM Routes
+    </select>
+
     <select id="countTotal" resultType="int">
         SELECT COUNT(*) FROM Routes
     </select>
@@ -56,5 +62,4 @@
     <delete id="delete" parameterType="long">
         DELETE FROM Routes WHERE ID = #{id}
     </delete>
-
 </mapper>

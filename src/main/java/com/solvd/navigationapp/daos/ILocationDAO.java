@@ -13,4 +13,6 @@ public interface ILocationDAO extends IDAO<Location> {
     List<Location> getByAddress(String address);
 
     List<Location> getByType(LocationType type);
+
+    List<Location> getAll();
 }

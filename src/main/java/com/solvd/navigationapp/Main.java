@@ -1,12 +1,14 @@
 package com.solvd.navigationapp;
-import com.solvd.navigationapp.models.Client;
-import com.solvd.navigationapp.models.User;
-import com.solvd.navigationapp.utils.parsers.IDataParser;
-import com.solvd.navigationapp.utils.parsers.JAXBParser;
-import com.solvd.navigationapp.utils.parsers.JacksonParser;
+import com.solvd.navigationapp.daos.mybatisimpl.LocationDAO;
+import com.solvd.navigationapp.models.Location;
+import com.solvd.navigationapp.services.GraphService;
+import com.solvd.navigationapp.services.NavigationService;
+import com.solvd.navigationapp.services.PathFinderService;
+import com.solvd.navigationapp.utils.DAOFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.List;
 import java.util.Optional;
 
 public class Main {
@@ -15,22 +17,48 @@ public class Main {
     private static final String XML_FILE_PATH = "src/main/resources/data/data.xml";
 
     public static void main(String[] args) {
-        Client client = new Client(1L, "Jan", "Mazowiecki", "jan.maz@example.com",
-                "password123");
+//        Client client = new Client(1L, "Jan", "Mazowiecki", "jan.maz@example.com",
+//                "password123");
+//
+//        IDataParser<User> jacksonparser = new JacksonParser<User>();
+//        IDataParser<User> jaxbparser = new JAXBParser<User>();
+//
+//        jacksonparser.writeToFile(JSON_FILE_PATH, client);
+//        jaxbparser.writeToFile(XML_FILE_PATH, client);
+//
+//        Optional<User> parsedjacksonuser = jacksonparser.readFromFile(JSON_FILE_PATH, User.class);
+//
+//        Optional<User> parsedjaxbuser = jaxbparser.readFromFile(XML_FILE_PATH, User.class);
+//
+//        parsedjacksonuser.ifPresentOrElse(user -> logger.info("User read from JSON: " + user.getFirstName() + " " +
+//                user.getLastName()),() -> logger.error("Failed to read user from JSON.") );
+//        parsedjaxbuser.ifPresentOrElse(user -> logger.info("User read from XML: " + user.getFirstName() + " " +
+//                user.getLastName()), () -> logger.error("Failed to read user from XML.") );
 
-        IDataParser<User> jacksonparser = new JacksonParser<User>();
-        IDataParser<User> jaxbparser = new JAXBParser<User>();
+        try {
+            Location start = DAOFactory.getInstance().getLocationDAO().getById(83L).orElseThrow();
+            Location end = DAOFactory.getInstance().getLocationDAO().getById(99L).orElseThrow();
 
-        jacksonparser.writeToFile(JSON_FILE_PATH, client);
-        jaxbparser.writeToFile(XML_FILE_PATH, client);
+            GraphService graphService = new GraphService();
+            graphService.loadGraph();
 
-        Optional<User> parsedjacksonuser = jacksonparser.readFromFile(JSON_FILE_PATH, User.class);
+            PathFinderService pathFinderService = new PathFinderService(graphService.getGraph());
+            NavigationService navigationService = new NavigationService(pathFinderService);
 
-        Optional<User> parsedjaxbuser = jaxbparser.readFromFile(XML_FILE_PATH, User.class);
+            logger.info("Searching path from {} to {}", start.getName(), end.getName());
+            List<Location> path = navigationService.findPath(start, end);
 
-        parsedjacksonuser.ifPresentOrElse(user -> logger.info("User read from JSON: " + user.getFirstName() + " " +
-                user.getLastName()),() -> logger.error("Failed to read user from JSON.") );
-        parsedjaxbuser.ifPresentOrElse(user -> logger.info("User read from XML: " + user.getFirstName() + " " +
-                user.getLastName()), () -> logger.error("Failed to read user from XML.") );
+            if (!path.isEmpty()) {
+                logger.info("Found path with {} stops:", path.size() - 1);
+                for (int i = 0; i < path.size(); i++) {
+                    logger.info("{}. {}", i + 1, path.get(i).getName());
+                }
+                logger.info("Total distance: {}", pathFinderService.getShortestPathDistance(start, end));
+            } else {
+                logger.info("No path found between locations");
+            }
+        } catch (Exception e) {
+            logger.error("Error during navigation: {}", e.getMessage());
+        }
     }
 }

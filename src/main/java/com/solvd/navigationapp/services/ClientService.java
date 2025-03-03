@@ -1,9 +1,9 @@
-package com.solvd.navigationapp.services.mybatisimpl;
+package com.solvd.navigationapp.services;
 
 import com.solvd.navigationapp.daos.IClientDAO;
 import com.solvd.navigationapp.daos.mybatisimpl.ClientDAO;
 import com.solvd.navigationapp.models.Client;
-import com.solvd.navigationapp.services.IClientService;
+import com.solvd.navigationapp.utils.DAOFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -16,7 +16,7 @@ public class ClientService implements IClientService {
     private final IClientDAO clientDAO;
     
     public ClientService() {
-        this.clientDAO = new ClientDAO();
+        this.clientDAO = DAOFactory.getInstance().getClientDAO();
     }
 
     @Override

@@ -45,7 +45,7 @@ public class Graph {
         return locationRoutes.keySet().stream()
                 .filter(location -> location.getId().equals(id))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("Location not found"));
+                .orElseThrow(() -> new IllegalArgumentException("Location not found with id :" + id));
     }
 
     public Set<Location> getLocations() {
