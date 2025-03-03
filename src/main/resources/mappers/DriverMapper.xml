@@ -1,47 +1,53 @@
 <!DOCTYPE mapper
-    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace  = "com.solvd.navigationapp.daos.IDriverDAO">
-    <resultMap id = "DriverResultMap" type = "com.solvd.navigationapp.models.Driver" autoMapping = "false" >
-        <id column = "ID" property = "id" />
-        <result column = "FIRST_NAME" property = "firstName"/>
-        <result column = "LAST_NAME" property = "lastName"/>
-        <result column = "PHONE_NUMBER" property = "phoneNumber"/>
-        <result column = "USER_TYPE" property = "userType"/>
-        <result column = "LICENSE_ID" property = "licenseId"/>
+<mapper namespace="com.solvd.navigationapp.daos.IDriverDAO">
+    <resultMap id="DriverResultMap" type="com.solvd.navigationapp.models.Driver" autoMapping="false">
+        <id column="ID" property="id"/>
+        <result column="FIRST_NAME" property="firstName"/>
+        <result column="LAST_NAME" property="lastName"/>
+        <result column="PHONE" property="phoneNumber"/>
+        <result column="EMAIL" property="email"/>
+        <result column="ROLE_TYPE" property="userType"/>
     </resultMap>
 
-    <select id ="getById" resultMap = "DriverResultMap">
+    <select id="getById" resultMap="DriverResultMap">
         SELECT *
-        FROM Drivers 
-        WHERE ID = #{id} and USER_TYPE = 'DRIVER'
+        FROM Users
+        WHERE ID = #{id} and ROLE_TYPE = 'DRIVER'
     </select>
 
-    <select id ="getByLicenseId" resultMap = "DriverResultMap">
+    <select id="getByLicenseId" resultMap="DriverResultMap">
         SELECT *
-        FROM Drivers 
-        WHERE LICENSE_ID = #{licenseId} and USER_TYPE = 'DRIVER'
+        FROM Users
+        WHERE LICENSE_ID = #{licenseId} and ROLE_TYPE = 'DRIVER'
     </select>
 
     <select id="getByFullName" resultMap="DriverResultMap">
         SELECT *
-        FROM Drivers 
-        WHERE FIRST_NAME = #{firstName} AND LAST_NAME = #{lastName} AND USER_TYPE = 'DRIVER'
+        FROM Users
+        WHERE FIRST_NAME = #{firstName} AND LAST_NAME = #{lastName} AND ROLE_TYPE = 'DRIVER'
     </select>
 
     <insert id="insert" parameterType="com.solvd.navigationapp.models.Driver" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO Drivers (FIRST_NAME, LAST_NAME, PHONE_NUMBER, LICENSE_ID, USER_TYPE)
-        VALUES (#{firstName}, #{lastName}, #{phoneNumber}, #{licenseId}, 'DRIVER')   
+        INSERT INTO Users (FIRST_NAME, LAST_NAME, PHONE, ROLE_TYPE, EMAIL)
+        VALUES (#{firstName}, #{lastName}, #{phoneNumber}, 'DRIVER', #{email})
     </insert>
 
     <update id="update" parameterType="com.solvd.navigationapp.models.Driver">
-        UPDATE Drivers
-        SET FIRST_NAME = #{firstName}, LAST_NAME = #{lastName}, PHONE_NUMBER = #{phoneNumber}, LICENSE_ID = #{licenseId}, USER_TYPE = 'DRIVER'
+        UPDATE Users
+        SET FIRST_NAME = #{firstName}, LAST_NAME = #{lastName}, PHONE = #{phoneNumber}, ROLE_TYPE = 'DRIVER', EMAIL =
+        #{email}
         WHERE ID = #{id}
     </update>
 
     <delete id="delete" parameterType="long">
-        DELETE FROM Drivers WHERE ID = #{id}
+        DELETE FROM Users WHERE ID = #{id}
+    </delete>
+
+    <delete id="deleteByEmail" parameterType="String">
+        DELETE FROM Users
+        WHERE EMAIL = #{email}
     </delete>
 </mapper>

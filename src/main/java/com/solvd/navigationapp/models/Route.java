@@ -11,7 +11,7 @@ public class Route {
     private Integer distance;
     private boolean isBidirectional;
 
-    public Route(Long id, Long startPointId, Long endPointId, Long vehicleId, Integer distance) {
+    public Route(Long id, Long startPointId, Long endPointId, Long vehicleId, Integer distance, boolean isBidirectional) {
         this.id = id;
         this.startPointId = startPointId;
         this.endPointId = endPointId;
@@ -85,4 +85,17 @@ public class Route {
     public int hashCode() {
         return Objects.hash(id, startPointId, endPointId, vehicleId, distance, isBidirectional);
     }
+
+    @Override
+    public String toString() {
+        return "Route{" +
+                "id=" + id +
+                ", startId=" + startPointId +
+                ", endId=" + endPointId +
+                ", vehicleId=" + vehicleId +
+                ", distance=" + distance +
+                ", isBidirectional=" + isBidirectional +
+                '}';
+    }
+
 }

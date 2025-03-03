@@ -1,6 +1,6 @@
 <!DOCTYPE mapper
-    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.solvd.navigationapp.daos.IRouteDAO">
     <resultMap id="RouteResultMap" type="com.solvd.navigationapp.models.Route" autoMapping="false">
@@ -16,28 +16,28 @@
         SELECT * FROM Routes WHERE ID = #{id}
     </select>
 
-    <select id="getByStartPointId" resultMap="RouteResultMap" parameterType="long">
-        SELECT * FROM Routes WHERE START_POINT_ID = #{startPointId}
+    <select id="getByStartPointId" resultMap="RouteResultMap">
+        SELECT * FROM Routes WHERE START_ID = #{startPointId}
     </select>
 
-    <select id="getByEndPointId" resultMap="RouteResultMap" parameterType="long">
-        SELECT * FROM Routes WHERE END_POINT_ID = #{endPointId}
+    <select id="getByEndPointId" resultMap="RouteResultMap">
+        SELECT * FROM Routes WHERE END_ID = #{endPointId}
     </select>
 
-    <select id="getByVehicleId" resultMap="RouteResultMap" parameterType="long">
+    <select id="getByVehicleId" resultMap="RouteResultMap">
         SELECT * FROM Routes WHERE VEHICLE_ID = #{vehicleId}
     </select>
 
     <select id="getByStartAndEndPoints" resultMap="RouteResultMap">
-        SELECT * 
-        FROM Routes 
-        WHERE START_POINT_ID = #{startPointId} AND END_POINT_ID = #{endPointId}
+        SELECT *
+        FROM Routes
+        WHERE START_ID = #{startPointId} AND END_ID = #{endPointId}
     </select>
 
     <select id="getByStartEndAndVehicle" resultMap="RouteResultMap">
-        SELECT * 
-        FROM Routes 
-        WHERE START_POINT_ID = #{startPointId} AND END_POINT_ID = #{endPointId} AND VEHICLE_ID = #{vehicleId}
+        SELECT *
+        FROM Routes
+        WHERE START_ID = #{startPointId} AND END_ID = #{endPointId} AND VEHICLE_ID = #{vehicleId}
     </select>
 
     <select id="getAll" resultMap="RouteResultMap">
@@ -49,17 +49,21 @@
     </select>
 
     <insert id="insert" parameterType="com.solvd.navigationapp.models.Route" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO Routes (START_POINT_ID, END_POINT_ID, VEHICLE_ID)
-        VALUES (#{startPointId}, #{endPointId}, #{vehicleId})   
+        INSERT INTO Routes (START_ID, END_ID, VEHICLE_ID, DISTANCE, IS_BIDIRECTIONAL)
+        VALUES (#{startPointId}, #{endPointId}, #{vehicleId}, #{distance}, #{isBidirectional})
     </insert>
 
     <update id="update" parameterType="com.solvd.navigationapp.models.Route">
         UPDATE Routes
-        SET START_POINT_ID = #{startPointId}, END_POINT_ID = #{endPointId}, VEHICLE_ID = #{vehicleId}
+        SET START_ID = #{startPointId},
+        END_ID = #{endPointId},
+        VEHICLE_ID = #{vehicleId},
+        DISTANCE = #{distance},
+        IS_BIDIRECTIONAL = #{isBidirectional}
         WHERE ID = #{id}
     </update>
 
-    <delete id="delete" parameterType="long">
+    <delete id="delete">
         DELETE FROM Routes WHERE ID = #{id}
     </delete>
 </mapper>
