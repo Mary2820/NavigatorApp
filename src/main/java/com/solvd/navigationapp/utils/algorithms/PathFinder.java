@@ -1,19 +1,27 @@
-package com.solvd.navigationapp.services;
+package com.solvd.navigationapp.utils.algorithms;
+
+import java.util.AbstractMap.SimpleEntry;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.PriorityQueue;
 
 import com.solvd.navigationapp.models.Graph;
 import com.solvd.navigationapp.models.Location;
 import com.solvd.navigationapp.models.Route;
 
-import java.util.*;
-import java.util.AbstractMap.SimpleEntry;
+public class PathFinder implements IPathFinder {
+private final Graph graph;
+private List<Location> path;
 
-public class PathFinderService {
-    private final Graph graph;
-
-    public PathFinderService(Graph graph) {
+    public PathFinder(Graph graph) {
         this.graph = graph;
     }
 
+    @Override
     public List<Location> findShortestPath(Location start, Location end) {
         if (start.equals(end)) {
             return Collections.singletonList(start);
@@ -47,9 +55,10 @@ public class PathFinderService {
 
         return reconstructPath(start, end, previous);
     }
-
-    public int getShortestPathDistance(Location start, Location end) {
-        List<Location> path = findShortestPath(start, end);
+    
+    @Override
+    public Integer getShortestPathDistance(Location start, Location end) {
+        this.path = findShortestPath(start, end);
         if (path.isEmpty()) return -1;
 
         int distance = 0;
@@ -65,6 +74,10 @@ public class PathFinderService {
             }
         }
         return distance;
+    }
+
+    public List<Location> getShortPath(){
+        return path;
     }
 
     private Location getNeighborLocation(Route route, Location current) {
@@ -93,4 +106,4 @@ public class PathFinderService {
         return (route.getStartPointId().equals(from.getId()) && route.getEndPointId().equals(to.getId())) ||
                (route.getEndPointId().equals(from.getId()) && route.getStartPointId().equals(to.getId()) && route.isBidirectional());
     }
-} 
+}

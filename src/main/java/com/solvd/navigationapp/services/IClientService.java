@@ -5,25 +5,17 @@ import java.util.Optional;
 
 import com.solvd.navigationapp.models.Client;
 
-public interface IClientService {
+public interface IClientService extends IService<Client> {
 
-    boolean register(Client client);
+    Optional<Client> getByEmail(String email);
 
-    Optional<Client> findById(Long id);
+    List<Client> getByFirstName(String firstName);
 
-    Optional<Client> findByEmail(String email);
+    List<Client> getByLastName(String lastName);
 
-    List<Client> findByFirstName(String firstName);
-
-    List<Client> findByLastName(String lastName);
-
-    List<Client> findByNamePart(String namePart);
-
-    boolean updateProfile(Client client);
-
-    boolean deleteAccountById(Long clientId);
+    List<Client> getByNamePart(String namePart);
 
     boolean deleteAccountByEmail(String email);
 
-    List<Client> findAllClients();
+    List<Client> getAllClients();
 }

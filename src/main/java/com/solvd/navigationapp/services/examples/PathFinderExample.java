@@ -4,7 +4,8 @@ import com.solvd.navigationapp.enums.LocationType;
 import com.solvd.navigationapp.models.Graph;
 import com.solvd.navigationapp.models.Location;
 import com.solvd.navigationapp.models.Route;
-import com.solvd.navigationapp.services.PathFinderService;
+import com.solvd.navigationapp.services.impl.PathFinderService;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -14,7 +15,7 @@ public class PathFinderExample {
     private static final Logger logger = LogManager.getLogger(PathFinderExample.class.getName());
 
     public static void main(String[] args) {
-        Graph graph = new Graph();
+       /*  Graph graph = new Graph();
 
         Location locationA = new Location(1L, "Location A", 1L, "Address A", LocationType.BUILDING);
         Location locationB = new Location(2L, "Location B", 1L, "Address B", LocationType.BUS_STOP);
@@ -65,6 +66,6 @@ public class PathFinderExample {
         List<Location> nonExistentPath = pathFinder.findShortestPath(locationA, locationF);
         if (nonExistentPath.isEmpty()) {
             logger.info("No path exists from {} to {}", locationA.getName(), locationF.getName());
-        }
+        }*/
     }
 } 
