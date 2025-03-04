@@ -1,8 +1,6 @@
 package com.solvd.navigationapp;
 import com.solvd.navigationapp.models.Location;
-import com.solvd.navigationapp.services.INavigationService;
 import com.solvd.navigationapp.services.IPathFinderService;
-import com.solvd.navigationapp.services.impl.NavigationService;
 import com.solvd.navigationapp.services.impl.PathFinderService;
 import com.solvd.navigationapp.utils.DAOFactory;
 import org.apache.logging.log4j.LogManager;
@@ -20,10 +18,11 @@ public class Main {
         Location end = DAOFactory.getInstance().getLocationDAO().getById(99L);
 
         IPathFinderService pathFinderService = new PathFinderService();
-        pathFinderService.addStartLocation(start);
-        pathFinderService.addEndLocation(end);
-        INavigationService navigationService = new NavigationService(pathFinderService);
-        navigationService.showPath();
+        /*pathFinderService.addStartLocation(start);
+        pathFinderService.addEndLocation(end);*/
+        pathFinderService.getBestPath(start, end);
+        //INavigationService navigationService = new NavigationService(pathFinderService);
+       // navigationService.showPath();
 
 
 //        Client client = new Client(1L, "Jan", "Mazowiecki", "jan.maz@example.com",

@@ -1,8 +1,8 @@
-package com.solvd.navigationapp.services.impl;
+package com.solvd.navigationapp.services.dbservices.impl;
 
 import com.solvd.navigationapp.daos.IClientDAO;
 import com.solvd.navigationapp.models.Client;
-import com.solvd.navigationapp.services.IClientService;
+import com.solvd.navigationapp.services.dbservices.IClientService;
 import com.solvd.navigationapp.utils.DAOFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

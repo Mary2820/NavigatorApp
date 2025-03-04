@@ -21,8 +21,7 @@ private List<Location> path;
         this.graph = graph;
     }
 
-    @Override
-    public List<Location> findShortestPath(Location start, Location end) {
+    private List<Location> findShortestPath(Location start, Location end) {
         if (start.equals(end)) {
             return Collections.singletonList(start);
         }
@@ -56,9 +55,10 @@ private List<Location> path;
         return reconstructPath(start, end, previous);
     }
     
-    @Override
+   /*  @Override
     public Integer getShortestPathDistance(Location start, Location end) {
-        this.path = findShortestPath(start, end);
+       // this.path = 
+        List<Location> path = findShortestPath(start, end);
         if (path.isEmpty()) return -1;
 
         int distance = 0;
@@ -74,9 +74,11 @@ private List<Location> path;
             }
         }
         return distance;
-    }
+    }*/
 
-    public List<Location> getShortPath(){
+    @Override
+    public List<Location> getShortPath(Location start, Location end){
+        path = findShortestPath( start, end);
         return path;
     }
 
@@ -102,8 +104,10 @@ private List<Location> path;
         return path;
     }
     
-    private boolean isRouteConnecting(Route route, Location from, Location to) {
+    /*private boolean isRouteConnecting(Route route, Location from, Location to) {
         return (route.getStartPointId().equals(from.getId()) && route.getEndPointId().equals(to.getId())) ||
                (route.getEndPointId().equals(from.getId()) && route.getStartPointId().equals(to.getId()) && route.isBidirectional());
-    }
+    }*/
+
+  
 }
