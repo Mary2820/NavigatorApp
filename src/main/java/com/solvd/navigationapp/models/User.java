@@ -28,17 +28,13 @@ public abstract class User {
     @XmlElement(name = "userType")
     protected UserType userType;
 
-    @XmlElement(name = "email")
-    private String email;
-
     @XmlElement(name = "phoneNumber")
     private String phoneNumber;
 
-    protected User(Long id, String firstName, String lastName, String email, String phoneNumber) {
+    protected User(Long id, String firstName, String lastName, String phoneNumber) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.email = email;
         this.phoneNumber = phoneNumber;
     }
 
@@ -70,14 +66,6 @@ public abstract class User {
         this.lastName = lastName;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -97,9 +85,7 @@ public abstract class User {
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", userType=" + userType +
-                ", email='" + email + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
+                ", phoneNumber=" + phoneNumber +
                 '}';
     }
 }
