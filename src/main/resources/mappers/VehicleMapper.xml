@@ -31,6 +31,16 @@
         SELECT * FROM Vehicles
     </select>
 
+    <select id="isRegistartionNumberTaken" resultType="boolean">
+        SELECT 
+            CASE 
+                 WHEN COUNT(*) > 0 THEN 1 
+                ELSE 0 
+            END
+        FROM Vehicles
+        WHERE REGISTRATION_NUMBER = #{registrationNumber}
+    </select>
+
     <insert id="insert" parameterType="com.solvd.navigationapp.models.Vehicle" useGeneratedKeys="true" keyProperty="id">
             INSERT INTO Vehicles (VEHICLE_TYPE_ID, REGISTRATION_NUMBER, SEATS_COUNT, DRIVER_ID)
             VALUES (#{vehicleTypeId}, #{registrationNumber}, #{seatsCount}, #{driverId})   
@@ -49,5 +59,7 @@
     <delete id="deleteByRegistrationNumber" parameterType="string">
             DELETE FROM Vehicles WHERE REGISTRATION_NUMBER = #{registrationNumber}
     </delete>
+
+  
 
 </mapper>
