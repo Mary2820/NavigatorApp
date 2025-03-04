@@ -1,4 +1,4 @@
-package com.solvd.navigationapp.services;
+package com.solvd.navigationapp.services.dbservices;
 
 import com.solvd.navigationapp.models.Location;
 

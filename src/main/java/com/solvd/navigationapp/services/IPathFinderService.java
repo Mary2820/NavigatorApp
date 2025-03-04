@@ -6,10 +6,8 @@ import java.util.Optional;
 import com.solvd.navigationapp.models.Location;
 
 public interface IPathFinderService {
-    Optional<Integer> getShortestPathDistance();
+    List<Location> getBestPath(Location startLocation, Location endLocation);
     Optional<Location> getStartPoint();
     Optional<Location> getEndPoint();
-    List<Location> getShortPath();
-    void addEndLocation(Location starLocation);
-    void addStartLocation(Location endLocation);
+ 
 }
