@@ -23,7 +23,7 @@ public class VehicleService extends AbstractService<Vehicle> implements IVehicle
     @Override
     public Optional<Vehicle> getById(Long id) {
         try {
-            return vehicleDAO.getById(id);
+            return Optional.ofNullable(vehicleDAO.getById(id));
         } catch (Exception e) {
             logger.error("Error finding vehicle by ID: {}", e.getMessage());
             return Optional.empty();
@@ -74,7 +74,7 @@ public class VehicleService extends AbstractService<Vehicle> implements IVehicle
             return false;
         }
         try {
-            vehicleDAO.delete(id);
+            vehicleDAO.deleteById(id);
             logger.info("Vehicle successfully deleted: {}", id);
             return true;
         } catch (Exception e) {
@@ -84,9 +84,9 @@ public class VehicleService extends AbstractService<Vehicle> implements IVehicle
     }
     
     @Override
-    public Vehicle getByRegistrationNumber(String registrationNumber) {
+    public Optional<Vehicle> getByRegistrationNumber(String registrationNumber) {
         try {
-            return vehicleDAO.getByRegistrationNumber(registrationNumber);
+            return Optional.ofNullable(vehicleDAO.getByRegistrationNumber(registrationNumber));
         } catch (Exception e) {
             logger.error("Error finding vehicle by registration number {}", e.getMessage());
             return null;

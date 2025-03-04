@@ -4,7 +4,6 @@ import com.solvd.navigationapp.daos.IVehicleDAO;
 import com.solvd.navigationapp.models.Vehicle;
 
 import java.util.List;
-import java.util.Optional;
 
 public class VehicleDAO extends AbstractMyBatisDAO<IVehicleDAO> implements IVehicleDAO {
     @Override
@@ -38,7 +37,7 @@ public class VehicleDAO extends AbstractMyBatisDAO<IVehicleDAO> implements IVehi
     }
 
     @Override
-    public Optional<Vehicle> getById(Long id) {
+    public Vehicle getById(Long id) {
         return executeInSession(mapper -> mapper.getById(id));
     }
 
@@ -48,8 +47,8 @@ public class VehicleDAO extends AbstractMyBatisDAO<IVehicleDAO> implements IVehi
     }
 
     @Override
-    public void delete(Long id) {
-        executeInSessionVoid(mapper -> mapper.delete(id));
+    public void deleteById(Long id) {
+        executeInSessionVoid(mapper -> mapper.deleteById(id));
     }
 
     @Override

@@ -4,7 +4,6 @@ import com.solvd.navigationapp.daos.IClientDAO;
 import com.solvd.navigationapp.models.Client;
 
 import java.util.List;
-import java.util.Optional;
 
 public class ClientDAO extends AbstractMyBatisDAO<IClientDAO> implements IClientDAO {
     @Override
@@ -48,7 +47,7 @@ public class ClientDAO extends AbstractMyBatisDAO<IClientDAO> implements IClient
     }
 
     @Override
-    public Optional<Client> getById(Long id) {
+    public Client getById(Long id) {
         return executeInSession(mapper -> mapper.getById(id));
     }
 
@@ -58,8 +57,8 @@ public class ClientDAO extends AbstractMyBatisDAO<IClientDAO> implements IClient
     }
 
     @Override
-    public void delete(Long id) {
-        executeInSessionVoid(mapper -> mapper.delete(id));
+    public void deleteById(Long id) {
+        executeInSessionVoid(mapper -> mapper.deleteById(id));
     }
 
     @Override

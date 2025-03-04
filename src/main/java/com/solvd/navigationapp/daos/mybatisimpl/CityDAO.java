@@ -4,7 +4,6 @@ import com.solvd.navigationapp.daos.ICityDAO;
 import com.solvd.navigationapp.models.City;
 
 import java.util.List;
-import java.util.Optional;
 
 public class CityDAO extends AbstractMyBatisDAO<ICityDAO> implements ICityDAO {
     @Override
@@ -28,7 +27,7 @@ public class CityDAO extends AbstractMyBatisDAO<ICityDAO> implements ICityDAO {
     }
 
     @Override
-    public Optional<City> getById(Long id) {
+    public City getById(Long id) {
         return executeInSession(mapper -> mapper.getById(id));
     }
 
@@ -38,8 +37,8 @@ public class CityDAO extends AbstractMyBatisDAO<ICityDAO> implements ICityDAO {
     }
 
     @Override
-    public void delete(Long id) {
-        executeInSessionVoid(mapper -> mapper.delete(id));
+    public void deleteById(Long id) {
+        executeInSessionVoid(mapper -> mapper.deleteById(id));
     }
 
     @Override
