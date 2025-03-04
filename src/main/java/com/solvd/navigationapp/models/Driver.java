@@ -10,16 +10,12 @@ import com.solvd.navigationapp.enums.UserType;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Driver extends User {
 
-    @XmlElement(name = "licenseId")
-    private Long licenseId;
-
-
     public Driver() {
         super();
         this.userType = UserType.DRIVER;
     }
 
-    public Driver(Long id, String firstName, String lastName, String phoneNumber, Long licenseId) {
+    public Driver(Long id, String firstName, String lastName, String phoneNumber) {
         super(id, firstName, lastName, phoneNumber);
         this.userType = UserType.DRIVER;
     }
@@ -31,6 +27,4 @@ public class Driver extends User {
                 ", " + super.toString() +
                 '}';
     }
-
-
 }
