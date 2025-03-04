@@ -1,4 +1,4 @@
-package com.solvd.navigationapp.services.impl;
+package com.solvd.navigationapp.services.dbservices.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.solvd.navigationapp.daos.IVehicleDAO;
 import com.solvd.navigationapp.models.Vehicle;
-import com.solvd.navigationapp.services.IVehicleService;
+import com.solvd.navigationapp.services.dbservices.IVehicleService;
 import com.solvd.navigationapp.utils.DAOFactory;
 
 public class VehicleService extends AbstractService<Vehicle> implements IVehicleService {

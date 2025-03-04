@@ -1,9 +1,9 @@
-package com.solvd.navigationapp.services.impl;
+package com.solvd.navigationapp.services.dbservices.impl;
 
 import java.util.Optional;
 
 import com.solvd.navigationapp.models.Location;
-import com.solvd.navigationapp.services.ILocationService;
+import com.solvd.navigationapp.services.dbservices.ILocationService;
 
 public class LocationService implements ILocationService{
 
