@@ -18,12 +18,6 @@
         WHERE ID = #{id} and ROLE_TYPE = 'DRIVER'
     </select>
 
-    <select id="getByLicenseId" resultMap="DriverResultMap">
-        SELECT *
-        FROM Users
-        WHERE LICENSE_ID = #{licenseId} and ROLE_TYPE = 'DRIVER'
-    </select>
-
     <select id="getByFullName" resultMap="DriverResultMap">
         SELECT *
         FROM Users
@@ -44,10 +38,5 @@
 
     <delete id="delete" parameterType="long">
         DELETE FROM Users WHERE ID = #{id}
-    </delete>
-
-    <delete id="deleteByEmail" parameterType="String">
-        DELETE FROM Users
-        WHERE EMAIL = #{email}
     </delete>
 </mapper>
