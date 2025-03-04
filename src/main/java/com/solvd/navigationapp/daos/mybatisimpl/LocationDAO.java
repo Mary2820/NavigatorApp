@@ -5,7 +5,6 @@ import com.solvd.navigationapp.enums.LocationType;
 import com.solvd.navigationapp.models.Location;
 
 import java.util.List;
-import java.util.Optional;
 
 public class LocationDAO extends AbstractMyBatisDAO<ILocationDAO> implements ILocationDAO {
     @Override
@@ -39,7 +38,7 @@ public class LocationDAO extends AbstractMyBatisDAO<ILocationDAO> implements ILo
     }
 
     @Override
-    public Optional<Location> getById(Long id) {
+    public Location getById(Long id) {
         return executeInSession(mapper -> mapper.getById(id));
     }
 
@@ -49,12 +48,12 @@ public class LocationDAO extends AbstractMyBatisDAO<ILocationDAO> implements ILo
     }
 
     @Override
-    public void delete(Long id) {
-        executeInSessionVoid(mapper -> mapper.delete(id));
+    public void deleteById(Long id) {
+        executeInSessionVoid(mapper -> mapper.deleteById(id));
     }
 
     @Override
     protected Class<ILocationDAO> getMapperClass() {
         return ILocationDAO.class;
     }
-} 
+}

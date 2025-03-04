@@ -39,7 +39,7 @@
             WHERE ID = #{id}
     </update>
 
-    <delete id="delete" parameterType="long">
+    <delete id="deleteById" parameterType="long">
             DELETE FROM Cities WHERE ID = #{id}
     </delete>
 </mapper>

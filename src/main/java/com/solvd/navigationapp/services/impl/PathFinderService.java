@@ -1,6 +1,7 @@
 package com.solvd.navigationapp.services.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.solvd.navigationapp.models.Graph;
 import com.solvd.navigationapp.models.Location;
@@ -23,8 +24,8 @@ public class PathFinderService implements IPathFinderService{
         this.pathFinder = new PathFinder(graph);
     }
     @Override
-    public Integer getShortestPathDistance(){
-        return pathFinder.getShortestPathDistance(startLocation, endLocation);
+    public Optional<Integer> getShortestPathDistance(){
+        return Optional.ofNullable(pathFinder.getShortestPathDistance(startLocation, endLocation));
     }
     @Override
     public void addStartLocation(Location starLocation) {
@@ -40,13 +41,13 @@ public class PathFinderService implements IPathFinderService{
         
     }
     @Override
-    public Location getStartPoint(){
-        return startLocation;
+    public Optional<Location> getStartPoint(){
+        return Optional.ofNullable(startLocation);
     }
     
     @Override
-    public Location getEndPoint(){
-        return endLocation;
+    public Optional<Location> getEndPoint(){
+        return Optional.ofNullable(endLocation);
     }
     
     private Graph getGraph() {

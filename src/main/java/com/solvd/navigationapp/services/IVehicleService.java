@@ -1,11 +1,12 @@
 package com.solvd.navigationapp.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.solvd.navigationapp.models.Vehicle;
 
 public interface IVehicleService extends IService<Vehicle> {
-    Vehicle getByRegistrationNumber(String registrationNumber);
+    Optional<Vehicle> getByRegistrationNumber(String registrationNumber);
 
     List<Vehicle> getByVehicleTypeId(Long vehicleTypeId);
 

@@ -5,7 +5,6 @@ import com.solvd.navigationapp.models.License;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 public class LicenseDAO extends AbstractMyBatisDAO<ILicenseDAO> implements ILicenseDAO {
     @Override
@@ -29,7 +28,7 @@ public class LicenseDAO extends AbstractMyBatisDAO<ILicenseDAO> implements ILice
     }
 
     @Override
-    public Optional<License> getById(Long id) {
+    public License getById(Long id) {
         return executeInSession(mapper -> mapper.getById(id));
     }
 
@@ -39,8 +38,8 @@ public class LicenseDAO extends AbstractMyBatisDAO<ILicenseDAO> implements ILice
     }
 
     @Override
-    public void delete(Long id) {
-        executeInSessionVoid(mapper -> mapper.delete(id));
+    public void deleteById(Long id) {
+        executeInSessionVoid(mapper -> mapper.deleteById(id));
     }
 
     @Override

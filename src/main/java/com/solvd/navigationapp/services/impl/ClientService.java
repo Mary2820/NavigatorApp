@@ -43,7 +43,7 @@ public class ClientService extends AbstractService<Client> implements IClientSer
     @Override
     public Optional<Client> getById(Long id) {
         try {
-            return clientDAO.getById(id);
+            return Optional.ofNullable(clientDAO.getById(id));
         } catch (Exception e) {
             logger.error("Error finding client by ID: {}", e.getMessage());
             return Optional.empty();
@@ -122,7 +122,7 @@ public class ClientService extends AbstractService<Client> implements IClientSer
         }
         
         try {
-            clientDAO.delete(clientId);
+            clientDAO.deleteById(clientId);
             logger.info("Client successfully deleted: {}", clientId);
             return true;
         } catch (Exception e) {

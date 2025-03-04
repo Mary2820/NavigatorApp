@@ -1,6 +1,7 @@
 package com.solvd.navigationapp.services.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.solvd.navigationapp.models.Location;
 import com.solvd.navigationapp.services.INavigationService;
@@ -19,9 +20,9 @@ public class NavigationService implements INavigationService {
        
     }
     public void showPath() {
-        Location start = pathFinderService.getStartPoint();
-        Location end = pathFinderService.getEndPoint();
-        Integer shortestPathDistance = pathFinderService.getShortestPathDistance();
+        Optional<Location> start = pathFinderService.getStartPoint();
+        Optional<Location> end = pathFinderService.getEndPoint();
+        Optional<Integer> shortestPathDistance = pathFinderService.getShortestPathDistance();
         path = pathFinderService.getShortPath();
         navigation.showPath(path,start, end, shortestPathDistance);
     }
