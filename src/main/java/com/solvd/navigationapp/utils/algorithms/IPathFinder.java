@@ -1,7 +1,6 @@
 package com.solvd.navigationapp.utils.algorithms;
 
 import java.util.List;
-import java.util.Optional;
 
 import com.solvd.navigationapp.models.Location;
 

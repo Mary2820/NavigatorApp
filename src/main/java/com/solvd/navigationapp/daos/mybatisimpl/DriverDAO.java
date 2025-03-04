@@ -4,7 +4,6 @@ import com.solvd.navigationapp.daos.IDriverDAO;
 import com.solvd.navigationapp.models.Driver;
 
 import java.util.List;
-import java.util.Optional;
 
 public class DriverDAO extends AbstractMyBatisDAO<IDriverDAO> implements IDriverDAO {
     @Override
@@ -23,7 +22,7 @@ public class DriverDAO extends AbstractMyBatisDAO<IDriverDAO> implements IDriver
     }
 
     @Override
-    public Optional<Driver> getById(Long id) {
+    public Driver getById(Long id) {
         return executeInSession(mapper -> mapper.getById(id));
     }
 
@@ -33,8 +32,8 @@ public class DriverDAO extends AbstractMyBatisDAO<IDriverDAO> implements IDriver
     }
 
     @Override
-    public void delete(Long id) {
-        executeInSessionVoid(mapper -> mapper.delete(id));
+    public void deleteById(Long id) {
+        executeInSessionVoid(mapper -> mapper.deleteById(id));
     }
 
     @Override
