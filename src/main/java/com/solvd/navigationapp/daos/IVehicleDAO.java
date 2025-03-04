@@ -18,4 +18,6 @@ public interface IVehicleDAO extends IDAO<Vehicle> {
     List<Vehicle> getBySeatsCountLessThan(Integer seatsCount);*/
 
     void deleteByRegistrationNumber(String registrationNumber);
+
+    boolean isRegistrationNumberTaken(String registrationNumber);
 }

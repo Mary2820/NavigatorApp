@@ -1,8 +1,8 @@
-package com.solvd.navigationapp.services;
+package com.solvd.navigationapp.services.impl;
 
 import com.solvd.navigationapp.daos.IClientDAO;
-import com.solvd.navigationapp.daos.mybatisimpl.ClientDAO;
 import com.solvd.navigationapp.models.Client;
+import com.solvd.navigationapp.services.IClientService;
 import com.solvd.navigationapp.utils.DAOFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class ClientService implements IClientService {
+public class ClientService extends AbstractService<Client> implements IClientService {
     private static final Logger logger = LogManager.getLogger(ClientService.class.getName());
     private final IClientDAO clientDAO;
     
@@ -20,8 +20,8 @@ public class ClientService implements IClientService {
     }
 
     @Override
-    public boolean register(Client client) {
-        if (!isValidClientData(client)) {
+    public boolean save(Client client) {
+        if (!isValidData(client)) {
             return false;
         }
 
@@ -41,7 +41,7 @@ public class ClientService implements IClientService {
     }
 
     @Override
-    public Optional<Client> findById(Long id) {
+    public Optional<Client> getById(Long id) {
         try {
             return clientDAO.getById(id);
         } catch (Exception e) {
@@ -51,7 +51,7 @@ public class ClientService implements IClientService {
     }
 
     @Override
-    public Optional<Client> findByEmail(String email) {
+    public Optional<Client> getByEmail(String email) {
         try {
             Client client = clientDAO.getByEmail(email);
             return Optional.ofNullable(client);
@@ -62,7 +62,7 @@ public class ClientService implements IClientService {
     }
 
     @Override
-    public List<Client> findByFirstName(String firstName) {
+    public List<Client> getByFirstName(String firstName) {
         try {
             return clientDAO.getByFirstName(firstName);
         } catch (Exception e) {
@@ -72,7 +72,7 @@ public class ClientService implements IClientService {
     }
 
     @Override
-    public List<Client> findByLastName(String lastName) {
+    public List<Client> getByLastName(String lastName) {
         try {
             return clientDAO.getByLastName(lastName);
         } catch (Exception e) {
@@ -82,7 +82,7 @@ public class ClientService implements IClientService {
     }
 
     @Override
-    public List<Client> findByNamePart(String namePart) {
+    public List<Client> getByNamePart(String namePart) {
         try {
             return clientDAO.getByNamePart(namePart);
         } catch (Exception e) {
@@ -92,8 +92,8 @@ public class ClientService implements IClientService {
     }
 
     @Override
-    public boolean updateProfile(Client client) {
-        Optional<Client> existingClient = findById(client.getId());
+    public boolean update(Client client) {
+        Optional<Client> existingClient = getById(client.getId());
         if (existingClient.isEmpty()) {
             logger.warn("Client with ID {} not found", client.getId());
             return false;
@@ -115,8 +115,8 @@ public class ClientService implements IClientService {
     }
 
     @Override
-    public boolean deleteAccountById(Long clientId) {
-        if (findById(clientId).isEmpty()) {
+    public boolean deleteById(Long clientId) {
+        if (getById(clientId).isEmpty()) {
             logger.warn("Attempt to delete non-existent client with ID: {}", clientId);
             return false;
         }
@@ -133,7 +133,7 @@ public class ClientService implements IClientService {
 
     @Override
     public boolean deleteAccountByEmail(String email) {
-        if (findByEmail(email).isEmpty()) {
+        if (getByEmail(email).isEmpty()) {
             logger.warn("Attempt to delete non-existent client with email: {}", email);
             return false;
         }
@@ -149,7 +149,7 @@ public class ClientService implements IClientService {
     }
 
     @Override
-    public List<Client> findAllClients() {
+    public List<Client> getAllClients() {
         try {
             return clientDAO.getAllUsers();
         } catch (Exception e) {
@@ -167,7 +167,8 @@ public class ClientService implements IClientService {
         }
     }
 
-    private boolean isValidClientData(Client client) {
+    @Override
+    protected boolean isValidData(Client client) {
         if (client.getEmail() == null || client.getEmail().trim().isEmpty() ||
             client.getFirstName() == null || client.getFirstName().trim().isEmpty() ||
             client.getLastName() == null || client.getLastName().trim().isEmpty()) {
@@ -186,4 +187,5 @@ public class ClientService implements IClientService {
     private boolean isValidEmail(String email) {
         return email != null && email.matches("^[A-Za-z0-9+_.-]+@(.+)$");
     }
+
 } 

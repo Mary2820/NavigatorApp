@@ -1,10 +1,11 @@
-package com.solvd.navigationapp.services;
+package com.solvd.navigationapp.services.impl;
 
-import com.solvd.navigationapp.daos.mybatisimpl.LocationDAO;
-import com.solvd.navigationapp.daos.mybatisimpl.RouteDAO;
+import com.solvd.navigationapp.daos.ILocationDAO;
+import com.solvd.navigationapp.daos.IRouteDAO;
 import com.solvd.navigationapp.models.Graph;
 import com.solvd.navigationapp.models.Location;
 import com.solvd.navigationapp.models.Route;
+import com.solvd.navigationapp.services.IGraphService;
 import com.solvd.navigationapp.utils.DAOFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,8 +15,8 @@ import java.util.List;
 public class GraphService implements IGraphService {
     private static final Logger logger = LogManager.getLogger(GraphService.class);
     private final Graph graph;
-    private final LocationDAO locationDAO;
-    private final RouteDAO routeDAO;
+    private final ILocationDAO locationDAO;
+    private final IRouteDAO routeDAO;
 
     public GraphService() {
         this.graph = new Graph();
