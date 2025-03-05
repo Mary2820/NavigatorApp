@@ -18,5 +18,5 @@ public interface IRouteDAO extends IDAO<Route> {
 
     List<Route> getAll();
 
-    int countTotal();
+    Integer countTotal();
 }
