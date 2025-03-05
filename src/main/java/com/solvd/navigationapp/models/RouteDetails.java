@@ -3,10 +3,10 @@ package com.solvd.navigationapp.models;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import jakarta.xml.bind.annotation.*;
 
-@JsonRootName(value = "step")
-@XmlRootElement(name = "step")
+@JsonRootName(value = "trip stage")
+@XmlRootElement(name = "trip stage")
 @XmlAccessorType(XmlAccessType.NONE)
-public class Result {
+public class RouteDetails {
     private Location startPoint;
     private Location endPoint;
     private Integer distance;
@@ -14,7 +14,7 @@ public class Result {
     private String vehicleType;
     private String vehicleNumber;
 
-    public Result(Location startPoint, Location endPoint, Integer distance, Integer timeInMinutes, String vehicleType, String vehicleNumber) {
+    public RouteDetails(Location startPoint, Location endPoint, Integer distance, Integer timeInMinutes, String vehicleType, String vehicleNumber) {
         this.startPoint = startPoint;
         this.endPoint = endPoint;
         this.distance = distance;
@@ -23,7 +23,7 @@ public class Result {
         this.vehicleNumber = vehicleNumber;
     }
 
-    public Result() {
+    public RouteDetails() {
     }
 
     @XmlElement(name = "startPoint")

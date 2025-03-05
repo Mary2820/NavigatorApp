@@ -3,7 +3,7 @@ import com.solvd.navigationapp.models.Location;
 import com.solvd.navigationapp.models.Route;
 import com.solvd.navigationapp.services.IPathFinderService;
 import com.solvd.navigationapp.services.impl.PathFinderService;
-import com.solvd.navigationapp.services.impl.ResultService;
+import com.solvd.navigationapp.services.impl.RouteDetailsService;
 import com.solvd.navigationapp.utils.DAOFactory;
 
 import java.util.List;
@@ -15,7 +15,7 @@ public class Main {
 
         IPathFinderService pathFinderService = new PathFinderService();
         List<Route> routeList = pathFinderService.getBestPath(start, end);
-        ResultService resultService = new ResultService();
-        resultService.saveResult(routeList);
+        RouteDetailsService routeDetailsService = new RouteDetailsService();
+        routeDetailsService.saveResult(routeList);
     } 
 }
