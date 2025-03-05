@@ -17,8 +17,7 @@ public class JAXBParser<T> implements IDataParser<T> {
     @Override
     public void writeToFile(String filePath, T data) {
         try {
-            JAXBContext context = JAXBContext.newInstance(User.class);
-
+            JAXBContext context = JAXBContext.newInstance(data.getClass());
             Marshaller marshaller = context.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             marshaller.marshal(data, new File(filePath));

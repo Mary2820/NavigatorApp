@@ -1,5 +1,7 @@
 package com.solvd.navigationapp.enums;
 
+import java.util.Objects;
+
 public enum VehicleType {
     BUS(1L, "BUS"),
     TRAIN(2L, "TRAIN"),
@@ -20,5 +22,14 @@ public enum VehicleType {
 
     public String getName() {
         return name;
+    }
+
+    public static String getById(Long id) {
+        for (VehicleType vehicleType : values()) {
+            if (Objects.equals(vehicleType.getId(), id)) {
+                return vehicleType.name;
+            }
+        }
+        throw new IllegalArgumentException("No vehicle with ID: " + id);
     }
 }

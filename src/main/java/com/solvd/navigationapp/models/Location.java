@@ -1,9 +1,14 @@
 package com.solvd.navigationapp.models;
 
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.solvd.navigationapp.enums.LocationType;
+import jakarta.xml.bind.annotation.*;
 
 import java.util.Objects;
 
+@JsonRootName(value = "location")
+@XmlRootElement(name = "location")
+@XmlAccessorType(XmlAccessType.NONE)
 public class Location {
     private static final int MASK = 1;
     private Long id;
@@ -23,6 +28,7 @@ public class Location {
     public Location() {
     }
 
+    @XmlElement(name = "id")
     public Long getId() {
         return id;
     }
@@ -31,6 +37,7 @@ public class Location {
         this.id = id;
     }
 
+    @XmlElement(name = "name")
     public String getName() {
         return name;
     }
@@ -39,6 +46,7 @@ public class Location {
         this.name = name;
     }
 
+    @XmlElement(name = "cityId")
     public Long getCityId() {
         return cityId;
     }
@@ -47,6 +55,7 @@ public class Location {
         this.cityId = cityId;
     }
 
+    @XmlElement(name = "address")
     public String getAddress() {
         return address;
     }
@@ -55,6 +64,7 @@ public class Location {
         this.address = address;
     }
 
+    @XmlElement(name = "type")
     public LocationType getType() {
         return type;
     }
@@ -89,6 +99,4 @@ public class Location {
                 ", type=" + type +
                 '}';
     }
-
-
 }

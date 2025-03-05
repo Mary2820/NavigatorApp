@@ -1,14 +1,29 @@
 package com.solvd.navigationapp.models;
 
+import jakarta.xml.bind.annotation.*;
 import java.util.Objects;
 
+@XmlRootElement(name = "route")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Route {
     private static final int MASK = 1;
+    
+    @XmlElement(name = "id")
     private Long id;
+    
+    @XmlElement(name = "startPointId")
     private Long startPointId;
+    
+    @XmlElement(name = "endPointId")
     private Long endPointId;
+    
+    @XmlElement(name = "vehicleId")
     private Long vehicleId;
+    
+    @XmlElement(name = "distance")
     private Integer distance;
+    
+    @XmlElement(name = "isBidirectional")
     private boolean isBidirectional;
 
     public Route(Long id, Long startPointId, Long endPointId, Long vehicleId, Integer distance, boolean isBidirectional) {
@@ -97,5 +112,4 @@ public class Route {
                 ", isBidirectional=" + isBidirectional +
                 '}';
     }
-
 }
