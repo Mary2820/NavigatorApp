@@ -54,27 +54,6 @@ private List<Location> path;
 
         return reconstructPath(start, end, previous);
     }
-    
-   /*  @Override
-    public Integer getShortestPathDistance(Location start, Location end) {
-       // this.path = 
-        List<Location> path = findShortestPath(start, end);
-        if (path.isEmpty()) return -1;
-
-        int distance = 0;
-        for (int i = 0; i < path.size() - 1; i++) {
-            Location current = path.get(i);
-            Location next = path.get(i + 1);
-
-            for (Route route : graph.getRoutesFromLocation(current)) {
-                if (isRouteConnecting(route, current, next)) {
-                    distance += route.getDistance();
-                    break;
-                }
-            }
-        }
-        return distance;
-    }*/
 
     @Override
     public List<Location> getShortPath(Location start, Location end){
@@ -103,11 +82,4 @@ private List<Location> path;
         Collections.reverse(path);
         return path;
     }
-    
-    /*private boolean isRouteConnecting(Route route, Location from, Location to) {
-        return (route.getStartPointId().equals(from.getId()) && route.getEndPointId().equals(to.getId())) ||
-               (route.getEndPointId().equals(from.getId()) && route.getStartPointId().equals(to.getId()) && route.isBidirectional());
-    }*/
-
-  
 }

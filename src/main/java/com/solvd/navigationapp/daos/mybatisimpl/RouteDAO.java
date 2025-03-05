@@ -37,7 +37,7 @@ public class RouteDAO extends AbstractMyBatisDAO<IRouteDAO> implements IRouteDAO
     }
 
     @Override
-    public int countTotal() {
+    public Integer countTotal() {
         return executeInSession(IRouteDAO::countTotal);
     }
 

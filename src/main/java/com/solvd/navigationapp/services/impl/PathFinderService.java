@@ -1,63 +1,39 @@
 package com.solvd.navigationapp.services.impl;
 
 import java.util.List;
-import java.util.Optional;
 
 import com.solvd.navigationapp.models.Graph;
 import com.solvd.navigationapp.models.Location;
-import com.solvd.navigationapp.services.IGraphService;
+import com.solvd.navigationapp.models.Route;
 import com.solvd.navigationapp.services.IPathFinderService;
 import com.solvd.navigationapp.services.ITransportService;
 import com.solvd.navigationapp.utils.algorithms.IPathFinder;
 import com.solvd.navigationapp.utils.algorithms.PathFinder;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class PathFinderService implements IPathFinderService {
+    private static final Logger logger = LogManager.getLogger(PathFinderService.class);
     private final IPathFinder pathFinder;
-    private final IGraphService graphService;
-    private final Graph graph;
-    private Location startLocation;
-    private Location endLocation;
-    private ITransportService transportService;
-    private List<Location> finalPath;
+    private final ITransportService transportService;
 
     public PathFinderService() {
-        this.graphService = new GraphService();
-        loadGraph();
-        this.graph = getGraph();
+        this.transportService = new TransportService();
+
+        Graph graph = new GraphService().getGraph();
         this.pathFinder = new PathFinder(graph);
     }
 
-    private List<Location> getShortPath(Location startLocation, Location endLocation) {
-        return pathFinder.getShortPath(startLocation, endLocation);
+    public List<Route> getBestPath(Location startLocation, Location endLocation) {
+        List<Location> path = pathFinder.getShortPath(startLocation, endLocation);
 
+        if (path.isEmpty()) {
+            logger.warn("No path found between {} and {}", startLocation, endLocation);
+            throw new IllegalStateException("No path found between the given locations.");
+        }
+
+        logger.info("Shortest path found with {} locations", path.size());
+
+        return transportService.getTransportPath(path);
     }
-
-    public List<Location> getBestPath(Location startLocation, Location endLocation) {
-        List<Location> path = getShortPath(startLocation, endLocation);
-        return path;
-        /*
-         * transportService = new TransportService();
-         * finalPath = transportService.getTransportPath(path);
-         * return finalPath;
-         */
-    }
-
-    @Override
-    public Optional<Location> getStartPoint() {
-        return Optional.ofNullable(startLocation);
-    }
-
-    @Override
-    public Optional<Location> getEndPoint() {
-        return Optional.ofNullable(endLocation);
-    }
-
-    private Graph getGraph() {
-        return graphService.getGraph();
-    }
-
-    private void loadGraph() {
-        graphService.loadGraph();
-    }
-
 }
