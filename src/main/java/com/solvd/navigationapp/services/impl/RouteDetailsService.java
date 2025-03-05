@@ -2,7 +2,7 @@ package com.solvd.navigationapp.services.impl;
 
 import com.solvd.navigationapp.enums.VehicleType;
 import com.solvd.navigationapp.models.Location;
-import com.solvd.navigationapp.models.Result;
+import com.solvd.navigationapp.models.RouteDetails;
 import com.solvd.navigationapp.models.Route;
 import com.solvd.navigationapp.models.Vehicle;
 import com.solvd.navigationapp.services.dbservices.ILocationService;
@@ -12,7 +12,7 @@ import com.solvd.navigationapp.services.dbservices.impl.VehicleService;
 import com.solvd.navigationapp.utils.parsers.IDataParser;
 import com.solvd.navigationapp.utils.parsers.JAXBParser;
 import com.solvd.navigationapp.utils.parsers.JacksonParser;
-import com.solvd.navigationapp.wrappers.ResultWrapper;
+import com.solvd.navigationapp.wrappers.TripWrapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -20,20 +20,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class ResultService {
-    private static final Logger logger = LogManager.getLogger(ResultService.class);
+public class RouteDetailsService {
+    private static final Logger logger = LogManager.getLogger(RouteDetailsService.class);
     private static final String JSON_FILE_PATH = "src/main/resources/data/data.json";
     private static final String XML_FILE_PATH = "src/main/resources/data/data.xml";
     private final ILocationService locationService;
     private final IVehicleService vehicleService;
 
-    public ResultService() {
+    public RouteDetailsService() {
         this.locationService = new LocationService();
         this.vehicleService = new VehicleService();
     }
 
-    public List<Result> convertRoutesToResults(List<Route> routeList) {
-        List<Result> results = new ArrayList<>();
+    public List<RouteDetails> convertRoutesToResults(List<Route> routeList) {
+        List<RouteDetails> routeDetailsList = new ArrayList<>();
         
         for (Route route : routeList) {
             try {
@@ -59,7 +59,7 @@ public class ResultService {
                 // Calculate time in minutes based on distance (assuming average speed of 5 km/h for walking)
                 Integer timeInMinutes = (int) (route.getDistance() / 83.33); // Convert meters to minutes at 5 km/h
 
-                Result result = new Result(
+                RouteDetails routeDetails = new RouteDetails(
                     startPoint.get(),
                     endPoint.get(),
                     route.getDistance(),
@@ -68,12 +68,12 @@ public class ResultService {
                     vehicleNumber
                 );
                 
-                results.add(result);
+                routeDetailsList.add(routeDetails);
             } catch (Exception e) {
                 logger.error("Error processing route {}: {}", route.getId(), e.getMessage());
             }
         }
-        return results;
+        return routeDetailsList;
     }
 
     private String getVehicleTypeName(Long vehicleTypeId) {
@@ -82,16 +82,16 @@ public class ResultService {
 
     public void saveResult(List<Route> routeList) {
         try {
-            List<Result> results = convertRoutesToResults(routeList);
+            List<RouteDetails> routeDetailsList = convertRoutesToResults(routeList);
             
-            ResultWrapper resultWrapper = new ResultWrapper();
-            resultWrapper.setResults(results);
+            TripWrapper tripWrapper = new TripWrapper();
+            tripWrapper.setTripStages(routeDetailsList);
             
-            IDataParser<ResultWrapper> jacksonParser = new JacksonParser<>();
-            IDataParser<ResultWrapper> jaxbParser = new JAXBParser<>();
+            IDataParser<TripWrapper> jacksonParser = new JacksonParser<>();
+            IDataParser<TripWrapper> jaxbParser = new JAXBParser<>();
 
-            jacksonParser.writeToFile(JSON_FILE_PATH, resultWrapper);
-            jaxbParser.writeToFile(XML_FILE_PATH, resultWrapper);
+            jacksonParser.writeToFile(JSON_FILE_PATH, tripWrapper);
+            jaxbParser.writeToFile(XML_FILE_PATH, tripWrapper);
             
             logger.info("Results successfully saved to JSON and XML files");
         } catch (Exception e) {
