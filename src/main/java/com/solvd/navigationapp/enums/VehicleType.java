@@ -12,7 +12,7 @@ public enum VehicleType {
     private final String name;
     private final Integer speed;
 
-    VehicleType(Long id, String name, int speed) {
+    VehicleType(Long id, String name, Integer speed) {
         this.id = id;
         this.name = name;
         this.speed = speed;
@@ -25,7 +25,7 @@ public enum VehicleType {
     public String getName() {
         return name;
     }
-    public int getSpeed() {
+    public Integer getSpeed() {
         return speed;
     }
 
