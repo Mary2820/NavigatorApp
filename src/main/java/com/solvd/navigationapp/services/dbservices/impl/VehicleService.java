@@ -1,6 +1,6 @@
 package com.solvd.navigationapp.services.dbservices.impl;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -89,7 +89,7 @@ public class VehicleService extends AbstractService<Vehicle> implements IVehicle
             return Optional.ofNullable(vehicleDAO.getByRegistrationNumber(registrationNumber));
         } catch (Exception e) {
             logger.error("Error finding vehicle by registration number {}", e.getMessage());
-            return null;
+            return Optional.empty();
         }
     }
 
@@ -99,7 +99,7 @@ public class VehicleService extends AbstractService<Vehicle> implements IVehicle
             return vehicleDAO.getByVehicleTypeId(vehicleTypeId);
         } catch (Exception e) {
             logger.error("Error finding vehicle by vehicle id: {}", e.getMessage());
-            return new ArrayList<>();
+            return Collections.emptyList();
         }
     }
 
@@ -109,7 +109,7 @@ public class VehicleService extends AbstractService<Vehicle> implements IVehicle
             return vehicleDAO.getByDriverId(driverId);
         } catch (Exception e) {
             logger.error("Error finding vehicle by driver id: {}", e.getMessage());
-            return new ArrayList<>();
+            return Collections.emptyList();
         }
     }
 
@@ -119,13 +119,13 @@ public class VehicleService extends AbstractService<Vehicle> implements IVehicle
             return vehicleDAO.getAllVehicles();
         } catch (Exception e) {
             logger.error("Error getting all vehicles: {}", e.getMessage());
-            return new ArrayList<>();
+            return Collections.emptyList();
         }
     }
 
     @Override
     public boolean deleteByRegistrationNumber(String registrationNumber) {
-        if (getByRegistrationNumber(registrationNumber) == null) {
+        if (getByRegistrationNumber(registrationNumber).isEmpty()) {
             logger.warn("Attempt to delete non-existent vehicle with registration number: {}", registrationNumber);
             return false;
         }
@@ -163,6 +163,5 @@ public class VehicleService extends AbstractService<Vehicle> implements IVehicle
             logger.error("Error checking if registration number is taken: {}", e.getMessage());
             return false;
         }
-
     }
 }

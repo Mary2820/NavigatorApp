@@ -15,7 +15,7 @@ public class JacksonParser<T> implements IDataParser<T> {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(filePath), data);
-            logger.info("JSON saved to " + filePath);
+            logger.info("JSON saved to {}", filePath);
         } catch (IOException e) {
             logger.error(e);
         }
