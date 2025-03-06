@@ -1,5 +1,6 @@
 package com.solvd.navigationapp.services.impl;
 
+import com.solvd.navigationapp.constants.TransportSpeedConstants;
 import com.solvd.navigationapp.enums.VehicleType;
 import com.solvd.navigationapp.models.Location;
 import com.solvd.navigationapp.models.RouteDetails;
@@ -21,7 +22,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class RouteDetailsService {
-    private static final Logger logger = LogManager.getLogger(RouteDetailsService.class);
+    private static final Logger logger = LogManager.getLogger(RouteDetailsService.class.getName());
     private static final String JSON_FILE_PATH = "src/main/resources/data/data.json";
     private static final String XML_FILE_PATH = "src/main/resources/data/data.xml";
     private final ILocationService locationService;
@@ -39,25 +40,20 @@ public class RouteDetailsService {
             try {
                 Optional<Location> startPoint = locationService.getById(route.getStartPointId());
                 Optional<Location> endPoint = locationService.getById(route.getEndPointId());
-                
-                if (startPoint.isEmpty() || endPoint.isEmpty()) {
-                    logger.warn("Could not find location for route {}", route.getId());
-                    continue;
-                }
 
                 String vehicleType = "WALK";
                 String vehicleNumber = "";
+                Integer timeInMinutes = route.getDistance() / TransportSpeedConstants.WALK_SPEED;
                 
                 if (route.getVehicleId() != null) {
                     Optional<Vehicle> vehicle = vehicleService.getById(route.getVehicleId());
+
                     if (vehicle.isPresent()) {
-                        vehicleType = getVehicleTypeName(vehicle.get().getVehicleTypeId());
+                        vehicleType = VehicleType.getById(vehicle.get().getVehicleTypeId()).getName();
                         vehicleNumber = vehicle.get().getRegistrationNumber();
+                        timeInMinutes = route.getDistance() / VehicleType.getById(vehicle.get().getVehicleTypeId()).getSpeed();
                     }
                 }
-
-                // Calculate time in minutes based on distance (assuming average speed of 5 km/h for walking)
-                Integer timeInMinutes = (int) (route.getDistance() / 83.33); // Convert meters to minutes at 5 km/h
 
                 RouteDetails routeDetails = new RouteDetails(
                     startPoint.get(),
@@ -74,10 +70,6 @@ public class RouteDetailsService {
             }
         }
         return routeDetailsList;
-    }
-
-    private String getVehicleTypeName(Long vehicleTypeId) {
-        return VehicleType.getById(vehicleTypeId);
     }
 
     public void saveResult(List<Route> routeList) {

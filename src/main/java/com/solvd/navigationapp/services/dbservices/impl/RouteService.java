@@ -120,7 +120,6 @@ public class RouteService extends AbstractService<Route> implements IRouteServic
     @Override
     public List<Route> getByStartAndEndPoints(Long startPointId, Long endPointId) {
         try {
-            logger.info("Getting routes by start point id {} and end point id {}", startPointId, endPointId);
             return routeDAO.getByStartAndEndPoints(startPointId, endPointId);
         } catch (Exception e) {
             logger.error("Error getting routes by start point id {} and end point id {}: {}", 
@@ -132,8 +131,6 @@ public class RouteService extends AbstractService<Route> implements IRouteServic
     @Override
     public Optional<Route> getByStartEndAndVehicle(Long startPointId, Long endPointId, Long vehicleId) {
         try {
-            logger.info("Getting route by start point id {}, end point id {} and vehicle id {}", 
-                startPointId, endPointId, vehicleId);
             return Optional.ofNullable(routeDAO.getByStartEndAndVehicle(startPointId, endPointId, vehicleId));
         } catch (Exception e) {
             logger.error("Error getting route by start point id {}, end point id {} and vehicle id {}: {}", 

@@ -20,7 +20,6 @@ public class JAXBParser<T> implements IDataParser<T> {
             Marshaller marshaller = context.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             marshaller.marshal(data, new File(filePath));
-            logger.info("XML saved to {}", filePath);
         } catch (JAXBException e) {
             logger.error(e);
         }

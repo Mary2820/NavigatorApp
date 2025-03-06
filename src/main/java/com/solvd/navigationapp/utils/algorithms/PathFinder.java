@@ -8,14 +8,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
+import java.util.stream.Collectors;
 
 import com.solvd.navigationapp.models.Graph;
 import com.solvd.navigationapp.models.Location;
 import com.solvd.navigationapp.models.Route;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class PathFinder implements IPathFinder {
-private final Graph graph;
-private List<Location> path;
+    private static final Logger logger = LogManager.getLogger(PathFinder.class.getName());
+    private final Graph graph;
+    private List<Location> path;
 
     public PathFinder(Graph graph) {
         this.graph = graph;
@@ -80,6 +84,16 @@ private List<Location> path;
             path.add(currentLoc);
         }
         Collections.reverse(path);
+
+        logPath(path);
         return path;
+    }
+
+    private void logPath(List<Location> path) {
+        String pathString = path.stream()
+                .map(Location::getName)
+                .collect(Collectors.joining(" -> "));
+
+        logger.info("Short path: {}", pathString);
     }
 }
