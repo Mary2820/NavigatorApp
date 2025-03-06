@@ -43,6 +43,10 @@ public class LicenseDAO extends AbstractMyBatisDAO<ILicenseDAO> implements ILice
     }
 
     @Override
+    public List<License> getAll() {
+        return executeInSession(ILicenseDAO::getAll);
+    }
+    @Override
     protected Class<ILicenseDAO> getMapperClass() {
         return ILicenseDAO.class;
     }

@@ -34,6 +34,11 @@
         WHERE EXPIRATION_DATE >= CURDATE()
     </select>
 
+    <select id="getAll" resultMap="LicenseResultMap">
+        SELECT *
+        FROM Licenses
+    </select>
+
     <insert id="insert" parameterType="com.solvd.navigationapp.models.License" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO Licenses (NUMBER, EXPIRATION_DATE, USER_ID)
         VALUES (#{number}, #{expirationDate}, #{userId})
