@@ -3,17 +3,19 @@ package com.solvd.navigationapp.enums;
 import java.util.Objects;
 
 public enum VehicleType {
-    BUS(1L, "BUS"),
-    TRAIN(2L, "TRAIN"),
-    TRAM(3L, "TRAM"),
-    TAXI(4L, "TAXI");
+    BUS(1L, "BUS", 60),
+    TRAIN(2L, "TRAIN", 120),
+    TRAM(3L, "TRAM", 40),
+    TAXI(4L, "TAXI", 90);
 
     private final Long id;
     private final String name;
+    private final int speed;
 
-    VehicleType(Long id, String name) {
+    VehicleType(Long id, String name, int speed) {
         this.id = id;
         this.name = name;
+        this.speed = speed;
     }
 
     public Long getId() {
@@ -22,6 +24,9 @@ public enum VehicleType {
 
     public String getName() {
         return name;
+    }
+    public int getSpeed() {
+        return speed;
     }
 
     public static String getById(Long id) {
