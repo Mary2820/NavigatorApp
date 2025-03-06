@@ -4,10 +4,11 @@ import com.solvd.navigationapp.daos.IClientDAO;
 import com.solvd.navigationapp.models.Client;
 
 import java.util.List;
+import java.util.Optional;
 
 public class ClientDAO extends AbstractMyBatisDAO<IClientDAO> implements IClientDAO {
     @Override
-    public Client getByEmail(String email) {
+    public Optional<Client> getByEmail(String email) {
         return executeInSession(mapper -> mapper.getByEmail(email));
     }
 
@@ -47,8 +48,9 @@ public class ClientDAO extends AbstractMyBatisDAO<IClientDAO> implements IClient
     }
 
     @Override
-    public Client getById(Long id) {
+    public Optional<Client> getById(Long id) {
         return executeInSession(mapper -> mapper.getById(id));
+
     }
 
     @Override
@@ -65,4 +67,4 @@ public class ClientDAO extends AbstractMyBatisDAO<IClientDAO> implements IClient
     protected Class<IClientDAO> getMapperClass() {
         return IClientDAO.class;
     }
-} 
+}
