@@ -15,7 +15,7 @@ import java.util.List;
 
 public class GraphService implements IGraphService {
     private static final Logger logger = LogManager.getLogger(GraphService.class.getName());
-    private Graph graph;
+    private final Graph graph;
     private final ILocationService locationService;
     private final IRouteService routeService;
     private boolean isGraphLoaded = false;

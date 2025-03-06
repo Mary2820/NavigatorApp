@@ -6,6 +6,7 @@ import com.solvd.navigationapp.models.Location;
 import com.solvd.navigationapp.models.RouteDetails;
 import com.solvd.navigationapp.models.Route;
 import com.solvd.navigationapp.models.Vehicle;
+import com.solvd.navigationapp.services.IRouteDetailsService;
 import com.solvd.navigationapp.services.dbservices.ILocationService;
 import com.solvd.navigationapp.services.dbservices.IVehicleService;
 import com.solvd.navigationapp.services.dbservices.impl.LocationService;
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class RouteDetailsService {
+public class RouteDetailsService implements IRouteDetailsService {
     private static final Logger logger = LogManager.getLogger(RouteDetailsService.class.getName());
     private static final String JSON_FILE_PATH = "src/main/resources/data/data.json";
     private static final String XML_FILE_PATH = "src/main/resources/data/data.xml";
@@ -33,7 +34,27 @@ public class RouteDetailsService {
         this.vehicleService = new VehicleService();
     }
 
-    public List<RouteDetails> convertRoutesToResults(List<Route> routeList) {
+    @Override
+    public void saveResult(List<Route> routeList) {
+        try {
+            List<RouteDetails> routeDetailsList = convertRoutesToResults(routeList);
+
+            TripWrapper tripWrapper = new TripWrapper();
+            tripWrapper.setRouteDetails(routeDetailsList);
+
+            IDataParser<TripWrapper> jacksonParser = new JacksonParser<>();
+            IDataParser<TripWrapper> jaxbParser = new JAXBParser<>();
+
+            jacksonParser.writeToFile(JSON_FILE_PATH, tripWrapper);
+            jaxbParser.writeToFile(XML_FILE_PATH, tripWrapper);
+
+            logger.info("Results successfully saved to JSON and XML files");
+        } catch (Exception e) {
+            logger.error("Error saving results: {}", e.getMessage(), e);
+        }
+    }
+
+    private List<RouteDetails> convertRoutesToResults(List<Route> routeList) {
         List<RouteDetails> routeDetailsList = new ArrayList<>();
         
         for (Route route : routeList) {
@@ -70,24 +91,5 @@ public class RouteDetailsService {
             }
         }
         return routeDetailsList;
-    }
-
-    public void saveResult(List<Route> routeList) {
-        try {
-            List<RouteDetails> routeDetailsList = convertRoutesToResults(routeList);
-            
-            TripWrapper tripWrapper = new TripWrapper();
-            tripWrapper.setTripStages(routeDetailsList);
-            
-            IDataParser<TripWrapper> jacksonParser = new JacksonParser<>();
-            IDataParser<TripWrapper> jaxbParser = new JAXBParser<>();
-
-            jacksonParser.writeToFile(JSON_FILE_PATH, tripWrapper);
-            jaxbParser.writeToFile(XML_FILE_PATH, tripWrapper);
-            
-            logger.info("Results successfully saved to JSON and XML files");
-        } catch (Exception e) {
-            logger.error("Error saving results: {}", e.getMessage(), e);
-        }
     }
 }

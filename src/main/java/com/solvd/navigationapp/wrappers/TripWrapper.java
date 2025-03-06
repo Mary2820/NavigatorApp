@@ -11,15 +11,15 @@ import java.util.List;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class TripWrapper {
 
-    @XmlElementWrapper(name = "trip stages")
-    @XmlElement(name = "trip stage")
+    @XmlElementWrapper(name = "trip_stages")
+    @XmlElement(name = "trip_stage")
     private List<RouteDetails> routeDetails;
 
-    public List<RouteDetails> getTripStages() {
+    public List<RouteDetails> getRouteDetails() {
         return routeDetails;
     }
 
-    public void setTripStages(List<RouteDetails> routeDetails) {
+    public void setRouteDetails(List<RouteDetails> routeDetails) {
         this.routeDetails = routeDetails;
     }
 }

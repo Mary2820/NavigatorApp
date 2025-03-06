@@ -23,7 +23,6 @@ public class LocationService extends AbstractService<Location> implements ILocat
     @Override
     public Optional<Location> getById(Long id) {
         try {
-            logger.info("Getting location by id: {}", id);
             return Optional.ofNullable(locationDAO.getById(id));
         } catch (Exception e) {
             logger.error("Error getting location by id {}: {}", id, e.getMessage());
@@ -138,7 +137,6 @@ public class LocationService extends AbstractService<Location> implements ILocat
     @Override
     public List<Location> getByName(String name) {
         try {
-            logger.info("Getting locations by name: {}", name);
             return locationDAO.getByName(name);
         } catch (Exception e) {
             logger.error("Error getting locations by name {}: {}", name, e.getMessage());

@@ -41,7 +41,7 @@ public class TransportService implements ITransportService {
                 transportPath.add(bestRoute);
 
                 String bestTransport = getTransportName(bestRoute);
-                logger.info("The best transport between {} and {} is {}",
+                logger.info("The best way to get from : {} to : {} is by {}",
                         currentLocation.getName(),
                         nextLocation.getName(), 
                         bestTransport);
@@ -94,4 +94,3 @@ public class TransportService implements ITransportService {
         return vehicleOpt.map(Vehicle::getVehicleTypeId).orElse(null);
     }
 }
-

@@ -4,7 +4,6 @@ import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 import com.solvd.navigationapp.enums.UserType;
 
 public class UserTypeAdapter extends XmlAdapter<String, UserType> {
-    
     @Override
     public UserType unmarshal(String value) {
         if (value == null) return null;

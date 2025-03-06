@@ -25,6 +25,12 @@ public class PathFinder implements IPathFinder {
         this.graph = graph;
     }
 
+    @Override
+    public List<Location> getShortPath(Location start, Location end){
+        path = findShortestPath( start, end);
+        return path;
+    }
+
     private List<Location> findShortestPath(Location start, Location end) {
         if (start.equals(end)) {
             return Collections.singletonList(start);
@@ -55,14 +61,7 @@ public class PathFinder implements IPathFinder {
                 }
             }
         }
-
         return reconstructPath(start, end, previous);
-    }
-
-    @Override
-    public List<Location> getShortPath(Location start, Location end){
-        path = findShortestPath( start, end);
-        return path;
     }
 
     private Location getNeighborLocation(Route route, Location current) {

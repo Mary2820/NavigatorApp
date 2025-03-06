@@ -1,9 +1,117 @@
 {
-  "@class" : "com.solvd.navigationapp.models.Client",
-  "id" : 1,
-  "firstName" : "Jan",
-  "lastName" : "Mazowiecki",
-  "userType" : "CLIENT",
-  "email" : "jan.maz@example.com",
-  "phoneNumber" : "password123"
+  "routeDetails" : [ {
+    "startPoint" : {
+      "id" : 83,
+      "name" : "Central Library",
+      "cityId" : 1,
+      "address" : "123 Main St",
+      "type" : "BUILDING"
+    },
+    "endPoint" : {
+      "id" : 90,
+      "name" : "Downtown Bus Stop",
+      "cityId" : 1,
+      "address" : "Broadway & 5th St",
+      "type" : "BUS_STOP"
+    },
+    "distance" : 350,
+    "timeInMinutes" : 70,
+    "vehicleType" : "WALK",
+    "vehicleNumber" : ""
+  }, {
+    "startPoint" : {
+      "id" : 89,
+      "name" : "Main St Bus Stop",
+      "cityId" : 1,
+      "address" : "Main St & 1st Ave",
+      "type" : "BUS_STOP"
+    },
+    "endPoint" : {
+      "id" : 90,
+      "name" : "Downtown Bus Stop",
+      "cityId" : 1,
+      "address" : "Broadway & 5th St",
+      "type" : "BUS_STOP"
+    },
+    "distance" : 300,
+    "timeInMinutes" : 7,
+    "vehicleType" : "BUS",
+    "vehicleNumber" : "BUS125"
+  }, {
+    "startPoint" : {
+      "id" : 84,
+      "name" : "City Hall",
+      "cityId" : 1,
+      "address" : "456 Government Ave",
+      "type" : "BUILDING"
+    },
+    "endPoint" : {
+      "id" : 89,
+      "name" : "Main St Bus Stop",
+      "cityId" : 1,
+      "address" : "Main St & 1st Ave",
+      "type" : "BUS_STOP"
+    },
+    "distance" : 50,
+    "timeInMinutes" : 10,
+    "vehicleType" : "WALK",
+    "vehicleNumber" : ""
+  }, {
+    "startPoint" : {
+      "id" : 84,
+      "name" : "City Hall",
+      "cityId" : 1,
+      "address" : "456 Government Ave",
+      "type" : "BUILDING"
+    },
+    "endPoint" : {
+      "id" : 98,
+      "name" : "Market Square Tram Stop",
+      "cityId" : 1,
+      "address" : "Market Sq",
+      "type" : "TRAM_STOP"
+    },
+    "distance" : 50,
+    "timeInMinutes" : 10,
+    "vehicleType" : "WALK",
+    "vehicleNumber" : ""
+  }, {
+    "startPoint" : {
+      "id" : 98,
+      "name" : "Market Square Tram Stop",
+      "cityId" : 1,
+      "address" : "Market Sq",
+      "type" : "TRAM_STOP"
+    },
+    "endPoint" : {
+      "id" : 97,
+      "name" : "Central Station Tram Stop",
+      "cityId" : 1,
+      "address" : "Station Sq",
+      "type" : "TRAM_STOP"
+    },
+    "distance" : 200,
+    "timeInMinutes" : 6,
+    "vehicleType" : "TRAM",
+    "vehicleNumber" : "TRAM123"
+  }, {
+    "startPoint" : {
+      "id" : 97,
+      "name" : "Central Station Tram Stop",
+      "cityId" : 1,
+      "address" : "Station Sq",
+      "type" : "TRAM_STOP"
+    },
+    "endPoint" : {
+      "id" : 99,
+      "name" : "West Side Tram Stop",
+      "cityId" : 1,
+      "address" : "West Ave & 10th St",
+      "type" : "TRAM_STOP"
+    },
+    "distance" : 1100,
+    "timeInMinutes" : 36,
+    "vehicleType" : "TRAM",
+    "vehicleNumber" : "TRAM123"
+  } ]
 }
