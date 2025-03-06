@@ -24,11 +24,11 @@ public class PathFinderService implements IPathFinderService {
         this.pathFinder = new PathFinder(graph);
     }
 
-    public List<Route> getBestPath(Location startLocation, Location endLocation) {
-        List<Location> path = pathFinder.getShortPath(startLocation, endLocation);
+    public List<Route> getBestPath(Location start, Location end) {
+        List<Location> path = pathFinder.getShortPath(start, end);
 
         if (path.isEmpty()) {
-            logger.warn("No path found between {} and {}", startLocation, endLocation);
+            logger.warn("No path found between {} and {}", start, end);
             throw new IllegalStateException("No path found between the given locations.");
         }
 

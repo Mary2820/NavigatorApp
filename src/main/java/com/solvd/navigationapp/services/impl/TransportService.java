@@ -35,7 +35,7 @@ public class TransportService implements ITransportService {
         for (int i = 0; i < path.size() - 1; i++) {
             Location currentLocation = path.get(i);
             Location nextLocation = path.get(i + 1);
-            Route bestRoute = findBestRouteForType(currentLocation.getId(), nextLocation.getId());
+            Route bestRoute = getBestRoute(currentLocation.getId(), nextLocation.getId());
 
             if (bestRoute != null) {
                 transportPath.add(bestRoute);
@@ -56,15 +56,24 @@ public class TransportService implements ITransportService {
     }
 
     private String getTransportName(Route route) {
-        Long vehicleTypeId = getVehicleTypeId(route);
+        Long vehicleTypeId = getVehicleTypeId(route.getVehicleId());
         return (vehicleTypeId == null) ? "WALK" : VehicleType.getById(vehicleTypeId).getName();
     }
 
-    private Route findBestRouteForType(Long startPointId, Long endPointId) {
+    private Route getBestRoute(Long startPointId, Long endPointId) {
         return getRoutesBetweenLocations(startPointId, endPointId)
                 .stream()
-                .min(Comparator.comparingDouble(route -> route.getDistance() / getSpeedForRoute(route)))
+                .min(Comparator.comparingInt(route -> getRouteTimeByTransport(route.getDistance(), route.getVehicleId())))
                 .orElse(null);
+    }
+
+    private int getRouteTimeByTransport(Integer distance, Long vehicleId) {
+        Long vehicleTypeId = getVehicleTypeId(vehicleId);
+        Integer transportSpeed = (vehicleTypeId == null)
+                ? TransportSpeedConstants.WALK_SPEED
+                : VehicleType.getById(vehicleTypeId).getSpeed();
+
+        return distance / transportSpeed;
     }
 
     private List<Route> getRoutesBetweenLocations(Long startPointId, Long endPointId) {
@@ -81,16 +90,8 @@ public class TransportService implements ITransportService {
         return allRoutes;
     }
 
-    private Integer getSpeedForRoute(Route route) {
-        Optional<Vehicle> vehicle = vehicleService.getById(route.getVehicleId());
-        Long vehicleTypeId = vehicle.get().getVehicleTypeId();
-        return (vehicleTypeId == null)
-                ? TransportSpeedConstants.WALK_SPEED
-                : VehicleType.getById(vehicleTypeId).getSpeed();
-    }
-
-    private Long getVehicleTypeId(Route route) {
-        Optional<Vehicle> vehicleOpt = vehicleService.getById(route.getVehicleId());
+    private Long getVehicleTypeId(Long vehicleId) {
+        Optional<Vehicle> vehicleOpt = vehicleService.getById(vehicleId);
         return vehicleOpt.map(Vehicle::getVehicleTypeId).orElse(null);
     }
 }

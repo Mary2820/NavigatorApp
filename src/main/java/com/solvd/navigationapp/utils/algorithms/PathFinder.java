@@ -19,29 +19,23 @@ import org.apache.logging.log4j.Logger;
 public class PathFinder implements IPathFinder {
     private static final Logger logger = LogManager.getLogger(PathFinder.class.getName());
     private final Graph graph;
-    private List<Location> path;
 
     public PathFinder(Graph graph) {
         this.graph = graph;
     }
 
     @Override
-    public List<Location> getShortPath(Location start, Location end){
-        path = findShortestPath( start, end);
-        return path;
-    }
-
-    private List<Location> findShortestPath(Location start, Location end) {
+    public List<Location> getShortPath(Location start, Location end) {
         if (start.equals(end)) {
             return Collections.singletonList(start);
         }
 
         Map<Location, Integer> distances = new HashMap<>();
-        Map<Location, Location> previous = new HashMap<>();
+        Map<Location, Location> predecessors = new HashMap<>();
         PriorityQueue<Map.Entry<Location, Integer>> queue = new PriorityQueue<>(
                 Comparator.comparingInt(Map.Entry::getValue));
 
-        graph.getLocations().forEach(loc -> distances.put(loc, Integer.MAX_VALUE));
+        graph.getLocations().forEach(location -> distances.put(location, Integer.MAX_VALUE));
         distances.put(start, 0);
         queue.add(new SimpleEntry<>(start, 0));
 
@@ -56,12 +50,12 @@ public class PathFinder implements IPathFinder {
                 int newDist = distances.get(current) + route.getDistance();
                 if (newDist < distances.get(neighbor)) {
                     distances.put(neighbor, newDist);
-                    previous.put(neighbor, current);
+                    predecessors.put(neighbor, current);
                     queue.add(new SimpleEntry<>(neighbor, newDist));
                 }
             }
         }
-        return reconstructPath(start, end, previous);
+        return reconstructPath(start, end, predecessors);
     }
 
     private Location getNeighborLocation(Route route, Location current) {

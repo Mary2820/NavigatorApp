@@ -3,7 +3,6 @@ package com.solvd.navigationapp.utils;
 import java.io.IOException;
 import java.io.Reader;
 
-import com.solvd.navigationapp.services.impl.TransportService;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
@@ -15,8 +14,7 @@ public class ConnectionFactory {
     private static SqlSessionFactory sqlSessionFactory;
     private static final String CONFIG_FILE = "mybatis-config.xml";
 
-    public ConnectionFactory() {
-    }
+    public ConnectionFactory() {}
 
     public static SqlSessionFactory getSQLSessionFactory() {
         if (sqlSessionFactory == null) {
