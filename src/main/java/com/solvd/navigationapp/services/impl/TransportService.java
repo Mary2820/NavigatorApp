@@ -8,10 +8,11 @@ import com.solvd.navigationapp.enums.VehicleType;
 import com.solvd.navigationapp.models.Location;
 import com.solvd.navigationapp.models.Route;
 import com.solvd.navigationapp.services.ITransportService;
+import com.solvd.navigationapp.services.dbservices.IRouteService;
 import com.solvd.navigationapp.services.dbservices.impl.RouteService;
 
 public class TransportService implements ITransportService{
-    private RouteService routeService;
+    private final IRouteService routeService;
 
     public TransportService() {
         this.routeService = new RouteService();
