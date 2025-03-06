@@ -5,7 +5,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
-import com.solvd.navigationapp.constants.TransportSpeedConstants;
+import com.solvd.navigationapp.utils.constants.TransportSpeedConstants;
 import com.solvd.navigationapp.enums.VehicleType;
 import com.solvd.navigationapp.models.Location;
 import com.solvd.navigationapp.models.Route;

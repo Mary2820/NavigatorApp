@@ -1,6 +1,6 @@
 package com.solvd.navigationapp.enums;
 
-import com.solvd.navigationapp.constants.TransportSpeedConstants;
+import com.solvd.navigationapp.utils.constants.TransportSpeedConstants;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -29,6 +29,7 @@ public enum VehicleType {
     public String getName() {
         return name;
     }
+
     public Integer getSpeed() {
         return speed;
     }

@@ -1,4 +1,4 @@
-package com.solvd.navigationapp.constants;
+package com.solvd.navigationapp.utils.constants;
 
 public class TransportSpeedConstants {
     public static final Integer WALK_SPEED = 5;

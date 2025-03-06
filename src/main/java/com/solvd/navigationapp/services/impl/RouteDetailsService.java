@@ -1,6 +1,6 @@
 package com.solvd.navigationapp.services.impl;
 
-import com.solvd.navigationapp.constants.TransportSpeedConstants;
+import com.solvd.navigationapp.utils.constants.TransportSpeedConstants;
 import com.solvd.navigationapp.enums.VehicleType;
 import com.solvd.navigationapp.models.Location;
 import com.solvd.navigationapp.models.RouteDetails;
@@ -35,9 +35,9 @@ public class RouteDetailsService implements IRouteDetailsService {
     }
 
     @Override
-    public void saveResult(List<Route> routeList) {
+    public void saveRoutes(List<Route> routes) {
         try {
-            List<RouteDetails> routeDetailsList = convertRoutesToResults(routeList);
+            List<RouteDetails> routeDetailsList = getRouteDetails(routes);
 
             TripWrapper tripWrapper = new TripWrapper();
             tripWrapper.setRouteDetails(routeDetailsList);
@@ -54,34 +54,45 @@ public class RouteDetailsService implements IRouteDetailsService {
         }
     }
 
-    private List<RouteDetails> convertRoutesToResults(List<Route> routeList) {
+    private List<RouteDetails> getRouteDetails(List<Route> routes) {
         List<RouteDetails> routeDetailsList = new ArrayList<>();
         
-        for (Route route : routeList) {
+        for (Route route : routes) {
             try {
                 Optional<Location> startPoint = locationService.getById(route.getStartPointId());
                 Optional<Location> endPoint = locationService.getById(route.getEndPointId());
 
-                String vehicleType = "WALK";
-                String vehicleNumber = "";
-                Integer timeInMinutes = route.getDistance() / TransportSpeedConstants.WALK_SPEED;
-                
-                if (route.getVehicleId() != null) {
-                    Optional<Vehicle> vehicle = vehicleService.getById(route.getVehicleId());
+                if(startPoint.isEmpty() || endPoint.isEmpty()){
+                    logger.error("Start or end point is empty");
+                    throw new IllegalArgumentException("Start or end point cannot be empty");
+                }
 
-                    if (vehicle.isPresent()) {
-                        vehicleType = VehicleType.getById(vehicle.get().getVehicleTypeId()).getName();
-                        vehicleNumber = vehicle.get().getRegistrationNumber();
-                        timeInMinutes = route.getDistance() / VehicleType.getById(vehicle.get().getVehicleTypeId()).getSpeed();
+                String vehicleTypeName = "WALK";
+                String vehicleNumber = "";
+                Integer distance = route.getDistance();
+                Integer timeInMinutes = distance / TransportSpeedConstants.WALK_SPEED;
+
+                Long vehicleId = route.getVehicleId();
+                if (vehicleId != null) {
+                    Optional<Vehicle> vehicleOptional = vehicleService.getById(vehicleId);
+
+                    if (vehicleOptional.isPresent()) {
+                        Vehicle vehicle = vehicleOptional.get();
+                        Long vehicleTypeId = vehicle.getVehicleTypeId();
+                        VehicleType vehicleType = VehicleType.getById(vehicleTypeId);
+
+                        vehicleTypeName = vehicleType.getName();
+                        vehicleNumber = vehicle.getRegistrationNumber();
+                        timeInMinutes = distance / vehicleType.getSpeed();
                     }
                 }
 
                 RouteDetails routeDetails = new RouteDetails(
                     startPoint.get(),
                     endPoint.get(),
-                    route.getDistance(),
+                    distance,
                     timeInMinutes,
-                    vehicleType,
+                    vehicleTypeName,
                     vehicleNumber
                 );
                 

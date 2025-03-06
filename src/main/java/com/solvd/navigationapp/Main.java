@@ -21,6 +21,6 @@ public class Main {
         IPathFinderService pathFinderService = new PathFinderService();
         List<Route> routeList = pathFinderService.getBestPath(start, end);
         RouteDetailsService routeDetailsService = new RouteDetailsService();
-        routeDetailsService.saveResult(routeList);
+        routeDetailsService.saveRoutes(routeList);
     }
 }
