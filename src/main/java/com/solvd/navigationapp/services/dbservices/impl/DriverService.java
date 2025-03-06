@@ -37,7 +37,7 @@ public class DriverService extends AbstractService<Driver> implements IDriverSer
     @Override
     public boolean update(Driver driver) {
         Optional<Driver> existingDriver = driverDAO.getById(driver.getId());
-        if (isValidData(driver) && existingDriver != null) {
+        if (isValidData(driver) && existingDriver.isPresent()) {
             driverDAO.update(driver);
             return true;
         }
@@ -48,7 +48,7 @@ public class DriverService extends AbstractService<Driver> implements IDriverSer
 
     @Override
     public boolean deleteById(Long id) {
-        if (driverDAO.getById(id) != null) {
+        if (driverDAO.getById(id).isPresent()) {
             driverDAO.deleteById(id);
             return true;
         }

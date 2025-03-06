@@ -1,6 +1,5 @@
 package com.solvd.navigationapp.services.dbservices.impl;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,7 +21,7 @@ public class VehicleService extends AbstractService<Vehicle> implements IVehicle
 
     @Override
     public Vehicle getById(Long id) {
-        return vehicleDAO.getById(id).get();
+        return vehicleDAO.getById(id).orElse(null);
     }
 
     @Override
@@ -42,7 +41,7 @@ public class VehicleService extends AbstractService<Vehicle> implements IVehicle
     @Override
     public boolean update(Vehicle vehicle) {
         Optional<Vehicle> existingVehicle = vehicleDAO.getById(vehicle.getId());
-        if (isValidData(vehicle) && existingVehicle != null) {
+        if (isValidData(vehicle) && existingVehicle.isPresent()) {
             vehicleDAO.update(vehicle);
             return true;
         }
@@ -52,7 +51,7 @@ public class VehicleService extends AbstractService<Vehicle> implements IVehicle
 
     @Override
     public boolean deleteById(Long id) {
-        if (vehicleDAO.getById(id) != null) {
+        if (vehicleDAO.getById(id).isPresent()) {
             vehicleDAO.deleteById(id);
             return true;
         }
@@ -95,7 +94,7 @@ public class VehicleService extends AbstractService<Vehicle> implements IVehicle
 
     @Override
     public boolean deleteByRegistrationNumber(String registrationNumber) {
-        if (vehicleDAO.getByRegistrationNumber(registrationNumber) != null) {
+        if (vehicleDAO.getByRegistrationNumber(registrationNumber).isPresent()) {
             vehicleDAO.deleteByRegistrationNumber(registrationNumber);
             return true; 
         }

@@ -3,7 +3,6 @@ package com.solvd.navigationapp.services.impl;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 
 import com.solvd.navigationapp.utils.constants.TransportSpeedConstants;
 import com.solvd.navigationapp.enums.VehicleType;
@@ -43,11 +42,11 @@ public class TransportService implements ITransportService {
                 String bestTransport = getTransportName(bestRoute);
                 logger.info("The best way to get from : {} to : {} is by {}",
                         currentLocation.getName(),
-                        nextLocation.getName(), 
+                        nextLocation.getName(),
                         bestTransport);
             } else {
                 logger.warn("No route found between {} and {}",
-                        currentLocation.getName(), 
+                        currentLocation.getName(),
                         nextLocation.getName());
             }
         }
@@ -91,7 +90,7 @@ public class TransportService implements ITransportService {
     }
 
     private Long getVehicleTypeId(Long vehicleId) {
-        Optional<Vehicle> vehicleOpt = vehicleService.getById(vehicleId);
-        return vehicleOpt.map(Vehicle::getVehicleTypeId).orElse(null);
+        Vehicle vehicle = vehicleService.getById(vehicleId);
+        return (vehicle != null) ? vehicle.getVehicleTypeId() : null;
     }
 }
