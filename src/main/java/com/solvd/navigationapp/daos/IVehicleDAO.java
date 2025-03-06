@@ -3,9 +3,10 @@ package com.solvd.navigationapp.daos;
 import com.solvd.navigationapp.models.Vehicle;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IVehicleDAO extends IDAO<Vehicle> {
-    Vehicle getByRegistrationNumber(String registrationNumber);
+    Optional<Vehicle> getByRegistrationNumber(String registrationNumber);
 
     List<Vehicle> getByVehicleTypeId(Long vehicleTypeId);
 

@@ -1,9 +1,45 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<client>
-    <id>1</id>
-    <firstName>Jan</firstName>
-    <lastName>Mazowiecki</lastName>
-    <userType>CLIENT</userType>
-    <email>jan.maz@example.com</email>
-    <phoneNumber>password123</phoneNumber>
-</client>
+<trip>
+    <trip stages>
+        <trip stage>
+            <distance>1100</distance>
+            <endPoint>
+                <address>West Ave &amp; 10th St</address>
+                <cityId>1</cityId>
+                <id>99</id>
+                <name>West Side Tram Stop</name>
+                <type>TRAM_STOP</type>
+            </endPoint>
+            <startPoint>
+                <address>Station Sq</address>
+                <cityId>1</cityId>
+                <id>97</id>
+                <name>Central Station Tram Stop</name>
+                <type>TRAM_STOP</type>
+            </startPoint>
+            <timeInMinutes>13</timeInMinutes>
+            <vehicleNumber>TRAM123</vehicleNumber>
+            <vehicleType>TRAM</vehicleType>
+        </trip stage>
+        <trip stage>
+            <distance>150</distance>
+            <endPoint>
+                <address>West Ave &amp; 10th St</address>
+                <cityId>1</cityId>
+                <id>99</id>
+                <name>West Side Tram Stop</name>
+                <type>TRAM_STOP</type>
+            </endPoint>
+            <startPoint>
+                <address>789 Commerce Blvd</address>
+                <cityId>1</cityId>
+                <id>85</id>
+                <name>Shopping Mall</name>
+                <type>BUILDING</type>
+            </startPoint>
+            <timeInMinutes>1</timeInMinutes>
+            <vehicleNumber></vehicleNumber>
+            <vehicleType>WALK</vehicleType>
+        </trip stage>
+    </trip stages>
+</trip>
