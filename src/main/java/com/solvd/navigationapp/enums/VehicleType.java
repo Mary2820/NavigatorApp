@@ -10,7 +10,7 @@ public enum VehicleType {
 
     private final Long id;
     private final String name;
-    private final int speed;
+    private final Integer speed;
 
     VehicleType(Long id, String name, int speed) {
         this.id = id;
