@@ -8,7 +8,6 @@
         <result column="FIRST_NAME" property="firstName"/>
         <result column="LAST_NAME" property="lastName"/>
         <result column="PHONE" property="phoneNumber"/>
-        <result column="EMAIL" property="email"/>
         <result column="ROLE_TYPE" property="userType"/>
     </resultMap>
 

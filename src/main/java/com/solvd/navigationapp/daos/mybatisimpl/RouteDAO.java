@@ -4,6 +4,7 @@ import com.solvd.navigationapp.daos.IRouteDAO;
 import com.solvd.navigationapp.models.Route;
 
 import java.util.List;
+import java.util.Optional;
 
 public class RouteDAO extends AbstractMyBatisDAO<IRouteDAO> implements IRouteDAO {
     @Override
@@ -22,12 +23,12 @@ public class RouteDAO extends AbstractMyBatisDAO<IRouteDAO> implements IRouteDAO
     }
 
     @Override
-    public List<Route> getByStartAndEndPoints(Long startPointId, Long endPointId) {
+    public Optional<Route> getByStartAndEndPoints(Long startPointId, Long endPointId) {
         return executeInSession(mapper -> mapper.getByStartAndEndPoints(startPointId, endPointId));
     }
 
     @Override
-    public Route getByStartEndAndVehicle(Long startPointId, Long endPointId, Long vehicleId) {
+    public Optional<Route> getByStartEndAndVehicle(Long startPointId, Long endPointId, Long vehicleId) {
         return executeInSession(mapper -> mapper.getByStartEndAndVehicle(startPointId, endPointId, vehicleId));
     }
 
@@ -37,7 +38,7 @@ public class RouteDAO extends AbstractMyBatisDAO<IRouteDAO> implements IRouteDAO
     }
 
     @Override
-    public Integer countTotal() {
+    public Optional<Integer> countTotal() {
         return executeInSession(IRouteDAO::countTotal);
     }
 
@@ -47,7 +48,7 @@ public class RouteDAO extends AbstractMyBatisDAO<IRouteDAO> implements IRouteDAO
     }
 
     @Override
-    public Route getById(Long id) {
+    public Optional<Route> getById(Long id) {
         return executeInSession(mapper -> mapper.getById(id));
     }
 

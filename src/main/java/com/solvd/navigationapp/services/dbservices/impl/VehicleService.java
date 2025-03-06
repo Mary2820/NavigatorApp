@@ -21,13 +21,8 @@ public class VehicleService extends AbstractService<Vehicle> implements IVehicle
     }
 
     @Override
-    public Optional<Vehicle> getById(Long id) {
-        try {
-            return Optional.ofNullable(vehicleDAO.getById(id));
-        } catch (Exception e) {
-            logger.error("Error finding vehicle by ID: {}", e.getMessage());
-            return Optional.empty();
-        }
+    public Vehicle getById(Long id) {
+        return vehicleDAO.getById(id).get();
     }
 
     @Override
@@ -40,104 +35,72 @@ public class VehicleService extends AbstractService<Vehicle> implements IVehicle
             logger.warn("Registration number already taken: {}", registrationNumber);
             return false;
         }
-        try {
-            vehicleDAO.insert(vehicle);
-            logger.info("Vehicle successfully registered: {}", vehicle.getId());
-            return true;
-        } catch (Exception e) {
-            logger.error("Error saving vehicle: {}", e.getMessage());
-            return false;
-        }
+        vehicleDAO.insert(vehicle);
+        return true;
     }
 
     @Override
     public boolean update(Vehicle vehicle) {
-        Optional<Vehicle> existingVehicle = getById(vehicle.getId());
-        if (existingVehicle.isEmpty()) {
-            logger.warn("Vehicle with ID {} not found", vehicle.getId());
-            return false;
-        }
-        try {
+        Optional<Vehicle> existingVehicle = vehicleDAO.getById(vehicle.getId());
+        if (isValidData(vehicle) && existingVehicle != null) {
             vehicleDAO.update(vehicle);
-            logger.info("Vehicle successfully updated: {}", vehicle.getId());
             return true;
-        } catch (Exception e) {
-            logger.error("Error updating vehicle: {}", e.getMessage());
-            return false;
         }
+        logger.error("Vehicle with ID {} not found", vehicle.getId());
+        return false;
     }
 
     @Override
     public boolean deleteById(Long id) {
-        if (getById(id).isEmpty()) {
-            logger.warn("Attempt to delete non-existent vehicle with ID: {}", id);
-            return false;
-        }
-        try {
+        if (vehicleDAO.getById(id) != null) {
             vehicleDAO.deleteById(id);
-            logger.info("Vehicle successfully deleted: {}", id);
             return true;
-        } catch (Exception e) {
-            logger.error("Error deleting vehicle: {}", e.getMessage());
-            return false;
         }
+        logger.error("Attempt to delete non-existent vehicle with ID: {}", id);
+        return false;
     }
-    
+
     @Override
-    public Optional<Vehicle> getByRegistrationNumber(String registrationNumber) {
-        try {
-            return Optional.ofNullable(vehicleDAO.getByRegistrationNumber(registrationNumber));
-        } catch (Exception e) {
-            logger.error("Error finding vehicle by registration number {}", e.getMessage());
-            return Optional.empty();
-        }
+    public Vehicle getByRegistrationNumber(String registrationNumber) {
+        return vehicleDAO.getByRegistrationNumber(registrationNumber).get();
     }
 
     @Override
     public List<Vehicle> getByVehicleTypeId(Long vehicleTypeId) {
-        try {
-            return vehicleDAO.getByVehicleTypeId(vehicleTypeId);
-        } catch (Exception e) {
-            logger.error("Error finding vehicle by vehicle id: {}", e.getMessage());
-            return Collections.emptyList();
+        List<Vehicle> vehicles = vehicleDAO.getByVehicleTypeId(vehicleTypeId);
+        if (vehicles.isEmpty()) {
+            logger.error("Vehicle not found by vehicle type id: {}", vehicleTypeId);
         }
+        return vehicles;
+
     }
 
     @Override
     public List<Vehicle> getByDriverId(Long driverId) {
-        try {
-            return vehicleDAO.getByDriverId(driverId);
-        } catch (Exception e) {
-            logger.error("Error finding vehicle by driver id: {}", e.getMessage());
-            return Collections.emptyList();
+        List<Vehicle> vehicles = vehicleDAO.getByDriverId(driverId);
+        if (vehicles.isEmpty()) {
+            logger.error("Vehicle not found by driver id: {}", driverId);
         }
+        return vehicles;
     }
 
     @Override
     public List<Vehicle> getAllVehicles() {
-        try {
-            return vehicleDAO.getAllVehicles();
-        } catch (Exception e) {
-            logger.error("Error getting all vehicles: {}", e.getMessage());
-            return Collections.emptyList();
+        List<Vehicle> vehicles = vehicleDAO.getAllVehicles();
+        if (vehicles.isEmpty()) {
+            logger.error("No vehicles found");
         }
+        return vehicles;
     }
 
     @Override
     public boolean deleteByRegistrationNumber(String registrationNumber) {
-        if (getByRegistrationNumber(registrationNumber).isEmpty()) {
-            logger.warn("Attempt to delete non-existent vehicle with registration number: {}", registrationNumber);
-            return false;
-        }
-
-        try {
+        if (vehicleDAO.getByRegistrationNumber(registrationNumber) != null) {
             vehicleDAO.deleteByRegistrationNumber(registrationNumber);
-            logger.info("Vehicle successfully deleted by registartion number {}", registrationNumber);
-            return true;
-        } catch (Exception e) {
-            logger.error("Error deleting vehicle by registration number: {}", e.getMessage());
-            return false;
+            return true; 
         }
+        logger.warn("Attempt to delete non-existent vehicle with registration number: {}", registrationNumber);
+        return false;
     }
 
     @Override
@@ -157,11 +120,6 @@ public class VehicleService extends AbstractService<Vehicle> implements IVehicle
     }
 
     private boolean isRegistrationNumberTaken(String registrationNumber) {
-        try {
-            return vehicleDAO.isRegistrationNumberTaken(registrationNumber);
-        } catch (Exception e) {
-            logger.error("Error checking if registration number is taken: {}", e.getMessage());
-            return false;
+            return vehicleDAO.isRegistrationNumberTaken(registrationNumber);    
         }
-    }
 }

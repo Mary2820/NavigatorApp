@@ -6,8 +6,6 @@ import com.solvd.navigationapp.models.Route;
 import com.solvd.navigationapp.services.IGraphService;
 import com.solvd.navigationapp.services.dbservices.ILocationService;
 import com.solvd.navigationapp.services.dbservices.IRouteService;
-import com.solvd.navigationapp.services.dbservices.impl.LocationService;
-import com.solvd.navigationapp.services.dbservices.impl.RouteService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -20,10 +18,10 @@ public class GraphService implements IGraphService {
     private final IRouteService routeService;
     private boolean isGraphLoaded = false;
 
-    public GraphService() {
+    public GraphService(ILocationService locationService, IRouteService routeService) {
         this.graph = new Graph();
-        this.locationService = new LocationService();
-        this.routeService = new RouteService();
+        this.locationService = locationService;
+        this.routeService = routeService;
     }
 
     @Override

@@ -9,8 +9,6 @@ import com.solvd.navigationapp.models.Vehicle;
 import com.solvd.navigationapp.services.IRouteDetailsService;
 import com.solvd.navigationapp.services.dbservices.ILocationService;
 import com.solvd.navigationapp.services.dbservices.IVehicleService;
-import com.solvd.navigationapp.services.dbservices.impl.LocationService;
-import com.solvd.navigationapp.services.dbservices.impl.VehicleService;
 import com.solvd.navigationapp.utils.parsers.IDataParser;
 import com.solvd.navigationapp.utils.parsers.JAXBParser;
 import com.solvd.navigationapp.utils.parsers.JacksonParser;
@@ -20,7 +18,6 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class RouteDetailsService implements IRouteDetailsService {
     private static final Logger logger = LogManager.getLogger(RouteDetailsService.class.getName());
@@ -29,9 +26,9 @@ public class RouteDetailsService implements IRouteDetailsService {
     private final ILocationService locationService;
     private final IVehicleService vehicleService;
 
-    public RouteDetailsService() {
-        this.locationService = new LocationService();
-        this.vehicleService = new VehicleService();
+    public RouteDetailsService(ILocationService locationService, IVehicleService vehicleService) {
+        this.locationService = locationService;
+        this.vehicleService = vehicleService;
     }
 
     @Override
@@ -56,16 +53,11 @@ public class RouteDetailsService implements IRouteDetailsService {
 
     private List<RouteDetails> getRouteDetails(List<Route> routes) {
         List<RouteDetails> routeDetailsList = new ArrayList<>();
-        
+
         for (Route route : routes) {
             try {
-                Optional<Location> startPoint = locationService.getById(route.getStartPointId());
-                Optional<Location> endPoint = locationService.getById(route.getEndPointId());
-
-                if(startPoint.isEmpty() || endPoint.isEmpty()){
-                    logger.error("Start or end point is empty");
-                    throw new IllegalArgumentException("Start or end point cannot be empty");
-                }
+                Location startPoint = locationService.getById(route.getStartPointId());
+                Location endPoint = locationService.getById(route.getEndPointId());
 
                 String vehicleTypeName = "WALK";
                 String vehicleNumber = "";
@@ -74,28 +66,25 @@ public class RouteDetailsService implements IRouteDetailsService {
 
                 Long vehicleId = route.getVehicleId();
                 if (vehicleId != null) {
-                    Optional<Vehicle> vehicleOptional = vehicleService.getById(vehicleId);
+                    Vehicle vehicle = vehicleService.getById(vehicleId);
 
-                    if (vehicleOptional.isPresent()) {
-                        Vehicle vehicle = vehicleOptional.get();
-                        Long vehicleTypeId = vehicle.getVehicleTypeId();
-                        VehicleType vehicleType = VehicleType.getById(vehicleTypeId);
+                    Long vehicleTypeId = vehicle.getVehicleTypeId();
+                    VehicleType vehicleType = VehicleType.getById(vehicleTypeId);
 
-                        vehicleTypeName = vehicleType.getName();
-                        vehicleNumber = vehicle.getRegistrationNumber();
-                        timeInMinutes = distance / vehicleType.getSpeed();
-                    }
+                    vehicleTypeName = vehicleType.getName();
+                    vehicleNumber = vehicle.getRegistrationNumber();
+                    timeInMinutes = distance / vehicleType.getSpeed();
                 }
 
                 RouteDetails routeDetails = new RouteDetails(
-                    startPoint.get(),
-                    endPoint.get(),
-                    distance,
-                    timeInMinutes,
-                    vehicleTypeName,
-                    vehicleNumber
+                        startPoint,
+                        endPoint,
+                        distance,
+                        timeInMinutes,
+                        vehicleTypeName,
+                        vehicleNumber
                 );
-                
+
                 routeDetailsList.add(routeDetails);
             } catch (Exception e) {
                 logger.error("Error processing route {}: {}", route.getId(), e.getMessage());
