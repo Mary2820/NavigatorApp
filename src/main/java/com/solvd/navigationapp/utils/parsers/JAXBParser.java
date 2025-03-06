@@ -1,5 +1,4 @@
 package com.solvd.navigationapp.utils.parsers;
-import com.solvd.navigationapp.models.User;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
@@ -21,7 +20,7 @@ public class JAXBParser<T> implements IDataParser<T> {
             Marshaller marshaller = context.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             marshaller.marshal(data, new File(filePath));
-            logger.info("XML saved to " + filePath);
+            logger.info("XML saved to {}", filePath);
         } catch (JAXBException e) {
             logger.error(e);
         }

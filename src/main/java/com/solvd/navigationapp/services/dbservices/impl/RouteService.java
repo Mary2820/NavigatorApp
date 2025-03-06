@@ -1,5 +1,6 @@
 package com.solvd.navigationapp.services.dbservices.impl;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,7 +26,7 @@ public class RouteService extends AbstractService<Route> implements IRouteServic
             return Optional.ofNullable(routeDAO.getById(id));
         } catch (Exception e) {
             logger.error("Error getting route by id {}: {}", id, e.getMessage());
-            throw new RuntimeException("Failed to get route by id", e);
+            return Optional.empty();
         }
     }
 
@@ -41,7 +42,7 @@ public class RouteService extends AbstractService<Route> implements IRouteServic
             return true;
         } catch (Exception e) {
             logger.error("Error saving route {}: {}", entity, e.getMessage());
-            throw new RuntimeException("Failed to save route", e);
+            return false;
         }
     }
 
@@ -62,7 +63,7 @@ public class RouteService extends AbstractService<Route> implements IRouteServic
             return true;
         } catch (Exception e) {
             logger.error("Error updating route {}: {}", entity, e.getMessage());
-            throw new RuntimeException("Failed to update route", e);
+            return false;
         }
     }
 
@@ -79,7 +80,7 @@ public class RouteService extends AbstractService<Route> implements IRouteServic
             return true;
         } catch (Exception e) {
             logger.error("Error deleting route with id {}: {}", id, e.getMessage());
-            throw new RuntimeException("Failed to delete route", e);
+            return false;
         }
     }
 
@@ -90,7 +91,7 @@ public class RouteService extends AbstractService<Route> implements IRouteServic
             return routeDAO.getByStartPointId(startPointId);
         } catch (Exception e) {
             logger.error("Error getting routes by start point id {}: {}", startPointId, e.getMessage());
-            throw new RuntimeException("Failed to get routes by start point id", e);
+            return Collections.emptyList();
         }
     }
 
@@ -101,7 +102,7 @@ public class RouteService extends AbstractService<Route> implements IRouteServic
             return routeDAO.getByEndPointId(endPointId);
         } catch (Exception e) {
             logger.error("Error getting routes by end point id {}: {}", endPointId, e.getMessage());
-            throw new RuntimeException("Failed to get routes by end point id", e);
+            return Collections.emptyList();
         }
     }
 
@@ -112,7 +113,7 @@ public class RouteService extends AbstractService<Route> implements IRouteServic
             return routeDAO.getByVehicleId(vehicleId);
         } catch (Exception e) {
             logger.error("Error getting routes by vehicle id {}: {}", vehicleId, e.getMessage());
-            throw new RuntimeException("Failed to get routes by vehicle id", e);
+            return Collections.emptyList();
         }
     }
 
@@ -124,7 +125,7 @@ public class RouteService extends AbstractService<Route> implements IRouteServic
         } catch (Exception e) {
             logger.error("Error getting routes by start point id {} and end point id {}: {}", 
                 startPointId, endPointId, e.getMessage());
-            throw new RuntimeException("Failed to get routes by start and end points", e);
+            return Collections.emptyList();
         }
     }
 
@@ -137,7 +138,7 @@ public class RouteService extends AbstractService<Route> implements IRouteServic
         } catch (Exception e) {
             logger.error("Error getting route by start point id {}, end point id {} and vehicle id {}: {}", 
                 startPointId, endPointId, vehicleId, e.getMessage());
-            throw new RuntimeException("Failed to get route by start, end points and vehicle", e);
+            return Optional.empty();
         }
     }
 
@@ -148,7 +149,7 @@ public class RouteService extends AbstractService<Route> implements IRouteServic
             return routeDAO.getAll();
         } catch (Exception e) {
             logger.error("Error getting all routes: {}", e.getMessage());
-            throw new RuntimeException("Failed to get all routes", e);
+            return Collections.emptyList();
         }
     }
 
@@ -159,7 +160,7 @@ public class RouteService extends AbstractService<Route> implements IRouteServic
             return routeDAO.countTotal();
         } catch (Exception e) {
             logger.error("Error counting total routes: {}", e.getMessage());
-            throw new RuntimeException("Failed to count total routes", e);
+            return 0;
         }
     }
 

@@ -1,5 +1,6 @@
 package com.solvd.navigationapp.services.dbservices.impl;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,7 +27,7 @@ public class LocationService extends AbstractService<Location> implements ILocat
             return Optional.ofNullable(locationDAO.getById(id));
         } catch (Exception e) {
             logger.error("Error getting location by id {}: {}", id, e.getMessage());
-            throw new RuntimeException("Failed to get location by id", e);
+            return Optional.empty();
         }
     }
 
@@ -36,6 +37,7 @@ public class LocationService extends AbstractService<Location> implements ILocat
             logger.error("Invalid location data for saving");
             throw new IllegalArgumentException("Invalid location data");
         }
+
         try {
             List<Location> existingLocations = locationDAO.getByCityId(entity.getCityId());
             for (Location existing : existingLocations) {
@@ -59,7 +61,7 @@ public class LocationService extends AbstractService<Location> implements ILocat
             return false;
         } catch (Exception e) {
             logger.error("Error saving location {}: {}", entity, e.getMessage());
-            throw new RuntimeException("Failed to save location", e);
+            return false;
         }
     }
 
@@ -99,7 +101,7 @@ public class LocationService extends AbstractService<Location> implements ILocat
             return false;
         } catch (Exception e) {
             logger.error("Error updating location {}: {}", entity, e.getMessage());
-            throw new RuntimeException("Failed to update location", e);
+            return false;
         }
     }
 
@@ -118,7 +120,7 @@ public class LocationService extends AbstractService<Location> implements ILocat
             return deleted == null;
         } catch (Exception e) {
             logger.error("Error deleting location with id {}: {}", id, e.getMessage());
-            throw new RuntimeException("Failed to delete location", e);
+            return false;
         }
     }
 
@@ -129,7 +131,7 @@ public class LocationService extends AbstractService<Location> implements ILocat
             return locationDAO.getByCityId(cityId);
         } catch (Exception e) {
             logger.error("Error getting locations by city id {}: {}", cityId, e.getMessage());
-            throw new RuntimeException("Failed to get locations by city id", e);
+            return Collections.emptyList();
         }
     }
 
@@ -140,7 +142,7 @@ public class LocationService extends AbstractService<Location> implements ILocat
             return locationDAO.getByName(name);
         } catch (Exception e) {
             logger.error("Error getting locations by name {}: {}", name, e.getMessage());
-            throw new RuntimeException("Failed to get locations by name", e);
+            return Collections.emptyList();
         }
     }
 
@@ -151,7 +153,7 @@ public class LocationService extends AbstractService<Location> implements ILocat
             return locationDAO.getByAddress(address);
         } catch (Exception e) {
             logger.error("Error getting locations by address {}: {}", address, e.getMessage());
-            throw new RuntimeException("Failed to get locations by address", e);
+            return Collections.emptyList();
         }
     }
 
@@ -162,7 +164,7 @@ public class LocationService extends AbstractService<Location> implements ILocat
             return locationDAO.getByType(type);
         } catch (Exception e) {
             logger.error("Error getting locations by type {}: {}", type, e.getMessage());
-            throw new RuntimeException("Failed to get locations by type", e);
+            return Collections.emptyList();
         }
     }
 
@@ -173,7 +175,7 @@ public class LocationService extends AbstractService<Location> implements ILocat
             return locationDAO.getAll();
         } catch (Exception e) {
             logger.error("Error getting all locations: {}", e.getMessage());
-            throw new RuntimeException("Failed to get all locations", e);
+            return Collections.emptyList();
         }
     }
 
