@@ -4,9 +4,10 @@ import com.solvd.navigationapp.models.Driver;
 
 import java.util.List;
 
-public interface IDriverDAO extends IDAO<Driver> {
-    Driver getByLicenseId(Long licenseId);
+import org.apache.ibatis.annotations.Param;
 
-    List<Driver> getByFullName(String firstName, String lastName);
+public interface IDriverDAO extends IDAO<Driver> {
+
+    List<Driver> getByFullName( @Param("firstName") String firstName, @Param("lastName")String lastName);
 
 }

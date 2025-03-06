@@ -1,6 +1,4 @@
 package com.solvd.navigationapp.services.dbservices.impl;
-
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,156 +18,101 @@ public class RouteService extends AbstractService<Route> implements IRouteServic
     }
 
     @Override
-    public Optional<Route> getById(Long id) {
-        try {
-            logger.info("Getting route by id: {}", id);
-            return Optional.ofNullable(routeDAO.getById(id));
-        } catch (Exception e) {
-            logger.error("Error getting route by id {}: {}", id, e.getMessage());
-            return Optional.empty();
-        }
+    public Route getById(Long id) {
+        return routeDAO.getById(id).get();
+
     }
 
     @Override
     public boolean save(Route entity) {
         if (!isValidData(entity)) {
             logger.error("Invalid route data for saving");
-            throw new IllegalArgumentException("Invalid route data");
-        }
-        try {
-            logger.info("Saving route: {}", entity);
-            routeDAO.insert(entity);
-            return true;
-        } catch (Exception e) {
-            logger.error("Error saving route {}: {}", entity, e.getMessage());
             return false;
+            // throw new IllegalArgumentException("Invalid route data");
         }
+        routeDAO.insert(entity);
+        return true;
     }
 
     @Override
     public boolean update(Route entity) {
-        if (!isValidData(entity)) {
-            logger.error("Invalid route data for updating");
-            throw new IllegalArgumentException("Invalid route data");
-        }
-        try {
-            Route existingRoute = routeDAO.getById(entity.getId());
-            if (existingRoute == null) {
-                logger.error("Route with id {} does not exist", entity.getId());
-                throw new IllegalArgumentException("Route does not exist");
-            }
-            logger.info("Updating route: {}", entity);
+        Optional<Route> existingRoute = routeDAO.getById(entity.getId());
+        if (isValidData(entity) && existingRoute != null) {
             routeDAO.update(entity);
             return true;
-        } catch (Exception e) {
-            logger.error("Error updating route {}: {}", entity, e.getMessage());
-            return false;
         }
+        logger.error("Error updating route: {}", entity.getId());
+        return false;
     }
 
     @Override
     public boolean deleteById(Long id) {
-        try {
-            Route route = routeDAO.getById(id);
-            if (route == null) {
-                logger.error("Route with id {} does not exist", id);
-                throw new IllegalArgumentException("Route does not exist");
-            }
-            logger.info("Deleting route: {}", route);
+        if (routeDAO.getById(id) != null) {
             routeDAO.deleteById(id);
             return true;
-        } catch (Exception e) {
-            logger.error("Error deleting route with id {}: {}", id, e.getMessage());
-            return false;
         }
+        logger.error("Route with id {} does not exist", id);
+        return false;
+
     }
 
     @Override
     public List<Route> getByStartPointId(Long startPointId) {
-        try {
-            logger.info("Getting routes by start point id: {}", startPointId);
-            return routeDAO.getByStartPointId(startPointId);
-        } catch (Exception e) {
-            logger.error("Error getting routes by start point id {}: {}", startPointId, e.getMessage());
-            return Collections.emptyList();
+        List<Route> routes = routeDAO.getByStartPointId(startPointId);
+        if(routes.isEmpty()){
+            logger.error("No routes found for start point id {}", startPointId);
         }
+        return routes;   
     }
 
     @Override
     public List<Route> getByEndPointId(Long endPointId) {
-        try {
-            logger.info("Getting routes by end point id: {}", endPointId);
-            return routeDAO.getByEndPointId(endPointId);
-        } catch (Exception e) {
-            logger.error("Error getting routes by end point id {}: {}", endPointId, e.getMessage());
-            return Collections.emptyList();
+        List<Route> routes = routeDAO.getByEndPointId(endPointId);
+        if(routes.isEmpty()){
+            logger.error("No routes found for end point id {}", endPointId);
         }
+        return routes;
     }
 
     @Override
     public List<Route> getByVehicleId(Long vehicleId) {
-        try {
-            logger.info("Getting routes by vehicle id: {}", vehicleId);
-            return routeDAO.getByVehicleId(vehicleId);
-        } catch (Exception e) {
-            logger.error("Error getting routes by vehicle id {}: {}", vehicleId, e.getMessage());
-            return Collections.emptyList();
+        List<Route> routes = routeDAO.getByVehicleId(vehicleId);
+        if(routes.isEmpty()){
+            logger.error("No routes found for vehicle id {}", vehicleId);
         }
+        return routes;
     }
 
     @Override
-    public List<Route> getByStartAndEndPoints(Long startPointId, Long endPointId) {
-        try {
-            logger.info("Getting routes by start point id {} and end point id {}", startPointId, endPointId);
-            return routeDAO.getByStartAndEndPoints(startPointId, endPointId);
-        } catch (Exception e) {
-            logger.error("Error getting routes by start point id {} and end point id {}: {}", 
-                startPointId, endPointId, e.getMessage());
-            return Collections.emptyList();
-        }
+    public Route getByStartAndEndPoints(Long startPointId, Long endPointId) {
+       return routeDAO.getByStartAndEndPoints(startPointId, endPointId).get();
     }
 
     @Override
-    public Optional<Route> getByStartEndAndVehicle(Long startPointId, Long endPointId, Long vehicleId) {
-        try {
-            logger.info("Getting route by start point id {}, end point id {} and vehicle id {}", 
-                startPointId, endPointId, vehicleId);
-            return Optional.ofNullable(routeDAO.getByStartEndAndVehicle(startPointId, endPointId, vehicleId));
-        } catch (Exception e) {
-            logger.error("Error getting route by start point id {}, end point id {} and vehicle id {}: {}", 
-                startPointId, endPointId, vehicleId, e.getMessage());
-            return Optional.empty();
-        }
+    public Route getByStartEndAndVehicle(Long startPointId, Long endPointId, Long vehicleId) {
+        return routeDAO.getByStartEndAndVehicle(startPointId, endPointId, vehicleId).get();
     }
 
     @Override
     public List<Route> getAll() {
-        try {
-            logger.info("Getting all routes");
-            return routeDAO.getAll();
-        } catch (Exception e) {
-            logger.error("Error getting all routes: {}", e.getMessage());
-            return Collections.emptyList();
+        List<Route> routes = routeDAO.getAll();
+        if(routes.isEmpty()){
+            logger.error("No routes found");
         }
+        return routes;
     }
 
     @Override
     public Integer countTotal() {
-        try {
-            logger.info("Counting total routes");
-            return routeDAO.countTotal();
-        } catch (Exception e) {
-            logger.error("Error counting total routes: {}", e.getMessage());
-            return 0;
-        }
+        return routeDAO.countTotal().get();
     }
 
     @Override
     protected boolean isValidData(Route entity) {
         return entity != null &&
-               entity.getStartPointId() != null && entity.getStartPointId() > 0 &&
-               entity.getEndPointId() != null && entity.getEndPointId() > 0 &&
-               entity.getVehicleId() != null && entity.getVehicleId() > 0 &&
-               entity.getDistance() != null && entity.getDistance() > 0;
+                entity.getStartPointId() != null && entity.getStartPointId() > 0 &&
+                entity.getEndPointId() != null && entity.getEndPointId() > 0 &&
+                entity.getVehicleId() != null && entity.getVehicleId() > 0 &&
+                entity.getDistance() != null && entity.getDistance() > 0;
     }
 }

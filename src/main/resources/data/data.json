@@ -1,9 +1,41 @@
 {
-  "@class" : "com.solvd.navigationapp.models.Client",
-  "id" : 1,
-  "firstName" : "Jan",
-  "lastName" : "Mazowiecki",
-  "userType" : "CLIENT",
-  "email" : "jan.maz@example.com",
-  "phoneNumber" : "password123"
+  "tripStages" : [ {
+    "startPoint" : {
+      "id" : 97,
+      "name" : "Central Station Tram Stop",
+      "cityId" : 1,
+      "address" : "Station Sq",
+      "type" : "TRAM_STOP"
+    },
+    "endPoint" : {
+      "id" : 99,
+      "name" : "West Side Tram Stop",
+      "cityId" : 1,
+      "address" : "West Ave & 10th St",
+      "type" : "TRAM_STOP"
+    },
+    "distance" : 1100,
+    "timeInMinutes" : 13,
+    "vehicleType" : "TRAM",
+    "vehicleNumber" : "TRAM123"
+  }, {
+    "startPoint" : {
+      "id" : 85,
+      "name" : "Shopping Mall",
+      "cityId" : 1,
+      "address" : "789 Commerce Blvd",
+      "type" : "BUILDING"
+    },
+    "endPoint" : {
+      "id" : 99,
+      "name" : "West Side Tram Stop",
+      "cityId" : 1,
+      "address" : "West Ave & 10th St",
+      "type" : "TRAM_STOP"
+    },
+    "distance" : 150,
+    "timeInMinutes" : 1,
+    "vehicleType" : "WALK",
+    "vehicleNumber" : ""
+  } ]
 }

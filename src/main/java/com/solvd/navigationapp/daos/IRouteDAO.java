@@ -4,6 +4,7 @@ import com.solvd.navigationapp.models.Route;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IRouteDAO extends IDAO<Route> {
     List<Route> getByStartPointId(Long startPointId);
@@ -12,11 +13,11 @@ public interface IRouteDAO extends IDAO<Route> {
 
     List<Route> getByVehicleId(Long vehicleId);
 
-    List<Route> getByStartAndEndPoints(@Param("startPointId") Long startPointId, @Param("endPointId") Long endPointId);
+    Optional<Route> getByStartAndEndPoints(@Param("startPointId") Long startPointId, @Param("endPointId") Long endPointId);
 
-    Route getByStartEndAndVehicle(@Param("startPointId") Long startPointId, @Param("endPointId") Long endPointId, @Param("vehicleId") Long vehicleId);
+    Optional<Route> getByStartEndAndVehicle(@Param("startPointId") Long startPointId, @Param("endPointId") Long endPointId, @Param("vehicleId") Long vehicleId);
 
     List<Route> getAll();
 
-    Integer countTotal();
+    Optional<Integer> countTotal();
 }
