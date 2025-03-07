@@ -52,8 +52,8 @@ public class LicenseService extends AbstractService<License> implements ILicense
     }
 
     @Override
-    public Optional<License> getByNumber(String number) {
-        return licenseDAO.getByNumber(number);
+    public License getByNumber(String number) {
+        return licenseDAO.getByNumber(number).get();
     }
 
     @Override
