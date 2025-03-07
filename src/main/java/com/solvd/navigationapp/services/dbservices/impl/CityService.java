@@ -7,7 +7,6 @@ import com.solvd.navigationapp.utils.DAOFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,7 +30,6 @@ public class CityService extends AbstractService<City> implements ICityService {
         }
         cityDAO.insert(city);
         return true;
-
     }
 
     @Override
@@ -63,7 +61,6 @@ public class CityService extends AbstractService<City> implements ICityService {
             logger.error("City not found by name: {}", name);
         }
         return cities;
-
     }
 
     @Override

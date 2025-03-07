@@ -98,7 +98,7 @@ public class Route {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, startPointId, endPointId, vehicleId, distance, isBidirectional);
+        return MASK+ Objects.hash(id, startPointId, endPointId, vehicleId, distance, isBidirectional);
     }
 
     @Override
