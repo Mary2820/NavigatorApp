@@ -1,7 +1,107 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <trip>
-    <trip stages>
-        <trip stage>
+    <trip_stages>
+        <trip_stage>
+            <distance>350</distance>
+            <endPoint>
+                <address>Broadway &amp; 5th St</address>
+                <cityId>1</cityId>
+                <id>90</id>
+                <name>Downtown Bus Stop</name>
+                <type>BUS_STOP</type>
+            </endPoint>
+            <startPoint>
+                <address>123 Main St</address>
+                <cityId>1</cityId>
+                <id>83</id>
+                <name>Central Library</name>
+                <type>BUILDING</type>
+            </startPoint>
+            <timeInMinutes>70</timeInMinutes>
+            <vehicleNumber></vehicleNumber>
+            <vehicleType>WALK</vehicleType>
+        </trip_stage>
+        <trip_stage>
+            <distance>300</distance>
+            <endPoint>
+                <address>Broadway &amp; 5th St</address>
+                <cityId>1</cityId>
+                <id>90</id>
+                <name>Downtown Bus Stop</name>
+                <type>BUS_STOP</type>
+            </endPoint>
+            <startPoint>
+                <address>Main St &amp; 1st Ave</address>
+                <cityId>1</cityId>
+                <id>89</id>
+                <name>Main St Bus Stop</name>
+                <type>BUS_STOP</type>
+            </startPoint>
+            <timeInMinutes>7</timeInMinutes>
+            <vehicleNumber>BUS125</vehicleNumber>
+            <vehicleType>BUS</vehicleType>
+        </trip_stage>
+        <trip_stage>
+            <distance>50</distance>
+            <endPoint>
+                <address>Main St &amp; 1st Ave</address>
+                <cityId>1</cityId>
+                <id>89</id>
+                <name>Main St Bus Stop</name>
+                <type>BUS_STOP</type>
+            </endPoint>
+            <startPoint>
+                <address>456 Government Ave</address>
+                <cityId>1</cityId>
+                <id>84</id>
+                <name>City Hall</name>
+                <type>BUILDING</type>
+            </startPoint>
+            <timeInMinutes>10</timeInMinutes>
+            <vehicleNumber></vehicleNumber>
+            <vehicleType>WALK</vehicleType>
+        </trip_stage>
+        <trip_stage>
+            <distance>50</distance>
+            <endPoint>
+                <address>Market Sq</address>
+                <cityId>1</cityId>
+                <id>98</id>
+                <name>Market Square Tram Stop</name>
+                <type>TRAM_STOP</type>
+            </endPoint>
+            <startPoint>
+                <address>456 Government Ave</address>
+                <cityId>1</cityId>
+                <id>84</id>
+                <name>City Hall</name>
+                <type>BUILDING</type>
+            </startPoint>
+            <timeInMinutes>10</timeInMinutes>
+            <vehicleNumber></vehicleNumber>
+            <vehicleType>WALK</vehicleType>
+        </trip_stage>
+        <trip_stage>
+            <distance>200</distance>
+            <endPoint>
+                <address>Station Sq</address>
+                <cityId>1</cityId>
+                <id>97</id>
+                <name>Central Station Tram Stop</name>
+                <type>TRAM_STOP</type>
+            </endPoint>
+            <startPoint>
+                <address>Market Sq</address>
+                <cityId>1</cityId>
+                <id>98</id>
+                <name>Market Square Tram Stop</name>
+                <type>TRAM_STOP</type>
+            </startPoint>
+            <timeInMinutes>6</timeInMinutes>
+            <vehicleNumber>TRAM123</vehicleNumber>
+            <vehicleType>TRAM</vehicleType>
+        </trip_stage>
+        <trip_stage>
             <distance>1100</distance>
             <endPoint>
                 <address>West Ave &amp; 10th St</address>
@@ -17,29 +117,9 @@
                 <name>Central Station Tram Stop</name>
                 <type>TRAM_STOP</type>
             </startPoint>
-            <timeInMinutes>13</timeInMinutes>
+            <timeInMinutes>36</timeInMinutes>
             <vehicleNumber>TRAM123</vehicleNumber>
             <vehicleType>TRAM</vehicleType>
-        </trip stage>
-        <trip stage>
-            <distance>150</distance>
-            <endPoint>
-                <address>West Ave &amp; 10th St</address>
-                <cityId>1</cityId>
-                <id>99</id>
-                <name>West Side Tram Stop</name>
-                <type>TRAM_STOP</type>
-            </endPoint>
-            <startPoint>
-                <address>789 Commerce Blvd</address>
-                <cityId>1</cityId>
-                <id>85</id>
-                <name>Shopping Mall</name>
-                <type>BUILDING</type>
-            </startPoint>
-            <timeInMinutes>1</timeInMinutes>
-            <vehicleNumber></vehicleNumber>
-            <vehicleType>WALK</vehicleType>
-        </trip stage>
-    </trip stages>
+        </trip_stage>
+    </trip_stages>
 </trip>

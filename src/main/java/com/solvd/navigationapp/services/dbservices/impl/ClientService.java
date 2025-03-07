@@ -83,7 +83,7 @@ public class ClientService extends AbstractService<Client> implements IClientSer
     @Override
     public boolean update(Client client) {
         Optional<Client> existingClient = clientDAO.getById(client.getId());
-        if (isValidData(client) && existingClient != null) {
+        if (isValidData(client) && existingClient.isPresent()) {
             clientDAO.update(client);
             return true;
         }
@@ -93,7 +93,7 @@ public class ClientService extends AbstractService<Client> implements IClientSer
 
     @Override
     public boolean deleteById(Long clientId) {
-        if (clientDAO.getById(clientId) != null) {
+        if (clientDAO.getById(clientId).isPresent()) {
             clientDAO.deleteById(clientId);
             return true;
         }
@@ -103,7 +103,7 @@ public class ClientService extends AbstractService<Client> implements IClientSer
 
     @Override
     public boolean deleteAccountByEmail(String email) {
-        if (clientDAO.getByEmail(email) == null) {
+        if (clientDAO.getByEmail(email).isEmpty()) {
             logger.error("Attempt to delete non-existent client with email: {}", email);
             return false;
         }
