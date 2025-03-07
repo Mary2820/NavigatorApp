@@ -9,7 +9,6 @@ import org.apache.logging.log4j.Logger;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 public class LicenseService extends AbstractService<License> implements ILicenseService {
     private static final Logger logger = LogManager.getLogger(LicenseService.class);

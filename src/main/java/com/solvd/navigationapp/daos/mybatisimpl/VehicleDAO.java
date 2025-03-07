@@ -55,7 +55,6 @@ public class VehicleDAO extends AbstractMyBatisDAO<IVehicleDAO> implements IVehi
     @Override
     public boolean isRegistrationNumberTaken(String registrationNumber) {
         return executeInSession(mapper -> mapper.isRegistrationNumberTaken(registrationNumber));
-
     }
 
     @Override

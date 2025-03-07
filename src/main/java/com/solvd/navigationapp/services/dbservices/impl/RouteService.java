@@ -20,7 +20,6 @@ public class RouteService extends AbstractService<Route> implements IRouteServic
     @Override
     public Route getById(Long id) {
         return routeDAO.getById(id).get();
-
     }
 
     @Override
@@ -86,7 +85,7 @@ public class RouteService extends AbstractService<Route> implements IRouteServic
     public List<Route> getByStartAndEndPoints(Long startPointId, Long endPointId) {
         List<Route> routes = routeDAO.getByStartAndEndPoints(startPointId, endPointId);
         if(routes.isEmpty()){
-            logger.error("No routes found for start point id {} and end point id {}", startPointId, endPointId);
+            logger.warn("No routes found for start point id {} and end point id {}", startPointId, endPointId);
         }
        return routes;
     }

@@ -39,7 +39,6 @@ public abstract class User {
     }
 
     public User() {
-
     }
 
     public Long getId() {
