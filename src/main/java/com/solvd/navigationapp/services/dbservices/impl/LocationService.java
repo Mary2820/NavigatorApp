@@ -28,7 +28,6 @@ public class LocationService extends AbstractService<Location> implements ILocat
         if (!isValidData(entity)) {
             logger.error("Invalid location data for saving");
             return false;
-            // throw new IllegalArgumentException("Invalid location data");
         }
         List<Location> existingLocations = locationDAO.getByCityId(entity.getCityId());
         for (Location existing : existingLocations) {
@@ -36,24 +35,11 @@ public class LocationService extends AbstractService<Location> implements ILocat
                 logger.error("Location with name '{}' already exists in city with id {}",
                         entity.getName(), entity.getCityId());
                 return false;
-                // throw new IllegalArgumentException("Location with this name already exists in
-                // this city");
+
             }
         }
         locationDAO.insert(entity);
         return true;
-
-        /*
-         * List<Location> locations = locationDAO.getByCityId(entity.getCityId());
-         * for (Location saved : locations) {
-         * if (saved.getName().equalsIgnoreCase(entity.getName()) &&
-         * saved.getAddress().equals(entity.getAddress())) {
-         * return true;
-         * }
-         * }
-         * logger.error("Failed to verify save operation for location: {}", entity);
-         * return false;
-         */
     }
 
     @Override
@@ -71,33 +57,13 @@ public class LocationService extends AbstractService<Location> implements ILocat
             }
             locationDAO.update(entity);
             return true;
-            // throw new IllegalArgumentException("Invalid location data");
         }
         return false;
     }
 
-    // throw new IllegalArgumentException("Location does not exist");
-
-    // throw new IllegalArgumentException("Location with this name already exists in
-    // this city");
-
-    /*
-     * Location updated = getById(entity.getId());
-     * if (updated != null &&
-     * updated.getName().equals(entity.getName()) &&
-     * updated.getAddress().equals(entity.getAddress()) &&
-     * updated.getType().equals(entity.getType()) &&
-     * updated.getCityId().equals(entity.getCityId())) {
-     * return true;
-     * }
-     * logger.error("Failed to verify update operation for location: {}", entity);
-     * return false;
-     * }
-     */
-
     @Override
     public boolean deleteById(Long id) {
-        if (locationDAO.getById(id) != null) {
+        if (locationDAO.getById(id).isPresent()) {
             locationDAO.deleteById(id);
             return true;
         }

@@ -10,12 +10,12 @@ import java.util.Optional;
 
 public class JacksonParser<T> implements IDataParser<T> {
     private static final Logger logger = LogManager.getLogger(JacksonParser.class.getName());
+
     @Override
     public void writeToFile(String filePath, T data) {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(filePath), data);
-            logger.info("JSON saved to {}", filePath);
         } catch (IOException e) {
             logger.error(e);
         }

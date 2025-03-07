@@ -9,7 +9,6 @@ import org.apache.logging.log4j.Logger;
 import java.io.File;
 import java.util.Optional;
 
-
 public class JAXBParser<T> implements IDataParser<T> {
     private static final Logger logger = LogManager.getLogger(JAXBParser.class.getName());
 
@@ -20,7 +19,6 @@ public class JAXBParser<T> implements IDataParser<T> {
             Marshaller marshaller = context.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             marshaller.marshal(data, new File(filePath));
-            logger.info("XML saved to {}", filePath);
         } catch (JAXBException e) {
             logger.error(e);
         }
@@ -31,7 +29,8 @@ public class JAXBParser<T> implements IDataParser<T> {
         try {
             JAXBContext context = JAXBContext.newInstance(clazz);
             Unmarshaller unmarshaller = context.createUnmarshaller();
-            return Optional.of(clazz.cast(unmarshaller.unmarshal(new File(filePath))));
+            File file = new File(filePath);
+            return Optional.of(clazz.cast(unmarshaller.unmarshal(file)));
         } catch (JAXBException e) {
             logger.error("Error during reading XML file: ", e);
         }

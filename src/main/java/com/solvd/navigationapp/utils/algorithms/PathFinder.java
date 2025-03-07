@@ -8,30 +8,34 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
+import java.util.stream.Collectors;
 
 import com.solvd.navigationapp.models.Graph;
 import com.solvd.navigationapp.models.Location;
 import com.solvd.navigationapp.models.Route;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class PathFinder implements IPathFinder {
-private final Graph graph;
-private List<Location> path;
+    private static final Logger logger = LogManager.getLogger(PathFinder.class.getName());
+    private final Graph graph;
 
     public PathFinder(Graph graph) {
         this.graph = graph;
     }
 
-    private List<Location> findShortestPath(Location start, Location end) {
+    @Override
+    public List<Location> getShortPath(Location start, Location end) {
         if (start.equals(end)) {
             return Collections.singletonList(start);
         }
 
         Map<Location, Integer> distances = new HashMap<>();
-        Map<Location, Location> previous = new HashMap<>();
+        Map<Location, Location> predecessors = new HashMap<>();
         PriorityQueue<Map.Entry<Location, Integer>> queue = new PriorityQueue<>(
                 Comparator.comparingInt(Map.Entry::getValue));
 
-        graph.getLocations().forEach(loc -> distances.put(loc, Integer.MAX_VALUE));
+        graph.getLocations().forEach(location -> distances.put(location, Integer.MAX_VALUE));
         distances.put(start, 0);
         queue.add(new SimpleEntry<>(start, 0));
 
@@ -46,19 +50,12 @@ private List<Location> path;
                 int newDist = distances.get(current) + route.getDistance();
                 if (newDist < distances.get(neighbor)) {
                     distances.put(neighbor, newDist);
-                    previous.put(neighbor, current);
+                    predecessors.put(neighbor, current);
                     queue.add(new SimpleEntry<>(neighbor, newDist));
                 }
             }
         }
-
-        return reconstructPath(start, end, previous);
-    }
-
-    @Override
-    public List<Location> getShortPath(Location start, Location end){
-        path = findShortestPath( start, end);
-        return path;
+        return reconstructPath(start, end, predecessors);
     }
 
     private Location getNeighborLocation(Route route, Location current) {
@@ -80,6 +77,16 @@ private List<Location> path;
             path.add(currentLoc);
         }
         Collections.reverse(path);
+
+        logPath(path);
         return path;
+    }
+
+    private void logPath(List<Location> path) {
+        String pathString = path.stream()
+                .map(Location::getName)
+                .collect(Collectors.joining(" -> "));
+
+        logger.info("Short path: {}", pathString);
     }
 }
