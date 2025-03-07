@@ -23,7 +23,7 @@ public class RouteDAO extends AbstractMyBatisDAO<IRouteDAO> implements IRouteDAO
     }
 
     @Override
-    public List<Route> getByStartAndEndPoints(Long startPointId, Long endPointId) {
+    public Optional<Route> getByStartAndEndPoints(Long startPointId, Long endPointId) {
         return executeInSession(mapper -> mapper.getByStartAndEndPoints(startPointId, endPointId));
     }
 

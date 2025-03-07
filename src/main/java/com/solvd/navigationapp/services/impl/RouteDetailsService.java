@@ -53,7 +53,7 @@ public class RouteDetailsService implements IRouteDetailsService {
 
     private List<RouteDetails> getRouteDetails(List<Route> routes) {
         List<RouteDetails> routeDetailsList = new ArrayList<>();
-
+        
         for (Route route : routes) {
             try {
                 Location startPoint = locationService.getById(route.getStartPointId());
@@ -77,14 +77,14 @@ public class RouteDetailsService implements IRouteDetailsService {
                 }
 
                 RouteDetails routeDetails = new RouteDetails(
-                        startPoint,
-                        endPoint,
-                        distance,
-                        timeInMinutes,
-                        vehicleTypeName,
-                        vehicleNumber
+                    startPoint,
+                    endPoint,
+                    distance,
+                    timeInMinutes,
+                    vehicleTypeName,
+                    vehicleNumber
                 );
-
+                
                 routeDetailsList.add(routeDetails);
             } catch (Exception e) {
                 logger.error("Error processing route {}: {}", route.getId(), e.getMessage());

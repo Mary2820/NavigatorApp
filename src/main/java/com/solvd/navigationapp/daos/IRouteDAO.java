@@ -13,7 +13,7 @@ public interface IRouteDAO extends IDAO<Route> {
 
     List<Route> getByVehicleId(Long vehicleId);
 
-    List<Route> getByStartAndEndPoints(@Param("startPointId") Long startPointId, @Param("endPointId") Long endPointId);
+    Optional<Route> getByStartAndEndPoints(@Param("startPointId") Long startPointId, @Param("endPointId") Long endPointId);
 
     Optional<Route> getByStartEndAndVehicle(@Param("startPointId") Long startPointId, @Param("endPointId") Long endPointId, @Param("vehicleId") Long vehicleId);
 

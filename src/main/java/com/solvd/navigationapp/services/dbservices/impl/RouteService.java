@@ -28,7 +28,6 @@ public class RouteService extends AbstractService<Route> implements IRouteServic
         if (!isValidData(entity)) {
             logger.error("Invalid route data for saving");
             return false;
-            // throw new IllegalArgumentException("Invalid route data");
         }
         routeDAO.insert(entity);
         return true;
@@ -62,7 +61,7 @@ public class RouteService extends AbstractService<Route> implements IRouteServic
         if(routes.isEmpty()){
             logger.error("No routes found for start point id {}", startPointId);
         }
-        return routes;
+        return routes;   
     }
 
     @Override
@@ -85,7 +84,7 @@ public class RouteService extends AbstractService<Route> implements IRouteServic
 
     @Override
     public List<Route> getByStartAndEndPoints(Long startPointId, Long endPointId) {
-        return routeDAO.getByStartAndEndPoints(startPointId, endPointId);
+       return routeDAO.getByStartAndEndPoints(startPointId, endPointId);
     }
 
     @Override
