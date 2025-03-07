@@ -40,13 +40,14 @@ public class Main {
             IGraphService graphService = new GraphService(locationService, routeService);
             Graph graph = graphService.getGraph();
             PathFinder pathFinder = new PathFinder(graph);
+            IVehicleService vehicleService = new VehicleService();
 
-            ITransportService transportService = new TransportService();
+            ITransportService transportService = new TransportService(routeService,vehicleService);
+
             IPathFinderService pathFinderService = new PathFinderService(pathFinder, transportService);
 
             List<Route> routeList = pathFinderService.getBestPath(start, end);
 
-            IVehicleService vehicleService = new VehicleService();
 
             RouteDetailsService routeDetailsService = new RouteDetailsService(locationService, vehicleService);
             routeDetailsService.saveRoutes(routeList);
