@@ -9,10 +9,9 @@ import java.util.Optional;
 
 public class LicenseDAO extends AbstractMyBatisDAO<ILicenseDAO> implements ILicenseDAO {
     @Override
-    public License getByNumber(String number) {
+    public Optional<License> getByNumber(String number) {
         return executeInSession(mapper -> mapper.getByNumber(number));
     }
-
     @Override
     public List<License> getExpiredLicenses(LocalDate currentDate) {
         return executeInSession(mapper -> mapper.getExpiredLicenses(currentDate));
@@ -43,6 +42,10 @@ public class LicenseDAO extends AbstractMyBatisDAO<ILicenseDAO> implements ILice
         executeInSessionVoid(mapper -> mapper.deleteById(id));
     }
 
+    @Override
+    public List<License> getAll() {
+        return executeInSession(ILicenseDAO::getAll);
+    }
     @Override
     protected Class<ILicenseDAO> getMapperClass() {
         return ILicenseDAO.class;
