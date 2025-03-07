@@ -1,12 +1,16 @@
 package com.solvd.navigationapp.enums;
 
+import com.solvd.navigationapp.utils.constants.TransportSpeedConstants;
+
+import java.util.Arrays;
 import java.util.Objects;
 
+
 public enum VehicleType {
-    BUS(1L, "BUS", 60),
-    TRAIN(2L, "TRAIN", 120),
-    TRAM(3L, "TRAM", 40),
-    TAXI(4L, "TAXI", 90);
+    BUS(1L, "BUS", TransportSpeedConstants.BUS_SPEED),
+    TRAIN(2L, "TRAIN", TransportSpeedConstants.TRAIN_SPEED),
+    TRAM(3L, "TRAM", TransportSpeedConstants.TRAM_SPEED),
+    TAXI(4L, "TAXI", TransportSpeedConstants.TAXI_SPEED);
 
     private final Long id;
     private final String name;
@@ -25,16 +29,15 @@ public enum VehicleType {
     public String getName() {
         return name;
     }
+
     public Integer getSpeed() {
         return speed;
     }
 
-    public static String getById(Long id) {
-        for (VehicleType vehicleType : values()) {
-            if (Objects.equals(vehicleType.getId(), id)) {
-                return vehicleType.name;
-            }
-        }
-        throw new IllegalArgumentException("No vehicle with ID: " + id);
+    public static VehicleType getById(Long id) {
+        return Arrays.stream(values())
+                .filter(vehicleType -> Objects.equals(vehicleType.getId(), id))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("No vehicle with ID: " + id));
     }
 }
