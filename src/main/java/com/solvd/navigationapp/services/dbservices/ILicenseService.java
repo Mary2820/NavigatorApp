@@ -4,7 +4,6 @@ import com.solvd.navigationapp.models.License;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 public interface ILicenseService extends IService<License> {
     License getByNumber(String number);

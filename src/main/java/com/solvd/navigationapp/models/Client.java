@@ -10,7 +10,6 @@ import com.solvd.navigationapp.enums.UserType;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Client extends User {
 
-
     @XmlElement(name = "email")
     private String email;
 

@@ -9,5 +9,4 @@ import org.apache.ibatis.annotations.Param;
 public interface IDriverDAO extends IDAO<Driver> {
 
     List<Driver> getByFullName( @Param("firstName") String firstName, @Param("lastName")String lastName);
-
 }
