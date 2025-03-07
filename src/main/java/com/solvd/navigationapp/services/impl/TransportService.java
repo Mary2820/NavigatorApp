@@ -12,8 +12,7 @@ import com.solvd.navigationapp.models.Vehicle;
 import com.solvd.navigationapp.services.ITransportService;
 import com.solvd.navigationapp.services.dbservices.IRouteService;
 import com.solvd.navigationapp.services.dbservices.IVehicleService;
-import com.solvd.navigationapp.services.dbservices.impl.RouteService;
-import com.solvd.navigationapp.services.dbservices.impl.VehicleService;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -22,9 +21,9 @@ public class TransportService implements ITransportService {
     private final IRouteService routeService;
     private final IVehicleService vehicleService;
 
-    public TransportService() {
-        this.routeService = new RouteService();
-        this.vehicleService = new VehicleService();
+    public TransportService(IRouteService routeService, IVehicleService vehicleService) {
+        this.routeService = routeService;
+        this.vehicleService = vehicleService;
     }
 
     @Override

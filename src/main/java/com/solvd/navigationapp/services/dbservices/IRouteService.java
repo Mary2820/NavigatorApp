@@ -11,7 +11,7 @@ public interface IRouteService extends IService<Route> {
 
     List<Route> getByVehicleId(Long vehicleId);
 
-    Route getByStartAndEndPoints(Long startPointId, Long endPointId);
+    List<Route> getByStartAndEndPoints(Long startPointId, Long endPointId);
 
     Route getByStartEndAndVehicle(Long startPointId, Long endPointId, Long vehicleId);
 
