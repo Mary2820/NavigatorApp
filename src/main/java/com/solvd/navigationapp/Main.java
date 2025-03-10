@@ -15,7 +15,7 @@ import com.solvd.navigationapp.services.impl.GraphService;
 import com.solvd.navigationapp.services.impl.PathFinderService;
 import com.solvd.navigationapp.services.impl.RouteDetailsService;
 import com.solvd.navigationapp.services.impl.TransportService;
-import com.solvd.navigationapp.utils.algorithms.PathFinder;
+import com.solvd.navigationapp.services.algorithms.PathFinder;
 
 import java.util.List;
 
@@ -38,7 +38,7 @@ public class Main {
 
             IRouteService routeService = new RouteService();
             IGraphService graphService = new GraphService(locationService, routeService);
-            Graph graph = graphService.getGraph();
+            Graph graph = graphService.getGraphFromDatabase();
             PathFinder pathFinder = new PathFinder(graph);
             IVehicleService vehicleService = new VehicleService();
 
