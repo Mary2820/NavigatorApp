@@ -85,7 +85,7 @@ public class RouteService extends AbstractService<Route> implements IRouteServic
     public List<Route> getByStartAndEndPoints(Long startPointId, Long endPointId) {
         List<Route> routes = routeDAO.getByStartAndEndPoints(startPointId, endPointId);
         if(routes.isEmpty()){
-            logger.warn("No routes found for start point id {} and end point id {}", startPointId, endPointId);
+            logger.error("No routes found for start point id {} and end point id {}", startPointId, endPointId);
         }
        return routes;
     }

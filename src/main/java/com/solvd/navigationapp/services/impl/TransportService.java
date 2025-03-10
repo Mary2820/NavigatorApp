@@ -77,15 +77,18 @@ public class TransportService implements ITransportService {
     private List<Route> getRoutesBetweenLocations(Long startPointId, Long endPointId) {
         List<Route> routes = routeService.getByStartAndEndPoints(startPointId, endPointId);
 
-        List<Route> reverseRoutes = routeService.getByStartAndEndPoints(endPointId, startPointId)
-                .stream()
-                .filter(Route::isBidirectional)
-                .toList();
+        for (Route route : routes) {
+            if (!route.getStartPointId().equals(startPointId)) {
+                swapStartAndEnd(route);
+            }
+        }
+        return routes;
+    }
 
-        List<Route> allRoutes = new ArrayList<>(routes);
-        allRoutes.addAll(reverseRoutes);
-
-        return allRoutes;
+    private void swapStartAndEnd(Route route) {
+        Long temp = route.getStartPointId();
+        route.setStartPointId(route.getEndPointId());
+        route.setEndPointId(temp);
     }
 
     private Long getVehicleTypeId(Long vehicleId) {

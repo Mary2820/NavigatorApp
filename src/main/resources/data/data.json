@@ -20,17 +20,17 @@
     "vehicleNumber" : ""
   }, {
     "startPoint" : {
-      "id" : 89,
-      "name" : "Main St Bus Stop",
-      "cityId" : 1,
-      "address" : "Main St & 1st Ave",
-      "type" : "BUS_STOP"
-    },
-    "endPoint" : {
       "id" : 90,
       "name" : "Downtown Bus Stop",
       "cityId" : 1,
       "address" : "Broadway & 5th St",
+      "type" : "BUS_STOP"
+    },
+    "endPoint" : {
+      "id" : 89,
+      "name" : "Main St Bus Stop",
+      "cityId" : 1,
+      "address" : "Main St & 1st Ave",
       "type" : "BUS_STOP"
     },
     "distance" : 300,
@@ -39,18 +39,18 @@
     "vehicleNumber" : "BUS125"
   }, {
     "startPoint" : {
-      "id" : 84,
-      "name" : "City Hall",
-      "cityId" : 1,
-      "address" : "456 Government Ave",
-      "type" : "BUILDING"
-    },
-    "endPoint" : {
       "id" : 89,
       "name" : "Main St Bus Stop",
       "cityId" : 1,
       "address" : "Main St & 1st Ave",
       "type" : "BUS_STOP"
+    },
+    "endPoint" : {
+      "id" : 84,
+      "name" : "City Hall",
+      "cityId" : 1,
+      "address" : "456 Government Ave",
+      "type" : "BUILDING"
     },
     "distance" : 50,
     "timeInMinutes" : 10,
