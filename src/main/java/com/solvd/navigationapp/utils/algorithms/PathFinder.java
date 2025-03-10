@@ -1,4 +1,4 @@
-package com.solvd.navigationapp.services.algorithms;
+package com.solvd.navigationapp.utils.algorithms;
 
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
@@ -16,16 +16,12 @@ import com.solvd.navigationapp.models.Route;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class PathFinder implements IPathFinder {
+public class PathFinder {
     private static final Logger logger = LogManager.getLogger(PathFinder.class.getName());
-    private final Graph graph;
 
-    public PathFinder(Graph graph) {
-        this.graph = graph;
-    }
+    private PathFinder() {}
 
-    @Override
-    public List<Location> getShortPath(Location start, Location end) {
+    public static List<Location> getShortPath(Graph graph, Location start, Location end) {
         if (start.equals(end)) {
             return Collections.singletonList(start);
         }
@@ -44,7 +40,7 @@ public class PathFinder implements IPathFinder {
             if (current.equals(end)) break;
 
             for (Route route : graph.getRoutesFromLocation(current)) {
-                Location neighbor = getNeighborLocation(route, current);
+                Location neighbor = getNeighborLocation(graph, route, current);
                 if (neighbor == null) continue;
 
                 int newDist = distances.get(current) + route.getDistance();
@@ -58,7 +54,7 @@ public class PathFinder implements IPathFinder {
         return reconstructPath(start, end, predecessors);
     }
 
-    private Location getNeighborLocation(Route route, Location current) {
+    private static Location getNeighborLocation(Graph graph, Route route, Location current) {
         if (route.getStartPointId().equals(current.getId())) {
             return graph.getLocationById(route.getEndPointId());
         } else if (route.getEndPointId().equals(current.getId()) && route.isBidirectional()) {
@@ -67,7 +63,7 @@ public class PathFinder implements IPathFinder {
         return null;
     }
 
-    private List<Location> reconstructPath(Location start, Location end, Map<Location, Location> previous) {
+    private static List<Location> reconstructPath(Location start, Location end, Map<Location, Location> previous) {
         if (!previous.containsKey(end) && !start.equals(end)) {
             return new ArrayList<>();
         }
@@ -82,7 +78,7 @@ public class PathFinder implements IPathFinder {
         return path;
     }
 
-    private void logPath(List<Location> path) {
+    private static void logPath(List<Location> path) {
         String pathString = path.stream()
                 .map(Location::getName)
                 .collect(Collectors.joining(" -> "));
