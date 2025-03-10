@@ -13,31 +13,16 @@ import java.util.List;
 
 public class GraphService implements IGraphService {
     private static final Logger logger = LogManager.getLogger(GraphService.class.getName());
-    private final Graph graph;
     private final ILocationService locationService;
     private final IRouteService routeService;
-    private boolean isGraphLoaded = false;
 
     public GraphService(ILocationService locationService, IRouteService routeService) {
-        this.graph = new Graph();
         this.locationService = locationService;
         this.routeService = routeService;
     }
 
-    @Override
-    public Graph getGraph() {
-        if (!isGraphLoaded) {
-            try {
-                loadGraph();
-                isGraphLoaded = true;
-            } catch (Exception e) {
-                logger.error("Failed to load graph: {}", e.getMessage(), e);
-            }
-        }
-        return graph;
-    }
-
-    private void loadGraph() {
+    public Graph getGraphFromDatabase() {
+        Graph graph = new Graph();
         List<Location> locations = locationService.getAll();
         List<Route> routes = routeService.getAll();
 
@@ -55,5 +40,7 @@ public class GraphService implements IGraphService {
 
         logger.info("Graph loaded with {} locations and {} routes",
                 graph.getLocations().size(), routes.size());
+
+        return graph;
     }
 }
