@@ -6,6 +6,7 @@ import jakarta.xml.bind.annotation.*;
 @JsonRootName(value = "trip stage")
 @XmlRootElement(name = "trip stage")
 @XmlAccessorType(XmlAccessType.NONE)
+@XmlType(propOrder = { "startPoint", "endPoint", "distance", "timeInMinutes", "vehicleType", "vehicleNumber"})
 public class RouteDetails {
     private Location startPoint;
     private Location endPoint;

@@ -1,4 +1,4 @@
-package com.solvd.navigationapp.utils.algorithms;
+package com.solvd.navigationapp.services.algorithms;
 
 import java.util.List;
 

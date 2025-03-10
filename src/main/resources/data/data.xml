@@ -2,14 +2,6 @@
 <trip>
     <trip_stages>
         <trip_stage>
-            <distance>350</distance>
-            <endPoint>
-                <address>Broadway &amp; 5th St</address>
-                <cityId>1</cityId>
-                <id>90</id>
-                <name>Downtown Bus Stop</name>
-                <type>BUS_STOP</type>
-            </endPoint>
             <startPoint>
                 <address>123 Main St</address>
                 <cityId>1</cityId>
@@ -17,12 +9,6 @@
                 <name>Central Library</name>
                 <type>BUILDING</type>
             </startPoint>
-            <timeInMinutes>70</timeInMinutes>
-            <vehicleNumber></vehicleNumber>
-            <vehicleType>WALK</vehicleType>
-        </trip_stage>
-        <trip_stage>
-            <distance>300</distance>
             <endPoint>
                 <address>Broadway &amp; 5th St</address>
                 <cityId>1</cityId>
@@ -30,19 +16,19 @@
                 <name>Downtown Bus Stop</name>
                 <type>BUS_STOP</type>
             </endPoint>
-            <startPoint>
-                <address>Main St &amp; 1st Ave</address>
-                <cityId>1</cityId>
-                <id>89</id>
-                <name>Main St Bus Stop</name>
-                <type>BUS_STOP</type>
-            </startPoint>
-            <timeInMinutes>7</timeInMinutes>
-            <vehicleNumber>BUS125</vehicleNumber>
-            <vehicleType>BUS</vehicleType>
+            <distance>350</distance>
+            <timeInMinutes>70</timeInMinutes>
+            <vehicleType>WALK</vehicleType>
+            <vehicleNumber></vehicleNumber>
         </trip_stage>
         <trip_stage>
-            <distance>50</distance>
+            <startPoint>
+                <address>Broadway &amp; 5th St</address>
+                <cityId>1</cityId>
+                <id>90</id>
+                <name>Downtown Bus Stop</name>
+                <type>BUS_STOP</type>
+            </startPoint>
             <endPoint>
                 <address>Main St &amp; 1st Ave</address>
                 <cityId>1</cityId>
@@ -50,6 +36,32 @@
                 <name>Main St Bus Stop</name>
                 <type>BUS_STOP</type>
             </endPoint>
+            <distance>300</distance>
+            <timeInMinutes>7</timeInMinutes>
+            <vehicleType>BUS</vehicleType>
+            <vehicleNumber>BUS125</vehicleNumber>
+        </trip_stage>
+        <trip_stage>
+            <startPoint>
+                <address>Main St &amp; 1st Ave</address>
+                <cityId>1</cityId>
+                <id>89</id>
+                <name>Main St Bus Stop</name>
+                <type>BUS_STOP</type>
+            </startPoint>
+            <endPoint>
+                <address>456 Government Ave</address>
+                <cityId>1</cityId>
+                <id>84</id>
+                <name>City Hall</name>
+                <type>BUILDING</type>
+            </endPoint>
+            <distance>50</distance>
+            <timeInMinutes>10</timeInMinutes>
+            <vehicleType>WALK</vehicleType>
+            <vehicleNumber></vehicleNumber>
+        </trip_stage>
+        <trip_stage>
             <startPoint>
                 <address>456 Government Ave</address>
                 <cityId>1</cityId>
@@ -57,12 +69,6 @@
                 <name>City Hall</name>
                 <type>BUILDING</type>
             </startPoint>
-            <timeInMinutes>10</timeInMinutes>
-            <vehicleNumber></vehicleNumber>
-            <vehicleType>WALK</vehicleType>
-        </trip_stage>
-        <trip_stage>
-            <distance>50</distance>
             <endPoint>
                 <address>Market Sq</address>
                 <cityId>1</cityId>
@@ -70,19 +76,19 @@
                 <name>Market Square Tram Stop</name>
                 <type>TRAM_STOP</type>
             </endPoint>
-            <startPoint>
-                <address>456 Government Ave</address>
-                <cityId>1</cityId>
-                <id>84</id>
-                <name>City Hall</name>
-                <type>BUILDING</type>
-            </startPoint>
+            <distance>50</distance>
             <timeInMinutes>10</timeInMinutes>
-            <vehicleNumber></vehicleNumber>
             <vehicleType>WALK</vehicleType>
+            <vehicleNumber></vehicleNumber>
         </trip_stage>
         <trip_stage>
-            <distance>200</distance>
+            <startPoint>
+                <address>Market Sq</address>
+                <cityId>1</cityId>
+                <id>98</id>
+                <name>Market Square Tram Stop</name>
+                <type>TRAM_STOP</type>
+            </startPoint>
             <endPoint>
                 <address>Station Sq</address>
                 <cityId>1</cityId>
@@ -90,19 +96,19 @@
                 <name>Central Station Tram Stop</name>
                 <type>TRAM_STOP</type>
             </endPoint>
-            <startPoint>
-                <address>Market Sq</address>
-                <cityId>1</cityId>
-                <id>98</id>
-                <name>Market Square Tram Stop</name>
-                <type>TRAM_STOP</type>
-            </startPoint>
+            <distance>200</distance>
             <timeInMinutes>6</timeInMinutes>
-            <vehicleNumber>TRAM123</vehicleNumber>
             <vehicleType>TRAM</vehicleType>
+            <vehicleNumber>TRAM123</vehicleNumber>
         </trip_stage>
         <trip_stage>
-            <distance>1100</distance>
+            <startPoint>
+                <address>Station Sq</address>
+                <cityId>1</cityId>
+                <id>97</id>
+                <name>Central Station Tram Stop</name>
+                <type>TRAM_STOP</type>
+            </startPoint>
             <endPoint>
                 <address>West Ave &amp; 10th St</address>
                 <cityId>1</cityId>
@@ -110,16 +116,10 @@
                 <name>West Side Tram Stop</name>
                 <type>TRAM_STOP</type>
             </endPoint>
-            <startPoint>
-                <address>Station Sq</address>
-                <cityId>1</cityId>
-                <id>97</id>
-                <name>Central Station Tram Stop</name>
-                <type>TRAM_STOP</type>
-            </startPoint>
+            <distance>1100</distance>
             <timeInMinutes>36</timeInMinutes>
-            <vehicleNumber>TRAM123</vehicleNumber>
             <vehicleType>TRAM</vehicleType>
+            <vehicleNumber>TRAM123</vehicleNumber>
         </trip_stage>
     </trip_stages>
 </trip>

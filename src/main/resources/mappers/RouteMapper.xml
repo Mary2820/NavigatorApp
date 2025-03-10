@@ -31,7 +31,10 @@
     <select id="getByStartAndEndPoints" resultMap="RouteResultMap">
         SELECT *
         FROM Routes
-        WHERE START_ID = #{startPointId} AND END_ID = #{endPointId}
+        WHERE
+        (START_ID = #{startPointId} AND END_ID = #{endPointId})
+        OR
+        (START_ID = #{endPointId} AND END_ID = #{startPointId} AND IS_BIDIRECTIONAL = 1);
     </select>
 
     <select id="getByStartEndAndVehicle" resultMap="RouteResultMap">

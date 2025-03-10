@@ -8,7 +8,7 @@ import com.solvd.navigationapp.models.Route;
 
 import com.solvd.navigationapp.services.IPathFinderService;
 import com.solvd.navigationapp.services.ITransportService;
-import com.solvd.navigationapp.utils.algorithms.IPathFinder;
+import com.solvd.navigationapp.services.algorithms.IPathFinder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
