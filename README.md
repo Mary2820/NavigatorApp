@@ -10,7 +10,7 @@
 - 📦 **Dependency Management:** Maven integration for streamlined building, testing, and deployment.
 - 🧭 **Pathfinding & Navigation:** Finds the shortest path between points using implemented algorithms (Dijkstra)
 - 📜 **Data Exchange & Storage:** Saves pathfinding results to XML (JAXB) and JSON (Jackson) for further processing or documentation.
--- 🔐 **Data Validation & Security:** Implements data validation mechanisms to prevent SQL Injection and ensure secure data handling.
+- 🔐 **Data Validation & Security:** Implements data validation mechanisms to prevent SQL Injection and ensure secure data handling.
 
 ## 🚀 Technologies & Tools
 - **Programming Languages:** Java, SQL (MySQL)
